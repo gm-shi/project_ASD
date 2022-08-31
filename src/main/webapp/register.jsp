@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,7 +32,7 @@
         </section>
         <div  style="display: flex; flex-direction: column; align-items: center;">
             <div  style="width: 30%">
-        <form  method="post" action="UserController?action=signup">
+        <form  method="post" action="user-servlet?action=register">
             <div class="form-group">
                 <label for="inputUserName">User Name</label>
                 <input type="text" name="username" class="form-control" id="inputUserName" required>

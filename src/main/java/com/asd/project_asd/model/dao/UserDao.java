@@ -25,7 +25,23 @@ public class UserDao {
         ps.executeUpdate();
         ResultSet results = ps.getGeneratedKeys();
         if(results.next())
-            return results.getInt((1));
+            return results.getInt(1);
+        return 0;
+    }
+    public int create(User user) throws SQLException {
+        String sqlQuery = "INSERT INTO User (name, email," +
+                " address, phone_number, role, password) VALUES (?,?,?,?,?,?)";
+        PreparedStatement ps = conn().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
+        ps.setString(1, user.getName());
+        ps.setString(2, user.getEmail());
+        ps.setString(3,user.getAddress());
+        ps.setString(4, user.getPhoneNumber());
+        ps.setString(5, user.getRole());
+        ps.setString(6, user.getPassword());
+        ps.executeUpdate();
+        ResultSet results = ps.getGeneratedKeys();
+        if(results.next())
+            return results.getInt(1);
         return 0;
     }
 }
