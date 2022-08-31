@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="ASD_DB@database-asd-project.cjsubjzglg6d.ap-southeast-2.rds.amazonaws.com" uuid="77c70749-43a0-4ad2-aa71-156e1a37a535">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://database-asd-project.cjsubjzglg6d.ap-southeast-2.rds.amazonaws.com:3306/ASD_DB</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>

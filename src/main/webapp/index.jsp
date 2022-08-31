@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <title>Online Ordering System</title>
 </head>
@@ -16,7 +17,8 @@
         <div class="navbar navbar-light shadow-sm" style="background-color: steelblue">
             <div class="container d-flex justify-content-between">
                 <a href="index.jsp" class="navbar-brand d-flex align-items-center">
-                    <img style=" width:30px; height: 30px; fill: currentColor;" src="img/shop.png" alt="logo">
+                    <img style=" width:30px; height: 30px; fill: currentColor;"
+                         src="${pageContext.request.contextPath}/img/shop.png" alt="logo">
                     <strong style="margin-left:5px">Online Ordering System</strong>
                 </a>
             </div>
@@ -45,8 +47,8 @@
 
                         <button type="submit" class="btn btn-success btn-block">Login</button>
                     </form>
-                    <button class="btn btn-primary" onclick="window.location='signUp.jsp'">Sign up</button>
-                    <button class="btn btn-link" onclick="window.location='main.jsp'">Continue as guest</button>
+                    <button class="btn btn-primary" onclick="window.location='register.jsp'">Register</button>
+                    <button class="btn btn-link" onclick="window.location='home.jsp'">Continue as guest</button>
                 </div>
             </div>
         </section>
@@ -66,19 +68,21 @@
 
 <script>
     function showPassword() {
-        var x = document.getElementById("password");
+        const x = document.getElementById("password");
         if (x.type === "password") {
             x.type = "text";
-            document.getElementById("showPassword").innerHTML = 'Hide';
         } else {
             x.type = "password";
-            document.getElementById("showPassword").innerHTML = 'Show';
 
         }
     }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
