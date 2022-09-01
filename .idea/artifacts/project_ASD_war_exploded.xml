@@ -15,7 +15,6 @@
           <element id="module-output" name="project_ASD" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="lib" />
           <element id="library" level="project" name="mysql-connector-java-8.0.28" />
         </element>
       </element>
