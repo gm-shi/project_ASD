@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -9,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Registration</title>
 </head>
 <body>
 <div class="body">
@@ -28,14 +29,14 @@
 
     <main role="main">
         <section class="jumbotron text-center" style="display: flex; flex-direction: column; align-items: center;">
-            <h1 class="display-4">Register</h1>
+            <h1 class="display-4">Registration</h1>
         </section>
         <div  style="display: flex; flex-direction: column; align-items: center;">
             <div  style="width: 30%">
-        <form  method="post" action="user-servlet?action=register">
+        <form method="post" action="userServlet?action=register">
             <div class="form-group">
                 <label for="inputUserName">User Name</label>
-                <input type="text" name="username" class="form-control" id="inputUserName" required>
+                <input type="text" name="name" class="form-control" id="inputUserName" required>
             </div>
             <div class="form-group" >
                 <label for="inputEmail4">Email</label>
@@ -43,7 +44,7 @@
             </div>
             <div class="form-group">
                 <label for="inputPassword">Password</label>
-                <input type="password" name="password" class="form-control" id="inputPassword" required>
+                <input type="password" onblur="confirm()" name="password" class="form-control" id="inputPassword" required>
             </div>
             <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
@@ -52,7 +53,7 @@
             </div>
             <div class="form-group">
                 <label for="inputAddress">Address</label>
-                <input type="text" name="address" class="form-control" id="inputAddress" placeholder="1234 com.asd.project_asd.utils.DBtester St">
+                <input type="text" name="address" class="form-control" id="inputAddress" placeholder="1234 Miller St">
             </div>
             <div class="form-group">
                 <label for="inputUserPhone">Phone Number</label>
@@ -65,7 +66,7 @@
                 </label>
             </div>
             <div  style=" text-align: center;" >
-                <button style="margin: 20px" type="submit" id="submitButton" class="btn btn-primary">Sign up</button>
+                <button style="margin: 20px" type="submit" id="submitButton" class="btn btn-primary">Register</button>
                 <a href="index.jsp" class="btn btn-danger">Cancel</a>
             </div>
 

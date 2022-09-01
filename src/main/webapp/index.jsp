@@ -28,12 +28,12 @@
 
     <main role="main">
         <section class="jumbotron text-center" style="display: flex; flex-direction: column; align-items: center;">
-            <h1 class="display-2">Online Ordering System</h1>
+            <h1 >Online Ordering System</h1>
             <div style="width: 40%; height: 1px; background-color: lightslategrey; margin: 10px"></div>
             <p class="lead" style="color: slategrey">ASD Demo Web Application.</p>
             <div class="card" style="width: 600px; height:400px; margin: 20px; }">
                 <div class="card-body" style="display: flex;flex-direction: column; justify-content: space-between">
-                    <form method="post" action="LoginController">
+                    <form method="post" action="loginServlet">
                         <div class="form-group" style="margin-top: 40px">
                             <label for="exampleInputEmail1" style="text-align: left; display: flex;">Email
                                 address</label>
@@ -53,7 +53,6 @@
                 </div>
             </div>
         </section>
-        <%--testing purpose  remove later--%>
     </main>
 
     <footer class="text-muted">

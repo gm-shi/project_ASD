@@ -1,4 +1,4 @@
-package com.asd.project_asd.utils;
+package com.asd.project.utils;
 
 import java.io.PrintWriter;
 

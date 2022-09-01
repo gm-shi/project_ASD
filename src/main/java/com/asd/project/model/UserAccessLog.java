@@ -1,4 +1,4 @@
-package com.asd.project_asd.model;
+package com.asd.project.model;
 
 import java.io.Serializable;
 import java.sql.Date;

@@ -13,11 +13,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="refresh" content="3;url=index.jsp">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Welcome!</title>
 </head>
 <body>
 <div class="body">
@@ -34,7 +35,17 @@
     </header>
 
 
-    <h1>Hello, world!</h1>
+    <main role="main">
+        <section class="jumbotron text-center" style="display: flex; flex-direction: column; align-items: center;">
+
+            <h1>Welcome</h1>
+            <p>Your have successfully registered</p>
+            <p>Will automatically redirect to login page in 3 sec</p>
+            <%--        Add timer later--%>
+            <%--        content goes here--%>
+            <a href="index.jsp"  class="btn btn-success">Login</a>
+        </section>
+    </main>
 
 
 

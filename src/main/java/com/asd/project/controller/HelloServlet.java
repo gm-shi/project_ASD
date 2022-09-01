@@ -1,4 +1,4 @@
-package com.asd.project_asd.controller;
+package com.asd.project.controller;
 
 import java.io.*;
 import javax.servlet.http.*;

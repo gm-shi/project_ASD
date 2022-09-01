@@ -1,18 +1,16 @@
-package com.asd.project_asd.controller;
+package com.asd.project.controller;
 
-import com.asd.project_asd.model.User;
-import com.asd.project_asd.model.dao.UserDao;
-import com.asd.project_asd.utils.DB;
-import com.asd.project_asd.utils.Helper;
-import com.asd.project_asd.utils.Validator;
+import com.asd.project.model.dao.UserDao;
+import com.asd.project.utils.DB;
+import com.asd.project.utils.Helper;
+import com.asd.project.utils.Validator;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/user-servlet")
+@WebServlet("/userServlet")
 public class UserServlet extends HttpServlet {
     DB db;
     UserDao userDao;
@@ -31,6 +29,7 @@ public class UserServlet extends HttpServlet {
                 handleRegister(request, response);
                 break;
             default:
+                System.out.println("no action");
                 return;
         }
     }
