@@ -40,7 +40,7 @@
             <%} else {%>
             <a class="btn btn-danger" style="margin-right: 10px" href="index.jsp">Log out</a>
             <%--            add logout servlet--%>
-            <%}%>s
+            <%}%>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-expanded="false">
@@ -54,7 +54,7 @@
                     %>
                     <a class="dropdown-item" href="userProfile.jsp">Personal Information</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="LogoutController">Log out</a>
+                    <a class="dropdown-item" href="index.jsp">Log out</a>
                 </div>
                 <%
                     }
