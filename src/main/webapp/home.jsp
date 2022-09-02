@@ -29,8 +29,8 @@
             <div class="container d-flex justify-content-between">
                 <a href="index.jsp" class="navbar-brand d-flex align-items-center">
                     <img style=" width:30px; height: 30px; fill: currentColor;"
-                         src="${pageContext.request.contextPath}/img/shop.png" alt="logo">
-                    <strong style="margin-left:5px">Online Ordering System</strong>
+                         src="img/shop.png" alt="logo">
+                    <strong style="margin-left:5px">Restaurant Online Ordering System</strong>
                 </a>
             </div>
             <%
@@ -38,7 +38,7 @@
             %>
             <a class="btn btn-success" style="margin-right: 10px" href="index.jsp">Log in</a>
             <%} else {%>
-            <a class="btn btn-danger" style="margin-right: 10px" href="index.jsp">Log out</a>
+            <a class="btn btn-danger" style="margin-right: 10px" href="logoutServlet">Log out</a>
             <%--            add logout servlet--%>
             <%}%>
             <div class="dropdown">
@@ -46,22 +46,20 @@
                         data-toggle="dropdown" aria-expanded="false">
                     <%=name%>
                 </button>
-
                 <div class="dropdown-menu-right dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Chart</a>
+                    <a class="dropdown-item" href="#">Cart</a>
                     <%
                         if (user != null) {
                     %>
                     <a class="dropdown-item" href="userProfile.jsp">Personal Information</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="index.jsp">Log out</a>
+                    <a class="dropdown-item" href="logoutServlet">Log out</a>
                 </div>
                 <%
                     }
                 %>
             </div>
         </div>
-
     </header>
 
 
@@ -75,13 +73,12 @@
                         <li data-target="#demo" data-slide-to="1"></li>
                         <li data-target="#demo" data-slide-to="2"></li>
                     </ul>
-
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg">
+                            <img  src="https://static.runoob.com/images/mix/img_nature_wide.jpg">
                         </div>
                         <div class="carousel-item">
                             <img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg">
@@ -140,9 +137,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Delete Account</h5>
-                            <p class="card-text">You will delete your account from our database but the access record
-                                will
-                                remain</p>
+                            <p class="card-text">You will delete your account from our database</p>
                             <a href="#" class="btn btn-primary">Delete</a>
                         </div>
                     </div>
@@ -156,7 +151,7 @@
             <p class="float-right">
                 <a href="#">Back to top</a>
             </p>
-            <p>Online Ordering System &copy;</p>
+            <p>Restaurant Online Ordering System &copy;</p>
         </div>
     </footer>
 </div>

@@ -20,7 +20,7 @@
         <div class="container d-flex justify-content-between">
             <a href="index.jsp" class="navbar-brand d-flex align-items-center">
                 <img style=" width:30px; height: 30px; fill: currentColor;" src="img/shop.png" alt="logo">
-                <strong style="margin-left:5px">Online Ordering System</strong>
+                <strong style="margin-left:5px">Restaurant Online Ordering System</strong>
             </a>
         </div>
     </div>
