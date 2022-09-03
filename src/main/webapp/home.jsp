@@ -61,8 +61,6 @@
             </div>
         </div>
     </header>
-
-
     <main role="main">
         <section class="jumbotron text-center">
             <div class="container">
@@ -75,13 +73,13 @@
                     </ul>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
+                            <img src="img/1.jpg">
                         </div>
                         <div class="carousel-item">
-                            <img  src="https://static.runoob.com/images/mix/img_nature_wide.jpg">
+                            <img  src="img/2.jpg">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg">
+                            <img src="img/3.jpg">
                         </div>
                     </div>
 

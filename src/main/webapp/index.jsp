@@ -29,12 +29,12 @@
     <main role="main">
         <div style=" background-image: url('img/food.jpg'); background-size: inherit ; display: flex; justify-content: space-around; ">
             <section class="card"
-                     style="box-shadow: #3e3e3efa 7px 7px 20px 0px; margin: 100px; padding: 10px; flex-direction: column; align-items: center;">
+                     style="box-shadow: #3e3e3efa 7px 7px 20px 0px; margin: 100px; padding: 20px; flex-direction: column; align-items: center;">
 
                 <h1>Restaurant Online Ordering System</h1>
                 <div style="width: 40%; height: 1px; background-color: lightslategrey; margin: 10px"></div>
                 <p class="lead" style="color: slategrey">ASD Restaurant Demo Web Application.</p>
-                <div style="width: 80%; margin: 20px; ">
+                <div style="width: 80%; ">
                     <div style="display: flex;flex-direction: column; justify-content: space-between">
                         <form method="post" action="loginServlet">
                             <div class="form-group" style="margin-top: 40px">
