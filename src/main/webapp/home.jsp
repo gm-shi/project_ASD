@@ -105,6 +105,8 @@
                             <button class="btn btn-primary" onclick="window.location='#'">Button</button>
                         </div>
                     </div>
+                </div>
+                <div class="col mb-4">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Make Order</h5>
@@ -114,7 +116,16 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Order Management</h5>
+                            <p class="card-text">Management Order here</p>
+                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
+                            <a class="btn btn-primary" href="ordermanagement.jsp">Button</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="col mb-4">
                     <div class="card">
                         <div class="card-body">
