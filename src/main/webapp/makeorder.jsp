@@ -69,7 +69,7 @@
             </tr>
         </table>
         <br>
-        <button>Check Out</button>
+        <a href="payment.jsp" class="btn btn-primary">Check Out</a>
     </div>
     <style>
         td{
