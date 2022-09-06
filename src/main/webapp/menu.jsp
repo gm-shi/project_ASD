@@ -33,10 +33,39 @@
   </header>
 
 
-  <h1>Hello, world!</h1>
+  <h1 style="    text-align: center;
+    padding: 30px;
+}">Categories</h1>
 
+  <div class="list-group" style="    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding-bottom: 50px;
+}">
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Appetizer</h5>
+        <small>Up to date</small>
+      </div>
 
+    </a>
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Main course</h5>
+        <small class="text-muted">Up to date</small>
+      </div>
 
+    </a>
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Beverages</h5>
+        <small class="text-muted">Up to date</small>
+      </div>
+
+    </a>
+  </div>
 
 
   <footer class="text-muted">

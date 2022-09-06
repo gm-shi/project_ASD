@@ -33,9 +33,41 @@
   </header>
 
 
-  <h1>Hello, world!</h1>
+  <h1>Dishes</h1>
 
+  <main role="main">
+    <section class="jumbotron text-center" style="display: flex; flex-direction: column; align-items: center;">
+      <strong><h1 class="display-4">Dishes</h1></strong>
+    </section>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <div style="width: 30%">
+        <form method="post" action="userServlet?action=register">
+          <div class="form-group">
+            <label for="inputUserName">Dishes name</label>
+            <input type="text" name="name" class="form-control" id="inputUserName" required>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail4">Dishes description</label>
+            <input type="email" name="email" class="form-control" id="inputEmail4" required>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword">Dishes price</label>
+            <input type="password" onblur="confirm()" name="password" class="form-control"
+                   id="inputPassword" required>
 
+          </div>
+          <div style=" text-align: center;">
+            <button style="margin: 20px" type="submit" id="submitButton" class="btn btn-primary">Confirm
+            </button>
+            <a href="index.jsp" class="btn btn-danger">Cancel</a>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </main>
 
 
 
