@@ -76,7 +76,7 @@
                             <img src="img/1.jpg">
                         </div>
                         <div class="carousel-item">
-                            <img  src="img/2.jpg">
+                            <img src="img/2.jpg">
                         </div>
                         <div class="carousel-item">
                             <img src="img/3.jpg">
@@ -99,30 +99,10 @@
                 <div class="col mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">XXXXXXXXXXXXX</h5>
-                            <p class="card-text">XXXXXXXXXXXXXXXX</p>
+                            <h5 class="card-title">Menu</h5>
+                            <p class="card-text">Pick dishes</p>
                             <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
-                            <button class="btn btn-primary" onclick="window.location='#'">Button</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Make Order</h5>
-                            <p class="card-text">Make Order NOW</p>
-                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
-                            <a class="btn btn-primary" href="makeorder.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Order Management</h5>
-                            <p class="card-text">Management Order here</p>
-                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
-                            <a class="btn btn-primary" href="ordermanagement.jsp">Button</a>
+                            <a class="btn btn-primary" href="menu.jsp">Button</a>
                         </div>
                     </div>
                 </div>
@@ -135,18 +115,16 @@
                             <a class="btn btn-primary" href="email.jsp">Button</a>
                         </div>
                     </div>
-                    </div>
-                    <div class="col mb-4">
+                </div>
+                <div class="col mb-4">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Restaurant</h5>
                             <p class="card-text">view restaurant information</p>
-                            <a class="btn btn-primary" href="email.jsp">Button</a>
+                            <a class="btn btn-primary" href="restaurant.jsp">Button</a>
                         </div>
                     </div>
-                    </div>
-
-
+                </div>
 
                 <%
                     if (user != null) {
@@ -155,10 +133,8 @@
                     <div class="card" style="line-height: inherit">
                         <div class="card-body">
                             <h5 class="card-title">Account Manage</h5>
-                            <p class="card-text">This allow you to manage your personal information, such as password,
-                                phone
-                                number and address</p>
-                            <a href="#" class="btn btn-primary">Profile</a>
+                            <p class="card-text">manage your personal information</p>
+                            <a href="editinfo.jsp" class="btn btn-primary">Profile</a>
                         </div>
                     </div>
                 </div>
@@ -175,12 +151,24 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Delete Account</h5>
-                            <p class="card-text">You will delete your account from our database</p>
+                            <p class="card-text">You will delete your account</p>
                             <a href="#" class="btn btn-primary">Delete</a>
                         </div>
                     </div>
                 </div>
+<%--add role check for admin and staff--%>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage Dishes</h5>
+                            <p class="card-text">mange dishes for staff</p>
+                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
+                            <a class="btn btn-primary" href="dishes.jsp">Button</a>
+                        </div>
+                    </div>
+                </div>
                 <%}%>
+
             </div>
         </div>
     </main>
