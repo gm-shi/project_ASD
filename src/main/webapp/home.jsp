@@ -113,6 +113,14 @@
                             <a class="btn btn-primary" href="makeorder.jsp">Button</a>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Order Management</h5>
+                            <p class="card-text">Check Order Details</p>
+                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
+                            <a class="btn btn-primary" href="ordermanagement.jsp">Button</a>
+                        </div>
+                    </div>
                 </div>
 
 
