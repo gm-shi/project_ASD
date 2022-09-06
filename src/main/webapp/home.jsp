@@ -134,16 +134,7 @@
                         </div>
                     </div>
                     </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Email</h5>
-                            <p class="card-text">view your order notification</p>
-                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
-                            <a class="btn btn-primary" href="menu.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
+
 
 
                 <%
@@ -178,19 +169,7 @@
                         </div>
                     </div>
                 </div>
-<%--add role check for admin and staff--%>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Email</h5>
-                            <p class="card-text">view your order notification</p>
-                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
-                            <a class="btn btn-primary" href="dishes.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
                 <%}%>
-
             </div>
         </div>
     </main>
