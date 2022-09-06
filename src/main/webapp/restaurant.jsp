@@ -38,7 +38,7 @@
                         <li data-target="#demo" data-slide-to="0" class="active"></li>
                         <li data-target="#demo" data-slide-to="1"></li>
                         <li data-target="#demo" data-slide-to="2"></li>
-                    </ul>![](C:/Users/11493/AppData/Local/Temp/download.jpg)
+                    </ul>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src="https://media.istockphoto.com/photos/stir-fry-noodles-with-vegetables-and-beef-in-black-bowl-slate-top-picture-id1265502236?k=20&m=1265502236&s=612x612&w=0&h=6tAimUt291HSqeL0h0qN1_I9FJ3-HueDZMb8GV7ZPLE=">
