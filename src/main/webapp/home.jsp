@@ -113,15 +113,28 @@
                             <a class="btn btn-primary" href="makeorder.jsp">Button</a>
                         </div>
                     </div>
+                </div>
+
+                <div class="col mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Order Management</h5>
-                            <p class="card-text">Check Order Details</p>
+                            <h5 class="card-title">Email</h5>
+                            <p class="card-text">view your order notification</p>
                             <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
-                            <a class="btn btn-primary" href="ordermanagement.jsp">Button</a>
+                            <a class="btn btn-primary" href="email.jsp">Button</a>
                         </div>
                     </div>
-                </div>
+                    </div>
+                    <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurant</h5>
+                            <p class="card-text">view restaurant information</p>
+                            <a class="btn btn-primary" href="email.jsp">Button</a>
+                        </div>
+                    </div>
+                    </div>
+
 
 
                 <%
