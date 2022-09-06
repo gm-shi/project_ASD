@@ -33,7 +33,7 @@
   </header>
 
 
-  <h1>Dishes</h1>
+  <h1>Dishes management</h1>
 
   <main role="main">
     <section class="jumbotron text-center" style="display: flex; flex-direction: column; align-items: center;">
@@ -57,7 +57,9 @@
 
           </div>
           <div style=" text-align: center;">
-            <button style="margin: 20px" type="submit" id="submitButton" class="btn btn-primary">Confirm
+            <button style="margin: 20px" type="submit" id="addButton" class="btn btn-primary">Add
+            </button>
+            <button style="margin: 20px" type="submit" id="removeButton" class="btn btn-primary">Remove
             </button>
             <a href="index.jsp" class="btn btn-danger">Cancel</a>
           </div>
