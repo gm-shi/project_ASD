@@ -32,19 +32,10 @@
         </div>
     </header>
 
-
-    <h1 style="    text-align: center;
-    padding: 30px;
-}">Categories</h1>
-
-    <div class="list-group" style="    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 20%;
-    margin-right: 20%;
-    padding-bottom: 50px;
-}">
-
+    <div class="Management" style="text-align: center">
+        <input type="text" placeholder="Please enter customer name for more management future" style="width: 500px">
+        <button>Search</button>
+        <p>So here is going to be a drop down list that will give the user or admin different option and based on the account role</p>
     </div>
 
 
