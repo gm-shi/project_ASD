@@ -34,9 +34,9 @@ public class UserDao {
     }
 
     public int create(User user) throws SQLException {
-        String sqlQuery = "INSERT INTO User (name, email," +
+        String query = "INSERT INTO User (name, email," +
                 " address, phone_number, role, password) VALUES (?,?,?,?,?,?)";
-        PreparedStatement ps = conn().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement ps = conn().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, user.getName());
         ps.setString(2, user.getEmail());
         ps.setString(3, user.getAddress());
@@ -69,5 +69,22 @@ public class UserDao {
         }
         return null;
 
+    }
+
+    public boolean delete(int id) throws SQLException {
+        try {
+            String query = "DELETE FROM User_access_log WHERE id = ?";
+            PreparedStatement ps = conn().prepareStatement(query);
+            ps.setInt(1, id);
+            ps.execute();
+
+            query = "DELETE FROM User WHERE id = ?";
+            ps = conn().prepareStatement(query);
+            ps.setInt(1, id);
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
