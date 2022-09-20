@@ -8,12 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.sql.SQLException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class UserTest {
     DB db;
-    private User user;
+    private User tester;
     private UserDao userDao;
     private int id;
     private String name;
@@ -23,7 +24,7 @@ public class UserTest {
     private String role;
     private String password;
 
-     public  UserTest() throws SQLException {
+    public UserTest() throws SQLException {
         db = new DB();
         userDao = new UserDao(db);
         this.name = "Tester";
@@ -35,7 +36,7 @@ public class UserTest {
     }
 
     @BeforeAll
-    public  void setup() throws SQLException {
+    public void setup() throws SQLException {
         this.id = userDao.create(name, email, address, phone, role, password);
         assertTrue(this.id != 0);
     }
@@ -43,13 +44,13 @@ public class UserTest {
     @AfterAll
     public void cleanup() throws SQLException {
         userDao.delete(id);
-        User tester = userDao.getUserByEmail(email);
+        tester = userDao.getUserByEmail(email);
         assertNull(tester);
     }
 
     @Test
     public void readUserTest() throws SQLException {
-        User tester = userDao.getUserByEmail(email);
+        tester = userDao.getUserByEmail(email);
         assertNotNull(tester);
         assertEquals(tester.getId(), this.id);
         assertEquals(tester.getName(), this.name);

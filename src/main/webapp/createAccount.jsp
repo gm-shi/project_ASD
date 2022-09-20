@@ -1,5 +1,16 @@
 <%@ page import="com.asd.project.model.User" %>
+<%@ page import="com.asd.project.model.UserAccessLog" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.asd.project.utils.DB" %>
+<%@ page import="com.asd.project.model.dao.UserAccessLogDao" %><%--
+  Created by IntelliJ IDEA.
+  User: sgm49
+  Date: 21/09/2022
+  Time: 1:01 am
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,18 +22,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Home</title>
+    <title>Access Log</title>
 </head>
 <body>
 <div class="body">
     <%
-        String name = "Guest";
+        String name = "";
         User user = null;
         if (session.getAttribute("user") != null) {
             user = (User) session.getAttribute("user");
+            if (!user.getRole().equalsIgnoreCase("Admin")) {
+                response.sendRedirect("home.jsp");
+            }
             name = user.getName();
+        } else {
+            response.sendRedirect("home.jsp");
         }
-
     %>
     <header>
         <div class="navbar navbar-light shadow-sm" style="background-color: steelblue">
@@ -72,7 +87,7 @@
         <div class="collapse navbar-collapse" style="justify-content: space-around;" id="navbarNavDropdown">
             <div style="width: 70%">
                 <ul class="navbar-nav" style="font-size: 20px; justify-content: space-evenly">
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link" href="home.jsp">Home</a>
                     </li>
                     <li class="nav-item">
@@ -86,7 +101,7 @@
                     </li>
                     <% if (user != null) { %>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-toggle="dropdown"
                            aria-expanded="false">
                             My Account
                         </a>
@@ -105,112 +120,90 @@
             </div>
         </div>
     </nav>
-    <%--    navigation bar end--%>
-
-    <main role="main">
-        <section class="jumbotron text-center">
-            <div class="container">
-                <div id="demo" class="carousel slide" data-ride="carousel">
-
-                    <ul class="carousel-indicators">
-                        <li data-target="#demo" data-slide-to="0" class="active"></li>
-                        <li data-target="#demo" data-slide-to="1"></li>
-                        <li data-target="#demo" data-slide-to="2"></li>
-                    </ul>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="img/1.jpg">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/2.jpg">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/3.jpg">
-                        </div>
-                    </div>
-
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
-
+    <section class="jumbotron text-center">
+        <strong><h1 class="display-4">CREATE ACCOUNT</h1></strong>
+    </section>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 30%">
+            <form method="post" action="userServlet?action=register">
+                <div class="form-group">
+                    <label for="inputUserName">User Name</label>
+                    <input type="text" name="name" class="form-control" id="inputUserName" required>
                 </div>
-            </div>
-        </section>
+                <div class="form-group">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" name="email" class="form-control" id="inputEmail4" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" onblur="confirm()" name="password" class="form-control"
+                           id="inputPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" onblur="confirm()" name="confirmPassword" class="form-control"
+                           id="confirmPassword" required>
+                    <p id="warning" style="color: red; margin-top: 5px; display: none">Password does not match!</p>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Address</label>
+                    <input type="text" name="address" class="form-control" id="inputAddress"
+                           placeholder="1234 Miller St">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserPhone">Phone Number</label>
+                    <input type="text" name="phone" class="form-control" pattern="[04]{2}[0-9]{8}" value="04"
+                           id="inputUserPhone" title=" Phone number with 04 and remaing 8 digit with 0-9" required>
+                </div>
+                <div class="form-group">
+                    <label for="role">Position</label>
+                    <select class="custom-select" name="role" id="role" required>
+                        <option selected>Choose...</option>
+                        <option value="Staff">Staff</option>
+                        <option value="Customer">Customer</option>
+                    </select>
+                </div>
 
-        <div class="container">
-            <div class="row row-cols-1 row-cols-md-3" style="margin: 40px">
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Menu</h5>
-                            <p class="card-text">Pick dishes</p>
-                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
-                            <a class="btn btn-primary" href="menu.jsp">Button</a>
-                        </div>
-                    </div>
+                <div style=" text-align: center;">
+                    <button style="margin: 20px" type="submit" id="submitButton" class="btn btn-primary">Create
+                    </button>
+                    <a href="home.jsp" class="btn btn-danger">Cancel</a>
                 </div>
-                <%--                <div class="col mb-4">--%>
-                <%--                    <div class="card">--%>
-                <%--                        <div class="card-body">--%>
-                <%--                            <h5 class="card-title">Order Management</h5>--%>
-                <%--                            <p class="card-text">Management Order here</p>--%>
-                <%--                            &lt;%&ndash;                        <a href="#" class="btn btn-primary">Search</a>&ndash;%&gt;--%>
-                <%--                            <a class="btn btn-primary" href="ordermanagement.jsp">Button</a>--%>
-                <%--                        </div>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
 
+            </form>
 
-                <%
-                    if (user != null && (user.getRole().equalsIgnoreCase("Staff") || user.getRole().equalsIgnoreCase("Admin"))) {
-                %>
-                <%--add role check for admin and staff--%>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Manage Dishes</h5>
-                            <p class="card-text">mange dishes for staff</p>
-                            <a class="btn btn-primary" href="dishes.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">View Access Log</h5>
-                            <p class="card-text">View user Access log</p>
-                            <a class="btn btn-primary" href="accesslog.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
-                <%}%>
-                <% if (user != null && user.getRole().equalsIgnoreCase("Admin")) {
-                %>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Create Account</h5>
-                            <p class="card-text">Create Staff Accounts</p>
-                            <a class="btn btn-primary" href="createAccount.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
-                <%}%>
-            </div>
         </div>
-    </main>
+    </div>
     <footer style="margin-top: 80px" class="text-muted">
         <div class="container">
             <p class="float-right">
                 <a href="#">Back to top</a>
             </p>
-            <p>Restaurant Online Ordering System &copy;</p>
+            <p>Online Ordering System &copy;</p>
         </div>
     </footer>
 </div>
+
+
+<script>
+
+    function confirm() {
+        const passwd = document.getElementById("inputPassword");
+        const _passwd = document.getElementById("confirmPassword");
+        const button = document.getElementById("submitButton");
+        const warning = document.getElementById('warning');
+        if (_passwd.value === passwd.value) {
+            button.disabled = false;
+            warning.style.display = "none";
+        } else {
+            button.disabled = true;
+            warning.style.display = "unset";
+
+        }
+    }
+
+
+</script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
