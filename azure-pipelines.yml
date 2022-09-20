@@ -9,6 +9,10 @@ trigger:
     - dev
     - master
     - GongmingShi
+    - Changyu
+    - LUN_OU
+    - Jacky
+    - Ao-Qu
 
 pool:
   vmImage: ubuntu-latest
