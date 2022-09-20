@@ -1,6 +1,7 @@
 package com.asd.project.controller;
 
 import com.asd.project.model.User;
+import com.asd.project.model.dao.UserAccessLogDao;
 import com.asd.project.model.dao.UserDao;
 import com.asd.project.utils.DB;
 import com.asd.project.utils.Helper;
@@ -17,17 +18,22 @@ public class LoginServlet extends HttpServlet {
 
 
     DB db;
-    UserDao userdao;
+    UserDao userDao;
+    UserAccessLogDao accessDao;
+
     public LoginServlet() throws SQLException {
+        super();
         db = new DB();
-        userdao = new UserDao(db);
+        userDao = new UserDao(db);
+        accessDao = new UserAccessLogDao(db);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        if(Validator.checkEmpty(email, password)){
+        if (Validator.checkEmpty(email, password)) {
             Helper.alert(res.getWriter(), "Please enter your email or password");
             return;
         }
@@ -45,17 +51,19 @@ public class LoginServlet extends HttpServlet {
     private void handleUserLogin(String email, String password, HttpServletRequest req, HttpServletResponse res) throws IOException {
         User user;
         try {
-           user = userdao.getUserByEmail(email);
-           if(user == null){
-               Helper.alert(res.getWriter(), "Email does not exist");
-               return;
-           }
-           if (!user.getPassword().equals(password)){
-               Helper.alert(res.getWriter(), "Wrong Password");
-               return;
-           }
-           req.getSession().setAttribute("user", user);
-           res.sendRedirect("home.jsp");
+            user = userDao.getUserByEmail(email);
+            if (user == null) {
+                Helper.alert(res.getWriter(), "Email does not exist");
+                return;
+            }
+            if (!user.getPassword().equals(password)) {
+                Helper.alert(res.getWriter(), "Wrong Password");
+                return;
+            }
+            accessDao.insert(user.getId(), "login");
+
+            req.getSession().setAttribute("user", user);
+            res.sendRedirect("home.jsp");
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

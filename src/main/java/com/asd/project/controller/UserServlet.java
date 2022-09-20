@@ -1,5 +1,7 @@
 package com.asd.project.controller;
 
+import com.asd.project.model.User;
+import com.asd.project.model.dao.UserAccessLogDao;
 import com.asd.project.model.dao.UserDao;
 import com.asd.project.utils.DB;
 import com.asd.project.utils.Helper;
@@ -14,11 +16,14 @@ import java.sql.SQLException;
 public class UserServlet extends HttpServlet {
     DB db;
     UserDao userDao;
+    UserAccessLogDao accessLogDao;
 
     public UserServlet() throws SQLException {
         super();
         db = new DB();
         userDao = new UserDao(db);
+        accessLogDao = new UserAccessLogDao(db);
+
     }
 
     @Override
@@ -28,9 +33,24 @@ public class UserServlet extends HttpServlet {
             case "register":
                 handleRegister(request, response);
                 break;
+            case "delete":
+                handleDeleteAccount(request,response);
             default:
                 System.out.println("no action");
                 return;
+        }
+    }
+
+    private void handleDeleteAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User user = (User) request.getSession().getAttribute("user");
+        try {
+            userDao.delete(user.getId());
+            request.getSession().removeAttribute("user");
+            request.getSession().invalidate();
+            response.sendRedirect("home.jsp");
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+            Helper.alert(response.getWriter(), "Delete failed");
         }
     }
 
@@ -41,7 +61,7 @@ public class UserServlet extends HttpServlet {
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
         String address = req.getParameter("address");
-        String role = null;
+        String role = "Customer";
         if (req.getParameter("role") != null)
             role = req.getParameter("role");
         if (Validator.checkEmpty(email, password) || Validator.checkEmpty(name)) {
