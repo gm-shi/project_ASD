@@ -61,6 +61,50 @@
             </div>
         </div>
     </header>
+
+    <%--    navigation bar--%>
+    <nav class="navbar navbar-expand-lg navbar-light" style="    background-color: #bae2ff;
+    box-shadow: 0px 0px 3px 0px black;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" style="justify-content: space-around;" id="navbarNavDropdown">
+            <div style="width: 70%">
+                <ul class="navbar-nav" style="font-size: 20px; justify-content: space-evenly">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="home.jsp">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.jsp">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="makeorder.jsp">My Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="restaurant.jsp">About us</a>
+                    </li>
+                    <% if(user != null && user.getRole().equalsIgnoreCase("Customer")) { %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                           aria-expanded="false">
+                            My Account
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">My Order</a>
+                            <a class="dropdown-item" href="editinfo.jsp">Profile</a>
+                            <a class="dropdown-item" href="accesslog.jsp">Access Log</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#">Delete Account</a>
+                        </div>
+                    </li>
+                    <%}%>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <%--    navigation bar end--%>
+
     <main role="main">
         <section class="jumbotron text-center">
             <div class="container">
@@ -106,66 +150,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Email</h5>
-                            <p class="card-text">view your order notification</p>
-                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
-                            <a class="btn btn-primary" href="email.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Restaurant</h5>
-                            <p class="card-text">view restaurant information</p>
-                            <a class="btn btn-primary" href="restaurant.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Make Order</h5>
-                            <p class="card-text">Make Order NOW</p>
-                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
-                            <a class="btn btn-primary" href="makeorder.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Order Management</h5>
-                            <p class="card-text">Management Order here</p>
-                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
-                            <a class="btn btn-primary" href="ordermanagement.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
+
+
+
+<%--                <div class="col mb-4">--%>
+<%--                    <div class="card">--%>
+<%--                        <div class="card-body">--%>
+<%--                            <h5 class="card-title">Order Management</h5>--%>
+<%--                            <p class="card-text">Management Order here</p>--%>
+<%--                            &lt;%&ndash;                        <a href="#" class="btn btn-primary">Search</a>&ndash;%&gt;--%>
+<%--                            <a class="btn btn-primary" href="ordermanagement.jsp">Button</a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
                 <%
-                    if (user != null) {
+                    if (user != null && (user.getRole().equalsIgnoreCase("Staff") || user.getRole().equalsIgnoreCase("Admin"))) {
                 %>
-                <div class="col mb-4">
-                    <div class="card" style="line-height: inherit">
-                        <div class="card-body">
-                            <h5 class="card-title">Account Manage</h5>
-                            <p class="card-text">manage your personal information</p>
-                            <a href="editinfo.jsp" class="btn btn-primary">Profile</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">View Access Log</h5>
-                            <p class="card-text">You can view your access record</p>
-                            <a href="#" class="btn btn-primary">View</a>
-                        </div>
-                    </div>
-                </div>
                 <%--add role check for admin and staff--%>
                 <div class="col mb-4">
                     <div class="card">
@@ -179,21 +179,20 @@
                 </div>
                 <%}%>
                 <%
-                    if (user != null && user.getRole().equalsIgnoreCase("Customer")) {
+                    if (user != null && user.getRole().equalsIgnoreCase("Admin")) {
                 %>
+                <%--add role check for admin and staff--%>
                 <div class="col mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Delete Account</h5>
-                            <p class="card-text">Delete account from our system</p>
-                            <a class="btn btn-primary" href="delete.jsp">Button</a>
+                            <h5 class="card-title">Create Account</h5>
+                            <p class="card-text">Create Staff Accounts</p>
+                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
+                            <a class="btn btn-primary" href="dishes.jsp">Button</a>
                         </div>
                     </div>
                 </div>
-                <%
-                    }
-                %>
-
+                <%}%>
             </div>
         </div>
     </main>
