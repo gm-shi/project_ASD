@@ -5,11 +5,6 @@
 
 trigger:
 - master
-- GongmingShi
-- Changyu
-- Lun_OU
-- Jacky
-- Ao-Qu
 
 pool:
   vmImage: ubuntu-latest
