@@ -127,7 +127,7 @@
         </div>
     </nav>
     <section class="jumbotron text-center">
-        <h1>Access Log</h1>
+        <strong><h1 class="display-4">ACCESS LOG</h1></strong>
     </section>
     <div style="display: flex;
     flex-direction: column;

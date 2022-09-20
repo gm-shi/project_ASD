@@ -34,7 +34,7 @@ public class UserServlet extends HttpServlet {
                 handleRegister(request, response);
                 break;
             case "delete":
-                handleDeleteAccount(request,response);
+                handleDeleteAccount(request, response);
             default:
                 System.out.println("no action");
                 return;
@@ -88,13 +88,13 @@ public class UserServlet extends HttpServlet {
             }
             return;
         }
-//        User user = new User(userId, name, email, password, phone, address, role);
-        //add user access log
-        if (req.getSession().getAttribute("user") != null)
-            res.sendRedirect("home.jsp");
-
-        res.sendRedirect("welcome.jsp");
-
+        if (req.getSession().getAttribute("user") != null) {
+            User user = (User) req.getSession().getAttribute("user");
+            if (user.getRole().equalsIgnoreCase("Admin"))
+                res.sendRedirect("home.jsp");
+        }else{
+            res.sendRedirect("welcome.jsp");
+        }
     }
 }
 
