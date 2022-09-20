@@ -61,7 +61,7 @@ public class UserServlet extends HttpServlet {
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
         String address = req.getParameter("address");
-        String role = null;
+        String role = "Customer";
         if (req.getParameter("role") != null)
             role = req.getParameter("role");
         if (Validator.checkEmpty(email, password) || Validator.checkEmpty(name)) {

@@ -166,28 +166,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Delete Account</h5>
-                            <p class="card-text">You will delete your account</p>
-                            <a href="#" class="btn btn-primary">Delete</a>
-                        </div>
-                    </div>
-                </div>
-<%--                <%--%>
-<%--                    if (!user.getRole().equalsIgnoreCase("staff") && !user.getRole().equalsIgnoreCase("admin")) {--%>
-<%--                %>--%>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Delete Account</h5>
-                            <p class="card-text">Delete account from our system</p>
-                            <a class="btn btn-primary" href="delete.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
-<%--                <%}%>--%>
                 <%--add role check for admin and staff--%>
                 <div class="col mb-4">
                     <div class="card">
@@ -200,6 +178,21 @@
                     </div>
                 </div>
                 <%}%>
+                <%
+                    if (user != null && user.getRole().equalsIgnoreCase("Customer")) {
+                %>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Delete Account</h5>
+                            <p class="card-text">Delete account from our system</p>
+                            <a class="btn btn-primary" href="delete.jsp">Button</a>
+                        </div>
+                    </div>
+                </div>
+                <%
+                    }
+                %>
 
             </div>
         </div>
