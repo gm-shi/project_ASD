@@ -1,19 +1,70 @@
 package com.asd.project.controller;
 
+import com.asd.project.model.User;
+import com.asd.project.model.UserAccessLog;
+import com.asd.project.model.dao.UserAccessLogDao;
+import com.asd.project.model.dao.UserDao;
+import com.asd.project.utils.DB;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 @WebServlet("/userAccessLogServlet")
 public class UserAccessLogServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    super.doGet(req,resp);
+    DB db;
+    UserAccessLogDao accessLogDao;
+    UserDao userDao;
+
+    public UserAccessLogServlet() throws SQLException {
+        super();
+        db = new DB();
+        userDao = new UserDao(db);
+        accessLogDao = new UserAccessLogDao(db);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String[] queries = req.getQueryString().split("=");
+        String query = queries[1].toLowerCase();
+        switch (query) {
+            case "search":
+                handleSearch(req, res);
+                break;
+            case "all":
+                handleAll(req, res);
+                break;
+        }
+    }
 
+    private void handleSearch(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+        User user = (User) req.getSession().getAttribute("user");
+        String date = req.getParameter("date");
+        ArrayList<UserAccessLog> userAccessLogs = null;
+        try {
+            userAccessLogs = accessLogDao.getUserAccessLogByDate(user.getId(), date);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        req.setAttribute("userAccessLogs", userAccessLogs);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("accesslog.jsp");
+        requestDispatcher.forward(req, res);
+    }
+
+    private void handleAll(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        User user = (User) req.getSession().getAttribute("user");
+        ArrayList<UserAccessLog> userAccessLogs = null;
+        try {
+            userAccessLogs = accessLogDao.getUserAccessLog(user.getId());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        req.setAttribute("userAccessLogs", userAccessLogs);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("accesslog.jsp");
+        requestDispatcher.forward(req, res);
     }
 }

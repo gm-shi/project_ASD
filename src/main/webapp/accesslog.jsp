@@ -1,5 +1,17 @@
 <%@ page import="com.asd.project.model.User" %>
+<%@ page import="com.asd.project.model.UserAccessLog" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.asd.project.utils.DB" %>
+<%@ page import="com.asd.project.model.dao.UserAccessLogDao" %><%--
+  Created by IntelliJ IDEA.
+  User: sgm49
+  Date: 21/09/2022
+  Time: 1:01 am
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,7 +23,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Home</title>
+    <title>Access Log</title>
 </head>
 <body>
 <div class="body">
@@ -22,7 +34,16 @@
             user = (User) session.getAttribute("user");
             name = user.getName();
         }
-
+        ArrayList<UserAccessLog> accessLogs;
+        if (user == null)
+            response.sendRedirect("main.jsp");
+        if (request.getAttribute("userAccessLogs") == null) {
+            DB db = new DB();
+            UserAccessLogDao accessLogDao = new UserAccessLogDao(db);
+            accessLogs = accessLogDao.getUserAccessLog(user.getId());
+        } else {
+            accessLogs = (ArrayList<UserAccessLog>) request.getAttribute("userAccessLogs");
+        }
     %>
     <header>
         <div class="navbar navbar-light shadow-sm" style="background-color: steelblue">
@@ -72,7 +93,7 @@
         <div class="collapse navbar-collapse" style="justify-content: space-around;" id="navbarNavDropdown">
             <div style="width: 70%">
                 <ul class="navbar-nav" style="font-size: 20px; justify-content: space-evenly">
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link" href="home.jsp">Home</a>
                     </li>
                     <li class="nav-item">
@@ -86,7 +107,7 @@
                     </li>
                     <% if (user != null) { %>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-toggle="dropdown"
                            aria-expanded="false">
                             My Account
                         </a>
@@ -105,109 +126,59 @@
             </div>
         </div>
     </nav>
-    <%--    navigation bar end--%>
-
-    <main role="main">
-        <section class="jumbotron text-center">
-            <div class="container">
-                <div id="demo" class="carousel slide" data-ride="carousel">
-
-                    <ul class="carousel-indicators">
-                        <li data-target="#demo" data-slide-to="0" class="active"></li>
-                        <li data-target="#demo" data-slide-to="1"></li>
-                        <li data-target="#demo" data-slide-to="2"></li>
-                    </ul>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="img/1.jpg">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/2.jpg">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/3.jpg">
-                        </div>
-                    </div>
-
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
-
+    <section class="jumbotron text-center">
+        <h1>Access Log</h1>
+    </section>
+    <div style="display: flex;
+    flex-direction: column;
+    align-items: center;">
+        <div class="col-md-8">
+            <form method="post" action="userAccessLogServlet?action=search">
+                <div class="input-group mb-4">
+                    <input type="date" class="form-control" id="date" name="date" aria-label="DATE">
+                    <button class="btn btn-outline-primary" type="submit"
+                            onclick="form.action='userAccessLogServlet?action=all'" id="allButton">All
+                    </button>
+                    <button class="btn btn-outline-primary" type="submit" id="searchButton">Search</button>
                 </div>
-            </div>
-        </section>
-
-        <div class="container">
-            <div class="row row-cols-1 row-cols-md-3" style="margin: 40px">
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Menu</h5>
-                            <p class="card-text">Pick dishes</p>
-                            <%--                        <a href="#" class="btn btn-primary">Search</a>--%>
-                            <a class="btn btn-primary" href="menu.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
-                <%--                <div class="col mb-4">--%>
-                <%--                    <div class="card">--%>
-                <%--                        <div class="card-body">--%>
-                <%--                            <h5 class="card-title">Order Management</h5>--%>
-                <%--                            <p class="card-text">Management Order here</p>--%>
-                <%--                            &lt;%&ndash;                        <a href="#" class="btn btn-primary">Search</a>&ndash;%&gt;--%>
-                <%--                            <a class="btn btn-primary" href="ordermanagement.jsp">Button</a>--%>
-                <%--                        </div>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
-
-
-                <%
-                    if (user != null && (user.getRole().equalsIgnoreCase("Staff") || user.getRole().equalsIgnoreCase("Admin"))) {
-                %>
-                <%--add role check for admin and staff--%>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Manage Dishes</h5>
-                            <p class="card-text">mange dishes for staff</p>
-                            <a class="btn btn-primary" href="dishes.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">View Access Log</h5>
-                            <p class="card-text">View user Access log</p>
-                            <a class="btn btn-primary" href="accesslog.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
-                <%}%>
-                <% if (user != null && user.getRole().equalsIgnoreCase("Admin")) {
-                %>
-                <div class="col mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Create Account</h5>
-                            <p class="card-text">Create Staff Accounts</p>
-                            <a class="btn btn-primary" href="dishes.jsp">Button</a>
-                        </div>
-                    </div>
-                </div>
-                <%}%>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped ">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%
+                        if (accessLogs != null) {
+                            for (UserAccessLog log : accessLogs) {
+                    %>
+                    <tr>
+                        <td><%=log.getUserID()%>
+                        </td>
+                        <td style="text-transform: capitalize"><%=log.getUserAccessType()%>
+                        </td>
+                        <td><%=log.getUserAccessTime()%>
+                        </td>
+                    </tr>
+                    <%
+                            }
+                        }
+                    %>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </main>
+    </div>
     <footer style="margin-top: 80px" class="text-muted">
         <div class="container">
             <p class="float-right">
                 <a href="#">Back to top</a>
             </p>
-            <p>Restaurant Online Ordering System &copy;</p>
+            <p>Online Ordering System &copy;</p>
         </div>
     </footer>
 </div>
