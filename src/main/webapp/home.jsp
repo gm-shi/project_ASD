@@ -25,53 +25,18 @@
 
     %>
     <header>
-        <div class="navbar navbar-light shadow-sm" style="background-color: steelblue">
-            <div class="container d-flex justify-content-between">
-                <a href="index.jsp" class="navbar-brand d-flex align-items-center">
-                    <img style=" width:30px; height: 30px; fill: currentColor;"
-                         src="img/shop.png" alt="logo">
-                    <strong style="margin-left:5px">Restaurant Online Ordering System</strong>
-                </a>
-            </div>
-            <%
-                if (user == null) {
-            %>
-            <a class="btn btn-success" style="margin-right: 10px" href="index.jsp">Log in</a>
-            <%} else {%>
-            <a class="btn btn-danger" style="margin-right: 10px" href="logoutServlet">Log out</a>
-            <%--            add logout servlet--%>
-            <%}%>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-expanded="false">
-                    <%=name%>
-                </button>
-                <div class="dropdown-menu-right dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Cart</a>
-                    <%
-                        if (user != null) {
-                    %>
-                    <a class="dropdown-item" href="editinfo.jsp">Personal Information</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="logoutServlet">Log out</a>
-                </div>
-                <%
-                    }
-                %>
-            </div>
-        </div>
-    </header>
 
-    <%--    navigation bar--%>
-    <nav class="navbar navbar-expand-lg navbar-light" style="    background-color: #bae2ff;
+        <%--    navigation bar--%>
+        <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: steelblue;
     box-shadow: 0px 0px 3px 0px black;">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" style="justify-content: space-around;" id="navbarNavDropdown">
-            <div style="width: 70%">
-                <ul class="navbar-nav" style="font-size: 20px; justify-content: space-evenly">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div style="flex-basis: 10%"></div>
+            <div class="collapse navbar-collapse" style="justify-content: space-around;" id="navbarNavDropdown">
+                <ul class="navbar-nav"
+                    style="font-size: 20px;flex-basis: 90%;display: flex;justify-content: space-evenly; font-weight: 600;">
                     <li class="nav-item active">
                         <a class="nav-link" href="home.jsp">Home</a>
                     </li>
@@ -102,10 +67,40 @@
                     </li>
                     <%}%>
                 </ul>
+                <div style="display: flex">
+                    <%
+                        if (user == null) {
+                    %>
+                    <a class="btn btn-success" style="margin-right: 10px" href="index.jsp">Login</a>
+                    <%} else {%>
+                    <a class="btn btn-danger" style="margin-right: 10px" href="logoutServlet">Logout</a>
+                    <%--            add logout servlet--%>
+                    <%}%>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-expanded="false">
+                            <%=name%>
+                        </button>
+                        <div class="dropdown-menu-right dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Cart</a>
+                            <%
+                                if (user != null) {
+                            %>
+                            <a class="dropdown-item" href="editinfo.jsp">Personal Information</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="logoutServlet">Log out</a>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
-    <%--    navigation bar end--%>
+        </nav>
+        <%--    navigation bar end--%>
+
+    </header>
+
 
     <main role="main">
         <section class="jumbotron text-center">
