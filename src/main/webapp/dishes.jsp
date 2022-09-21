@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.asd.project.model.User" %><%--
   Created by IntelliJ IDEA.
   User: Littlenewww
   Date: 2022/9/6

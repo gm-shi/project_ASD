@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.asd.project.model.User" %><%--
   Created by IntelliJ IDEA.
   User: John Wang
   Date: 9/6/2022
