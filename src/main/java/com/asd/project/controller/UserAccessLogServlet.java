@@ -37,13 +37,13 @@ public class UserAccessLogServlet extends HttpServlet {
                 break;
             case "all":
                 handleAll(req, res);
-            case"id":
-                handleSearchById(req,res);
+            case "email":
+                handleSearchByEmail(req,res);
                 break;
         }
     }
 
-    private void handleSearchById(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    private void handleSearchByEmail(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String email = req.getParameter("email");
         ArrayList<UserAccessLog> userAccessLogs = null;
         try {
