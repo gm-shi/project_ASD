@@ -135,6 +135,39 @@
         </section>
 
         <div class="container">
+            <%
+                if (user == null || user.getRole().equalsIgnoreCase("Customer")) {
+            %>
+            <div style="    display: flex;
+    flex-direction: column;
+    align-items: center;">
+                <h1 style="margin-bottom: 40px">Restaurant</h1>
+                <p>The approach to the menu was easy. We had no interest in trying to reinvent food.</p>
+                <p>We went with choices that were popular catering requests — basic, down-home style — just from a wide
+                    range of regions.</p>
+                <p>We are known for our generous portions of BBQ, Southern, Cajun/Creole meals, plus a touch of Caribbean fun.</p>
+                <p> We will tell you now – save room for dessert!</p>
+                <a style="margin-top: 40px" href="menu.jsp" class="btn btn-primary btn-lg" tabindex="-1" role="button">Start Order</a>
+            </div>
+            <%}%>
+            <%--                <div class="col mb-4">--%>
+            <%--                    <div class="card">--%>
+            <%--                        <div class="card-body">--%>
+            <%--                            <h5 class="card-title">Order Management</h5>--%>
+            <%--                            <p class="card-text">Management Order here</p>--%>
+            <%--                            &lt;%&ndash;                        <a href="#" class="btn btn-primary">Search</a>&ndash;%&gt;--%>
+            <%--                            <a class="btn btn-primary" href="ordermanagement.jsp">Button</a>--%>
+            <%--                        </div>--%>
+            <%--                    </div>--%>
+            <%--                </div>--%>
+
+
+            <%
+                if (user != null && (user.getRole().equalsIgnoreCase("Staff") || user.getRole().equalsIgnoreCase("Admin"))) {
+            %>
+
+
+            <%--add role check for admin and staff--%>
             <div class="row row-cols-1 row-cols-md-3" style="margin: 40px">
                 <div class="col mb-4">
                     <div class="card">
@@ -146,22 +179,6 @@
                         </div>
                     </div>
                 </div>
-                <%--                <div class="col mb-4">--%>
-                <%--                    <div class="card">--%>
-                <%--                        <div class="card-body">--%>
-                <%--                            <h5 class="card-title">Order Management</h5>--%>
-                <%--                            <p class="card-text">Management Order here</p>--%>
-                <%--                            &lt;%&ndash;                        <a href="#" class="btn btn-primary">Search</a>&ndash;%&gt;--%>
-                <%--                            <a class="btn btn-primary" href="ordermanagement.jsp">Button</a>--%>
-                <%--                        </div>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
-
-
-                <%
-                    if (user != null && (user.getRole().equalsIgnoreCase("Staff") || user.getRole().equalsIgnoreCase("Admin"))) {
-                %>
-                <%--add role check for admin and staff--%>
                 <div class="col mb-4">
                     <div class="card">
                         <div class="card-body">
