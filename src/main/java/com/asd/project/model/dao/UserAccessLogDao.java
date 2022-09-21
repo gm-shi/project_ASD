@@ -63,4 +63,17 @@ public class UserAccessLogDao {
         return userAccessLogs;
     }
 
+    public ArrayList<UserAccessLog> getUserAccessLogByEmail(String email) throws SQLException {
+        ArrayList<UserAccessLog> userAccessLogs = new ArrayList<>();
+        String query = "SELECT User_access_log.id, access_type, time FROM User_access_log inner join User on User.id = User_access_log.id  where email= ?";
+        PreparedStatement statement = conn().prepareStatement(query);
+        statement.setString(1, email);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            userAccessLogs.add(new UserAccessLog((resultSet.getInt("id")),
+                    resultSet.getString("access_type"),
+                    new Date(resultSet.getTimestamp("time").getTime())));
+        }
+        return userAccessLogs;
+    }
 }

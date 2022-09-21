@@ -1,17 +1,14 @@
 <%@ page import="com.asd.project.model.User" %>
 <%@ page import="com.asd.project.model.UserAccessLog" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.asd.project.utils.DB" %>
-<%@ page import="com.asd.project.model.dao.UserAccessLogDao" %><%--
+<%@ page import="com.asd.project.utils.DB" %><%--
   Created by IntelliJ IDEA.
   User: sgm49
   Date: 21/09/2022
-  Time: 1:01 am
+  Time: 10:05 am
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,30 +20,25 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Access Log</title>
+    <title>Search User Access Log</title>
 </head>
 <body>
 <div class="body">
     <%
-        String name = "Guest";
-        User user = null;
-        if (session.getAttribute("user") != null) {
-            user = (User) session.getAttribute("user");
-            name = user.getName();
-        }
+        String name;
+        User user;
         ArrayList<UserAccessLog> accessLogs;
-        if (user == null)
-            response.sendRedirect("main.jsp");
-        if (request.getAttribute("userAccessLogs") == null) {
-            DB db = new DB();
-            UserAccessLogDao accessLogDao = new UserAccessLogDao(db);
-            accessLogs = accessLogDao.getUserAccessLog(user.getId());
-        } else {
-            accessLogs = (ArrayList<UserAccessLog>) request.getAttribute("userAccessLogs");
+
+        if (session.getAttribute("user") == null) {
+            response.sendRedirect("home.jsp");
         }
+        user = (User) session.getAttribute("user");
+        name = user.getName();
+        accessLogs = (ArrayList<UserAccessLog>) request.getAttribute("userAccessLogs");
+
     %>
-    <%--    navigation bar start--%>
     <header>
+        <%--    navigation bar--%>
         <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: steelblue;
     box-shadow: 0px 0px 3px 0px black;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -57,7 +49,7 @@
             <div class="collapse navbar-collapse" style="justify-content: space-around;" id="navbarNavDropdown">
                 <ul class="navbar-nav"
                     style="font-size: 20px;flex-basis: 90%;display: flex;justify-content: space-evenly; font-weight: 600;">
-                    <li class="nav-item ">
+                    <li class="nav-item active">
                         <a class="nav-link" href="home.jsp">Home</a>
                     </li>
                     <li class="nav-item">
@@ -70,7 +62,7 @@
                         <a class="nav-link" href="restaurant.jsp">About us</a>
                     </li>
                     <% if (user != null) { %>
-                    <li class="nav-item dropdown active">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                            aria-expanded="false">
                             My Account
@@ -117,8 +109,8 @@
                 </div>
             </div>
         </nav>
+        <%--    navigation bar end--%>
     </header>
-    <%--    navigation bar end--%>
 
 
     <section class="jumbotron text-center">
@@ -128,12 +120,11 @@
     flex-direction: column;
     align-items: center;">
         <div class="col-md-8">
-            <form method="post" action="userAccessLogServlet?action=search">
+            <form method="post" action="userAccessLogServlet?action=email">
                 <div class="input-group mb-4">
                     <input type="date" class="form-control" id="date" name="date" aria-label="DATE">
-                    <button class="btn btn-outline-primary" type="submit"
-                            onclick="form.action='userAccessLogServlet?action=all'" id="allButton">All
-                    </button>
+                    <input type="text" class="form-control" id="email" name="email">
+
                     <button class="btn btn-outline-primary" type="submit" id="searchButton">Search</button>
                 </div>
             </form>
