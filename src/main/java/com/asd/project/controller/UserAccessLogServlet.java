@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -36,8 +37,23 @@ public class UserAccessLogServlet extends HttpServlet {
                 break;
             case "all":
                 handleAll(req, res);
+            case"id":
+                handleSearchById(req,res);
                 break;
         }
+    }
+
+    private void handleSearchById(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String email = req.getParameter("email");
+        ArrayList<UserAccessLog> userAccessLogs = null;
+        try {
+            userAccessLogs = accessLogDao.getUserAccessLogByEmail(email);
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        req.setAttribute("userAccessLogs", userAccessLogs);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("searchAccessLog.jsp");
+        requestDispatcher.forward(req,res);
     }
 
     private void handleSearch(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
@@ -67,4 +83,5 @@ public class UserAccessLogServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("accesslog.jsp");
         requestDispatcher.forward(req, res);
     }
+
 }
