@@ -79,6 +79,7 @@ public class UserServlet extends HttpServlet {
 
         try {
             userId = userDao.create(name, email, address, phone, role, password);
+            accessLogDao.insert(userId,"register");
         } catch (SQLException e) {
             if (e.getErrorCode() == 1062) {
                 Helper.alert(res.getWriter(), "Email already exist");

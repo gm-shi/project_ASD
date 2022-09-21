@@ -63,7 +63,7 @@
                             <a class="dropdown-item" href="accesslog.jsp">Access Log</a>
                             <% if (user.getRole().equalsIgnoreCase("Customer")) {%>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#">Delete Account</a>
+                            <a class="dropdown-item text-danger" href="delete.jsp">Delete Account</a>
                             <%}%>
                         </div>
                     </li>
@@ -84,7 +84,7 @@
                             <%=name%>
                         </button>
                         <div class="dropdown-menu-right dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Cart</a>
+                            <a class="dropdown-item" href="makeorder.jsp">Cart</a>
                             <%
                                 if (user != null) {
                             %>
