@@ -94,7 +94,7 @@
                             <%=name%>
                         </button>
                         <div class="dropdown-menu-right dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Cart</a>
+                            <a class="dropdown-item" href="makeorder.jsp">Cart</a>
                             <%
                                 if (user != null) {
                             %>
@@ -114,19 +114,34 @@
 
 
     <section class="jumbotron text-center">
-        <strong><h1 class="display-4">ACCESS LOG</h1></strong>
+        <strong><h1 class="display-4">VIEW USER ACCESS LOG</h1></strong>
     </section>
     <div style="display: flex;
     flex-direction: column;
     align-items: center;">
         <div class="col-md-8">
             <form method="post" action="userAccessLogServlet?action=email">
-                <div class="input-group mb-4">
-                    <input type="date" class="form-control" id="date" name="date" aria-label="DATE">
-                    <input type="text" class="form-control" id="email" name="email">
 
-                    <button class="btn btn-outline-primary" type="submit" id="searchButton">Search</button>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="email">User Email</label>
+                        <input type="text" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="date">Date</label>
+                        <input type="date" class="form-control" id="date" name="date" aria-label="DATE">
+                    </div>
+                    <div class="form-group col-md-2"
+                         style="display: flex;flex-direction: row;align-items: flex-end;width: 100%;">
+                        <button style="width: inherit" class="btn btn-outline-primary" type="submit" id="searchButton">
+                            Search
+                        </button>
+                    </div>
+
                 </div>
+
+
             </form>
             <div class="table-responsive">
                 <table class="table table-hover table-striped ">

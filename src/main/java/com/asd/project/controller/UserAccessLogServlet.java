@@ -38,22 +38,23 @@ public class UserAccessLogServlet extends HttpServlet {
             case "all":
                 handleAll(req, res);
             case "email":
-                handleSearchByEmail(req,res);
+                handleSearchByEmail(req, res);
                 break;
         }
     }
 
     private void handleSearchByEmail(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        String email = req.getParameter("email");
-        ArrayList<UserAccessLog> userAccessLogs = null;
         try {
-            userAccessLogs = accessLogDao.getUserAccessLogByEmail(email);
-        }catch (SQLException throwables){
+            String date = req.getParameter("date");
+            String email = req.getParameter("email");
+            ArrayList<UserAccessLog> userAccessLogs = null;
+            userAccessLogs = accessLogDao.getUserAccessLogByEmailAndDate(email, date);
+            req.setAttribute("userAccessLogs", userAccessLogs);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("searchAccessLog.jsp");
+            requestDispatcher.forward(req, res);
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        req.setAttribute("userAccessLogs", userAccessLogs);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("searchAccessLog.jsp");
-        requestDispatcher.forward(req,res);
     }
 
     private void handleSearch(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {

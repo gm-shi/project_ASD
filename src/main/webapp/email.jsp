@@ -51,7 +51,7 @@
                     </li>
                     <% if (user != null) { %>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="delete.jsp" role="button" data-toggle="dropdown"
                            aria-expanded="false">
                             My Account
                         </a>
@@ -82,7 +82,7 @@
                             <%=name%>
                         </button>
                         <div class="dropdown-menu-right dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Cart</a>
+                            <a class="dropdown-item" href="makeorder.jsp">Cart</a>
                             <%
                                 if (user != null) {
                             %>
