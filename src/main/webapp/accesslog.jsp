@@ -57,7 +57,7 @@
             <div class="collapse navbar-collapse" style="justify-content: space-around;" id="navbarNavDropdown">
                 <ul class="navbar-nav"
                     style="font-size: 20px;flex-basis: 90%;display: flex;justify-content: space-evenly; font-weight: 600;">
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link" href="home.jsp">Home</a>
                     </li>
                     <li class="nav-item">
@@ -70,7 +70,7 @@
                         <a class="nav-link" href="restaurant.jsp">About us</a>
                     </li>
                     <% if (user != null) { %>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                            aria-expanded="false">
                             My Account
@@ -120,49 +120,7 @@
     </header>
     <%--    navigation bar end--%>
 
-    <%--    navigation bar--%>
-    <nav class="navbar navbar-expand-lg navbar-light" style="    background-color: #bae2ff;
-    box-shadow: 0px 0px 3px 0px black;">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" style="justify-content: space-around;" id="navbarNavDropdown">
-            <div style="width: 70%">
-                <ul class="navbar-nav" style="font-size: 20px; justify-content: space-evenly">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="home.jsp">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="menu.jsp">Menu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="makeorder.jsp">My Cart</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="restaurant.jsp">About us</a>
-                    </li>
-                    <% if (user != null) { %>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-toggle="dropdown"
-                           aria-expanded="false">
-                            My Account
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">My Order</a>
-                            <a class="dropdown-item" href="editinfo.jsp">Profile</a>
-                            <a class="dropdown-item" href="accesslog.jsp">Access Log</a>
-                            <% if (user.getRole().equalsIgnoreCase("Customer")) {%>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#">Delete Account</a>
-                            <%}%>
-                        </div>
-                    </li>
-                    <%}%>
-                </ul>
-            </div>
-        </div>
-    </nav>
+
     <section class="jumbotron text-center">
         <strong><h1 class="display-4">ACCESS LOG</h1></strong>
     </section>
