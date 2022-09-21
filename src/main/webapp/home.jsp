@@ -24,9 +24,9 @@
         }
 
     %>
-    <header>
 
-        <%--    navigation bar--%>
+    <%--    navigation bar start--%>
+    <header>
         <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: steelblue;
     box-shadow: 0px 0px 3px 0px black;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -97,9 +97,8 @@
                 </div>
             </div>
         </nav>
-        <%--    navigation bar end--%>
-
     </header>
+    <%--    navigation bar end--%>
 
 
     <main role="main">
