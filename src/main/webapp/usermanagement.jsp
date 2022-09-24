@@ -1,13 +1,14 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: sgm49
+  Date: 24/09/2022
+  Time: 10:23 pm
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page import="com.asd.project.model.User" %>
 <%@ page import="com.asd.project.model.UserAccessLog" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.asd.project.utils.DB" %><%--
-  Created by IntelliJ IDEA.
-  User: sgm49
-  Date: 21/09/2022
-  Time: 10:05 am
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.asd.project.utils.DB" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -27,17 +28,15 @@
     <%
         String name;
         User user;
-        ArrayList<UserAccessLog> accessLogs;
-
         if (session.getAttribute("user") == null) {
             response.sendRedirect("home.jsp");
         }
         user = (User) session.getAttribute("user");
-        if (user.getRole().equalsIgnoreCase("Customer")){
+        if (user.getRole().equalsIgnoreCase("Customer")) {
             response.sendRedirect("home.jsp");
         }
         name = user.getName();
-        accessLogs = (ArrayList<UserAccessLog>) request.getAttribute("userAccessLogs");
+        User result = (User) request.getAttribute("result");
 
     %>
     <header>
@@ -108,6 +107,7 @@
                         <%
                             }
                         %>
+
                     </div>
                 </div>
             </div>
@@ -117,23 +117,19 @@
 
 
     <section class="jumbotron text-center">
-        <strong><h1 class="display-4">VIEW USER ACCESS LOG</h1></strong>
+        <strong><h1 class="display-4">User Management</h1></strong>
     </section>
+
     <div style="display: flex;
     flex-direction: column;
     align-items: center;">
         <div class="col-md-8">
-            <form method="post" action="userAccessLogServlet?action=email">
+            <form method="post" action="userServlet?action=get">
 
-
-                <div class="form-row">
+                <div class="form-row" style="display: flex;flex-direction: column; align-items: center;">
                     <div class="form-group col-md-6">
                         <label for="email">User Email</label>
-                        <input type="text" class="form-control" id="email" name="email">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="date">Date</label>
-                        <input type="date" class="form-control" id="date" name="date" aria-label="DATE">
+                        <input type="text" class="form-control" id="email" name="email"/>
                     </div>
                     <div class="form-group col-md-2"
                          style="display: flex;flex-direction: row;align-items: flex-end;width: 100%;">
@@ -141,42 +137,46 @@
                             Search
                         </button>
                     </div>
-
                 </div>
-
-
             </form>
-            <div class="table-responsive">
-                <table class="table table-hover table-striped ">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Type</th>
-                        <th>Time</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <%
-                        if (accessLogs != null) {
-                            for (UserAccessLog log : accessLogs) {
-                    %>
-                    <tr>
-                        <td><%=log.getUserID()%>
-                        </td>
-                        <td style="text-transform: capitalize"><%=log.getUserAccessType()%>
-                        </td>
-                        <td><%=log.getUserAccessTime()%>
-                        </td>
-                    </tr>
-                    <%
-                            }
-                        }
-                    %>
-                    </tbody>
-                </table>
+        </div>
+        <% if (result != null) {
+            boolean isAdmin = result.getRole().equalsIgnoreCase("Admin");
+        %>
+        <div>
+            <div class="card" style="width: 600px;">
+                <div class="card-body" style="    min-height: 20rem;">
+                    <h5 class="card-title"><%=result.getName()%></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><%=result.getRole()%></h6>
+                    <p class="card-text">ID: <%=result.getId()%></p>
+                    <p class="card-text">Email: <%=result.getEmail()%></p>
+                    <p class="card-text">Password: <%=result.getPassword()%></p>
+                    <p class="card-text">Phone: <%=result.getPhoneNumber()%></p>
+                    <p class="card-text">Address: <%=result.getAddress()%></p>
+                    <div style="margin-top: 40px">
+                        <button style="width: 100px" class="btn btn-primary" href="#" class="card-link" <% if(isAdmin) {%> disabled<%}%>>Edit</button>
+                        <button style="width: 100px" class="btn btn-danger" onclick={getAlert("<%=result.getId()%>")} type="button" href="#" class="card-link" <% if(isAdmin) {%> disabled<%}%>>Delete</button>
+                        <form id="deleteForm" method="post" action="userServlet?=deleteuser">
+                            <input type="hidden" name="userId" id="userId" value=""/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%
+        } else {
+        %>         <div>
+        <div class="card" style="width: 600px;">
+            <div class="card-body" style="    min-height: 20rem;">
+                <h5 class="card-title">No Content</h5>
+                <p class="card-text">Please enter or provide correct user email.</p>
             </div>
         </div>
     </div>
+        <%}%>
+    </div>
+
+
     <footer style="margin-top: 80px" class="text-muted">
         <div class="container">
             <p class="float-right">
@@ -186,6 +186,22 @@
         </div>
     </footer>
 </div>
+
+<script>
+
+    const getAlert = (id) => {
+        const isConfirm = window.confirm("Are you sure, you want to delete this account from the database");
+        isConfirm && handleDelete(id);
+    }
+
+    const handleDelete = (id) => {
+        const form = document.getElementById("deleteForm");
+        document.getElementById("userId").value = id;
+        form.submit();
+        return form;
+    }
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -195,3 +211,4 @@
 
 </body>
 </html>
+
