@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: sgm49
-  Date: 24/09/2022
-  Time: 10:23 pm
+  Date: 27/09/2022
+  Time: 2:48 am
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="com.asd.project.model.User" %>
@@ -51,7 +51,7 @@
             <div class="collapse navbar-collapse" style="justify-content: space-around;" id="navbarNavDropdown">
                 <ul class="navbar-nav"
                     style="font-size: 20px;flex-basis: 90%;display: flex;justify-content: space-evenly; font-weight: 600;">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="home.jsp">Home</a>
                     </li>
                     <li class="nav-item">
@@ -115,78 +115,49 @@
         <%--    navigation bar end--%>
     </header>
 
-
     <section class="jumbotron text-center">
-        <strong><h1 class="display-4">User Management</h1></strong>
+        <strong><h1 class="display-4">Edit User Information</h1></strong>
     </section>
-
-    <div style="display: flex;
-    flex-direction: column;
-    align-items: center;">
-        <div class="col-md-8">
-            <form method="post" action="userServlet?action=get">
-
-                <div class="form-row" style="display: flex;flex-direction: column; align-items: center;">
-                    <div class="form-group col-md-6">
-                        <label for="email">User Email</label>
-                        <input type="text" class="form-control" id="email" name="email"/>
-                    </div>
-                    <div class="form-group col-md-2"
-                         style="display: flex;flex-direction: row;align-items: flex-end;width: 100%;">
-                        <button style="width: inherit" class="btn btn-outline-primary" type="submit" id="searchButton">
-                            Search
-                        </button>
-                    </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 30%">
+            <form method="post" action="userServlet?action=edit">
+                <div class="form-group">
+                    <label for="inputUserName">User Name</label>
+                    <input type="text" name="name" class="form-control" id="inputUserName" value="<%=result.getName()%>" required>
                 </div>
+                <div class="form-group">
+                    <label for="inputEmail4">Email</label>
+                    <input type="text" name="email" class="form-control" id="inputEmail4" value="<%=result.getEmail()%>" readonly required>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="text"  name="password" class="form-control"
+                           id="inputPassword" value="<%=result.getPassword()%>" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Address</label>
+                    <input type="text" name="address"  value="<%=result.getAddress()%>" class="form-control" id="inputAddress"
+                           placeholder="1234 Miller St">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserPhone">Phone Number</label>
+                    <input type="text" name="phone" class="form-control" value="<%=result.getPhoneNumber()%>"
+                           id="inputUserPhone"  required>
+                </div>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <input type="role" name="role" class="form-control" id="role" value="<%=result.getRole()%>" disabled required>
+                </div>
+
+                <div style=" text-align: center;">
+                    <button style="margin: 20px" type="submit" id="submitButton" class="btn btn-primary">Save
+                    </button>
+                    <a href="home.jsp" class="btn btn-danger">Cancel</a>
+                </div>
+
             </form>
-        </div>
-        <% if (result != null) {
-            boolean isAdmin = result.getRole().equalsIgnoreCase("Admin");
-        %>
-        <div>
-            <div class="card" style="width: 600px;">
-                <div class="card-body" style="    min-height: 20rem;">
-                    <h5 class="card-title"><%=result.getName()%>
-                    </h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><%=result.getRole()%>
-                    </h6>
-                    <p class="card-text">ID: <%=result.getId()%>
-                    </p>
-                    <p class="card-text">Email: <%=result.getEmail()%>
-                    </p>
-                    <p class="card-text">Password: <%=result.getPassword()%>
-                    </p>
-                    <p class="card-text">Phone: <%=result.getPhoneNumber()%>
-                    </p>
-                    <p class="card-text">Address: <%=result.getAddress()%>
-                    </p>
-                    <div style="margin-top: 40px">
-                        <button style="width: 100px" class="btn btn-primary" onclick={handleEdit("<%=result.getId()%>")}
-                                class="card-link" <% if (isAdmin) {%> disabled<%}%>>Edit
-                        </button>
-                        <button style="width: 100px" class="btn btn-danger" onclick={getAlert("<%=result.getId()%>")}
-                                type="button" href="#" class="card-link" <% if (isAdmin) {%> disabled<%}%>>Delete
-                        </button>
-                        <form id="hiddenForm" method="post" action="userServlet?=deleteuser">
-                            <input type="hidden" name="userId" id="userId" value=""/>
-                        </form>
 
-                    </div>
-                </div>
-            </div>
         </div>
-        <%
-        } else {
-        %>
-        <div>
-            <div class="card" style="width: 600px;">
-                <div class="card-body" style="    min-height: 20rem;">
-                    <h5 class="card-title">No Content</h5>
-                    <p class="card-text">Please enter or provide correct user email.</p>
-                </div>
-            </div>
-        </div>
-        <%}%>
     </div>
 
 
@@ -200,28 +171,7 @@
     </footer>
 </div>
 
-<script>
 
-    const getAlert = (id) => {
-        const isConfirm = window.confirm("Are you sure, you want to delete this account from the database");
-        isConfirm && handleDelete(id);
-    }
-
-    const handleDelete = (id) => {
-        const form = document.getElementById("hiddenForm");
-        document.getElementById("userId").value = id;
-        form.submit();
-        return form;
-    }
-
-    const handleEdit = (id) => {
-        const form = document.getElementById("hiddenForm");
-        form.action = "userServlet?=edituser"
-        document.getElementById("userId").value = id;
-        form.submit();
-        return form;
-    }
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -232,4 +182,5 @@
 
 </body>
 </html>
+
 

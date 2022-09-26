@@ -44,9 +44,52 @@ public class UserServlet extends HttpServlet {
             case "deleteuser":
                 handleDeleteUserByEmail(request,response);
                 break;
+            case "edituser":
+                handleEditUserInformationButton(request,response);
+                break;
+                case "edit":
+                handleUpdateUserInfo(request,response);
+                break;
             default:
                 System.out.println("no action");
                 return;
+        }
+    }
+
+    private void handleUpdateUserInfo(HttpServletRequest req, HttpServletResponse response) throws IOException {
+        String name = req.getParameter("name");
+        String password = req.getParameter("password");
+        String email = req.getParameter("email");
+        String phone = req.getParameter("phone");
+        String address = req.getParameter("address");
+        try {
+            if (userDao.update(name, password, address, phone, email)){
+                System.out.println(email);
+                System.out.println(phone);
+                response.sendRedirect("usermanagement.jsp");
+            }else {
+                Helper.alert(response.getWriter(),"update failed");
+            }
+        } catch (SQLException | IOException throwables) {
+            throwables.printStackTrace();
+            Helper.alert(response.getWriter(),"update failed");
+        }
+    }
+
+    private void handleEditUserInformationButton(HttpServletRequest request, HttpServletResponse response) {
+        User user;
+        String id = request.getParameter("userId");
+        try{
+            user = userDao.getUserById(Integer.parseInt(id));
+            request.setAttribute("result", user);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("editUserInfo.jsp");
+            requestDispatcher.forward(request, response);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -54,6 +97,7 @@ public class UserServlet extends HttpServlet {
         String id = request.getParameter("userId");
         try{
             userDao.delete(Integer.parseInt(id));
+
         } catch (SQLException e) {
             Helper.alert(response.getWriter(), "Fail to delete");
         }
@@ -64,7 +108,7 @@ public class UserServlet extends HttpServlet {
 
     private void handleGetUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
-        User user = null;
+        User user;
         try{
             user = userDao.getUserByEmail(email);
             request.setAttribute("result", user);
