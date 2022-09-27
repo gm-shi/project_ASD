@@ -16,5 +16,5 @@ Responsibility:
     - Model: User, UserAccessLog, UserAccessLogDao, UserDao
     - Controller: LoginServlet, LogoutServlet, UserAccessLogServlet, UserServlet
     - View: index.jsp delete.jsp, accesslog.jsp, editUserInfo.jsp, home.jsp, register.jsp, searchAccessLog.jsp, usermanagement.jsp, welcome.jsp
-    - Utils: DB, DBtester, Helper, Validator
+    - Utils: DB, Helper, Validator
     - JunitTest: UserTest
