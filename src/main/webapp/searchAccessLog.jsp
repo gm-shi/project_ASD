@@ -33,7 +33,7 @@
             response.sendRedirect("home.jsp");
         }
         user = (User) session.getAttribute("user");
-        if (user.getRole().equalsIgnoreCase("Customer")){
+        if (user.getRole().equalsIgnoreCase("Customer")) {
             response.sendRedirect("home.jsp");
         }
         name = user.getName();
@@ -157,7 +157,7 @@
                     </thead>
                     <tbody>
                     <%
-                        if (accessLogs != null) {
+                        if (accessLogs != null && !accessLogs.isEmpty()) {
                             for (UserAccessLog log : accessLogs) {
                     %>
                     <tr>
@@ -169,11 +169,17 @@
                         </td>
                     </tr>
                     <%
-                            }
                         }
+                    } else
                     %>
                     </tbody>
                 </table>
+                <% if (accessLogs != null && accessLogs.isEmpty()) {
+                %>
+                <h3 style="text-align: center; margin-top: 100px">No Result</h3>
+                <%} else if (accessLogs == null) { %>
+                <h3 style="text-align: center; margin-top: 100px">Please Provide Email</h3>
+                <%} %>
             </div>
         </div>
     </div>
