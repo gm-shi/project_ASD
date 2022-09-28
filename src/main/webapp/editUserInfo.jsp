@@ -1,13 +1,14 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: sgm49
+  Date: 27/09/2022
+  Time: 2:48 am
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page import="com.asd.project.model.User" %>
 <%@ page import="com.asd.project.model.UserAccessLog" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.asd.project.utils.DB" %><%--
-  Created by IntelliJ IDEA.
-  User: sgm49
-  Date: 21/09/2022
-  Time: 10:05 am
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.asd.project.utils.DB" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -27,8 +28,6 @@
     <%
         String name;
         User user;
-        ArrayList<UserAccessLog> accessLogs;
-
         if (session.getAttribute("user") == null) {
             response.sendRedirect("home.jsp");
         }
@@ -37,7 +36,7 @@
             response.sendRedirect("home.jsp");
         }
         name = user.getName();
-        accessLogs = (ArrayList<UserAccessLog>) request.getAttribute("userAccessLogs");
+        User result = (User) request.getAttribute("result");
 
     %>
     <header>
@@ -52,7 +51,7 @@
             <div class="collapse navbar-collapse" style="justify-content: space-around;" id="navbarNavDropdown">
                 <ul class="navbar-nav"
                     style="font-size: 20px;flex-basis: 90%;display: flex;justify-content: space-evenly; font-weight: 600;">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="home.jsp">Home</a>
                     </li>
                     <li class="nav-item">
@@ -108,6 +107,7 @@
                         <%
                             }
                         %>
+
                     </div>
                 </div>
             </div>
@@ -115,74 +115,52 @@
         <%--    navigation bar end--%>
     </header>
 
-
     <section class="jumbotron text-center">
-        <strong><h1 class="display-4">VIEW USER ACCESS LOG</h1></strong>
+        <strong><h1 class="display-4">Edit User Information</h1></strong>
     </section>
-    <div style="display: flex;
-    flex-direction: column;
-    align-items: center;">
-        <div class="col-md-8">
-            <form method="post" action="userAccessLogServlet?action=email">
-
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="email">User Email</label>
-                        <input type="text" class="form-control" id="email" name="email">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="date">Date</label>
-                        <input type="date" class="form-control" id="date" name="date" aria-label="DATE">
-                    </div>
-                    <div class="form-group col-md-2"
-                         style="display: flex;flex-direction: row;align-items: flex-end;width: 100%;">
-                        <button style="width: inherit" class="btn btn-outline-primary" type="submit" id="searchButton">
-                            Search
-                        </button>
-                    </div>
-
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 30%">
+            <form method="post" action="userServlet?action=edit">
+                <div class="form-group">
+                    <label for="inputUserName">User Name</label>
+                    <input type="text" name="name" class="form-control" id="inputUserName" value="<%=result.getName()%>" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail4">Email</label>
+                    <input type="text" name="email" class="form-control" id="inputEmail4" value="<%=result.getEmail()%>" readonly required>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="text"  name="password" class="form-control"
+                           id="inputPassword" value="<%=result.getPassword()%>" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Address</label>
+                    <input type="text" name="address"  value="<%=result.getAddress()%>" class="form-control" id="inputAddress"
+                           placeholder="1234 Miller St">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserPhone">Phone Number</label>
+                    <input type="text" name="phone" class="form-control" value="<%=result.getPhoneNumber()%>"
+                           id="inputUserPhone"  required>
+                </div>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <input type="role" name="role" class="form-control" id="role" value="<%=result.getRole()%>" disabled required>
                 </div>
 
+                <div style=" text-align: center;">
+                    <button style="margin: 20px" type="submit" id="submitButton" class="btn btn-primary">Save
+                    </button>
+                    <a href="home.jsp" class="btn btn-danger">Cancel</a>
+                </div>
 
             </form>
-            <div class="table-responsive">
-                <table class="table table-hover table-striped ">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Type</th>
-                        <th>Time</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <%
-                        if (accessLogs != null && !accessLogs.isEmpty()) {
-                            for (UserAccessLog log : accessLogs) {
-                    %>
-                    <tr>
-                        <td><%=log.getUserID()%>
-                        </td>
-                        <td style="text-transform: capitalize"><%=log.getUserAccessType()%>
-                        </td>
-                        <td><%=log.getUserAccessTime()%>
-                        </td>
-                    </tr>
-                    <%
-                        }
-                    } else
-                    %>
-                    </tbody>
-                </table>
-                <% if (accessLogs != null && accessLogs.isEmpty()) {
-                %>
-                <h3 style="text-align: center; margin-top: 100px">No Result</h3>
-                <%} else if (accessLogs == null) { %>
-                <h3 style="text-align: center; margin-top: 100px">Please Provide Email</h3>
-                <%} %>
-            </div>
+
         </div>
     </div>
+
+
     <footer style="margin-top: 80px" class="text-muted">
         <div class="container">
             <p class="float-right">
@@ -192,6 +170,9 @@
         </div>
     </footer>
 </div>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -201,3 +182,5 @@
 
 </body>
 </html>
+
+

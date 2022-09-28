@@ -204,8 +204,17 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Create Account</h5>
-                            <p class="card-text">Create Staff Accounts</p>
+                            <p class="card-text">Create Staff/Customer Accounts</p>
                             <a class="btn btn-primary" href="createAccount.jsp">Button</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">User Management</h5>
+                            <p class="card-text">Edit, Delete User Account</p>
+                            <a class="btn btn-primary" href="usermanagement.jsp">Button</a>
                         </div>
                     </div>
                 </div>

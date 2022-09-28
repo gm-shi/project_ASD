@@ -70,6 +70,26 @@ public class UserDao {
         return null;
 
     }
+    public User getUserById(int id) throws SQLException {
+        User user = new User();
+        String query = "SELECT * FROM User WHERE id = ?";
+        PreparedStatement ps = conn().prepareStatement(query);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            user.setId(rs.getInt(1));
+            user.setName(rs.getString(2));
+            user.setEmail(rs.getString(3));
+            user.setAddress(rs.getString(4));
+            user.setPhoneNumber(rs.getString(5));
+            user.setRole(rs.getString(6));
+            user.setPassword(rs.getString(7));
+            return user;
+        }
+        return null;
+
+    }
 
     public boolean delete(int id) throws SQLException {
         try {
@@ -84,6 +104,22 @@ public class UserDao {
             ps.execute();
             return true;
         } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean update(String name, String password, String addr, String phone,String email) throws  SQLException {
+        try {
+            String query = "UPDATE User SET name = ?, address = ?, phone_number = ?, password = ? WHERE email = ?";
+            PreparedStatement ps = conn().prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, addr);
+            ps.setString(3, phone);
+            ps.setString(4, password);
+            ps.setString(5, email);
+            ps.execute();
+            return true;
+        }catch (Exception e) {
             return false;
         }
     }
