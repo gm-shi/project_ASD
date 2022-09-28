@@ -1,5 +1,11 @@
 <%@ page import="com.asd.project.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.asd.project.utils.DB" %>
+<%@ page import="com.asd.project.model.Restaurant" %>
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,17 +21,22 @@
 </head>
 <body>
 <div class="body">
+    <%
+        String name = "Guest";
+        User user = null;
+        if (session.getAttribute("user") != null) {
+            user = (User) session.getAttribute("user");
+            name = user.getName();
+        }
+
+        Restaurant restaurant;
+        restaurant = (Restaurant) session.getAttribute("restaurant");
+        Restaurant result = (Restaurant) request.getAttribute("result");
+
+    %>
+
     <header>
         <%--    navigation bar start--%>
-        <%
-            String name = "Guest";
-            User user = null;
-            if (session.getAttribute("user") != null) {
-                user = (User) session.getAttribute("user");
-                name = user.getName();
-            }
-
-        %>
         <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: steelblue;
     box-shadow: 0px 0px 3px 0px black;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -99,7 +110,8 @@
     </header>
 
 
-    <main role="main">
+        <%--    picture and as link--%>
+    <main role="main">n
         <section class="jumbotron text-center">
             <div class="container">
                 <div id="demo" class="carousel slide" data-ride="carousel">
@@ -132,17 +144,19 @@
             </div>
         </section>
 
-
+            <%-- main --%>
         <main role="main">
             <section class="jumbotron text-center" style="display: flex; flex-direction: column; align-items: center;">
 
-                <h1>Restaurant101</h1>
-                <p>Located in Bridge mengpo, guichai District, yanwang City, difu Province </p>
-                <p>Contact us: 11223344 </p>
+                <h1 class="card-title"><%=result.getName()%></h1>
+                <p>Located in <%=result.getLocation()%> </p>
+                <p>Contact us: <%=result.getPhone()%> </p>
+                <p>We are very good at cooking <%=result.getType()%> food! </p>
             </section>
         </main>
 
 
+        <%--    map--%>
         <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -170,8 +184,7 @@
 
 
 
-
-
+        <%--    footer--%>
     </main>
     <footer class="text-muted">
         <div class="container">
