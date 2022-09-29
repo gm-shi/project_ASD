@@ -3,7 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.asd.project.utils.DB" %>
 <%@ page import="com.asd.project.model.Restaurant" %>
-
+<%@ page import="com.asd.project.model.dao.RestaurantDao" %>
 
 
 <!doctype html>
@@ -16,7 +16,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <title>Restaurant</title>
 </head>
 <body>
@@ -28,11 +28,9 @@
             user = (User) session.getAttribute("user");
             name = user.getName();
         }
-
-        Restaurant restaurant;
-        restaurant = (Restaurant) session.getAttribute("restaurant");
-        Restaurant result = (Restaurant) request.getAttribute("result");
-
+        DB db = new DB();
+        RestaurantDao rDao = new RestaurantDao(db);
+        Restaurant restaurant = rDao.getRestaurant();
     %>
 
     <header>
@@ -47,7 +45,7 @@
             <div class="collapse navbar-collapse" style="justify-content: space-around;" id="navbarNavDropdown">
                 <ul class="navbar-nav"
                     style="font-size: 20px;flex-basis: 90%;display: flex;justify-content: space-evenly; font-weight: 600;">
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link" href="home.jsp">Home</a>
                     </li>
                     <li class="nav-item">
@@ -56,7 +54,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="makeorder.jsp">My Cart</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="restaurant.jsp">About us</a>
                     </li>
                     <% if (user != null) { %>
@@ -148,11 +146,14 @@
         <main role="main">
             <section class="jumbotron text-center" style="display: flex; flex-direction: column; align-items: center;">
 
-                <h1 class="card-title"><%=result.getName()%></h1>
-                <p>Located in <%=result.getLocation()%> </p>
-                <p>Contact us: <%=result.getPhone()%> </p>
-                <p>We are very good at cooking <%=result.getType()%> food! </p>
+                <h1 class="card-title"><%=restaurant.getName()%></h1>
+                <p>Located in <%=restaurant.getLocation()%> </p>
+                <p>Contact us: <%=restaurant.getPhone()%> </p>
+                <p>We are very good at cooking <%=restaurant.getType()%> food! </p>
+                <div id="map-canvas" style="height:300px; width:500px"></div>
+
             </section>
+
         </main>
 
 
@@ -174,30 +175,23 @@
 
 
         <%--    map--%>
-        <html>
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-            <title>Insert title here</title>
-            <script
-                    src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-            <script>
-                var map;
-                function initialize() {
-                    var mapOptions = {
-                        zoom: 8,
-                        center: new google.maps.LatLng(-34.397, 150.644)
-                    };
-                    map = new google.maps.Map(document.getElementById('map-canvas'),
-                        mapOptions);
-                }
+        <script>
 
-                google.maps.event.addDomListener(window, 'load', initialize);
-            </script>
-        </head>
-        <body>
-        <div id="map-canvas" style="height:300px; width:500px"></div>
-        </body>
-        </html>
+        let map;
+
+            function initialize() {
+                const mapOptions = {
+                    zoom: 8,
+                    center: new google.maps.LatLng(-34.397, 150.644)
+                };
+                map = new google.maps.Map(document.getElementById('map-canvas'),
+                    mapOptions);
+            }
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+
+
 
 
 
@@ -212,6 +206,9 @@
         </div>
     </footer>
 </div>
+<script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAKfdSxa_3So9L5sKXbovjUDyLwTRXRds&libraries=geometry&callback=initMap">
+</script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
