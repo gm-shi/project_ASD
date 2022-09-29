@@ -2,6 +2,7 @@ package com.asd.project.controller;
 
 import com.asd.project.model.Menu;
 import com.asd.project.utils.DB;
+import com.asd.project.utils.Helper;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,6 +49,14 @@ public class DishManagement extends HttpServlet {
         Double item_price = Double.valueOf(req.getParameter("item_price"));
         Menu menu = new Menu(Integer.valueOf(item_id), item_name, item_description, Double.valueOf(item_price));
         System.out.println(menu);
+        try{
+            menu.add(menu);
+            res.sendRedirect("dishes.jsp");
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            Helper.alert(res.getWriter(), "Unsuccessful, please try again.");
+        }
     }
 
     private void delete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
@@ -55,6 +64,8 @@ public class DishManagement extends HttpServlet {
     }
 
     private void search(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+        String dish = req.getParameter("dishes");
+
 
     }
 
