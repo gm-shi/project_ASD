@@ -1,6 +1,7 @@
 package com.asd.project.controller;
 
-import com.asd.project.model.Menu;
+import com.asd.project.model.Dish;
+import com.asd.project.model.dao.DishDao;
 import com.asd.project.utils.DB;
 import com.asd.project.utils.Helper;
 
@@ -11,17 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 @WebServlet("/dishmanagement")
 public class DishManagement extends HttpServlet {
     DB db;
-    Menu menu;
-    String view = "dishes.jsp";
+    DishDao dishDao;
     public DishManagement() throws SQLException{
         super();
         db = new DB();
-        menu = new DishManagement(db);
+        dishDao = new DishDao(db);
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -43,14 +42,17 @@ public class DishManagement extends HttpServlet {
     }
     private void add(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
        //id name description price
-        Integer item_id = Integer.valueOf(req.getParameter("item_id"));
-        String item_name = req.getParameter("item_name");
-        String item_description = req.getParameter("item_description");
-        Double item_price = Double.valueOf(req.getParameter("item_price"));
-        Menu menu = new Menu(Integer.valueOf(item_id), item_name, item_description, Double.valueOf(item_price));
-        System.out.println(menu);
+        String item_name = req.getParameter("name");
+        String item_description = req.getParameter("description");
+        double item_price = Double.valueOf(req.getParameter("price"));
+        int category_id = Integer.valueOf(req.getParameter("category"));
+        System.out.println(category_id);
+
         try{
-            menu.add(menu);
+            int id = dishDao.create(item_name, item_description, item_price,category_id);
+            if (id == 0) {
+                Helper.alert(res.getWriter(), "Unsuccessful, please try again.");
+            }
             res.sendRedirect("dishes.jsp");
         }
         catch(SQLException e){
@@ -68,18 +70,18 @@ public class DishManagement extends HttpServlet {
 
 
     }
-
-    private void displayList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        try{
-            ArrayList<Menu> list = menu.search(null);
-            System.out.println(list);
-            req.setAttribute("list", list);
-            req.getRequestDispatcher(view).forward(req, res);
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
+//
+//    private void displayList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+//        try{
+//            ArrayList<Dish> list = menu.search(null);
+//            System.out.println(list);
+//            req.setAttribute("list", list);
+//            req.getRequestDispatcher(view).forward(req, res);
+//        }
+//        catch(SQLException e){
+//            e.printStackTrace();
+//        }
+//    }
     private boolean isEmpty(String str){
         if(str.isEmpty() || str == null){
             return false;
