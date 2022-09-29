@@ -50,4 +50,7 @@ public class Menu {
 
     public ArrayList<Menu> search(Object o) {
     }
+
+    public void add(Menu menu) {
+    }
 }
