@@ -179,18 +179,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                    <div class="col mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Edit Restaurant</h5>
-                                <p class="card-text">change restaurant information</p>
-                                <a class="btn btn-primary" href="editRestaurant.jsp">Button</a>
-                            </div>
-                        </div>
-                    </div>
-
                 <div class="col mb-4">
                     <div class="card">
                         <div class="card-body">
