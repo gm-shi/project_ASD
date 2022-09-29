@@ -16,12 +16,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <title>Restaurant</title>
 </head>
 <body>
 <div class="body">
-    <%
+        <%
         String name = "Guest";
         User user = null;
         if (session.getAttribute("user") != null) {
@@ -108,113 +107,60 @@
     </header>
 
 
-        <%--    picture and as link--%>
-    <main role="main">n
+    <%--    picture and as link--%>
+    <%-- main --%>
+    <div>
         <section class="jumbotron text-center">
-            <div class="container">
-                <div id="demo" class="carousel slide" data-ride="carousel">
 
-                    <ul class="carousel-indicators">
-                        <li data-target="#demo" data-slide-to="0" class="active"></li>
-                        <li data-target="#demo" data-slide-to="1"></li>
-                        <li data-target="#demo" data-slide-to="2"></li>
-                    </ul>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://media.istockphoto.com/photos/stir-fry-noodles-with-vegetables-and-beef-in-black-bowl-slate-top-picture-id1265502236?k=20&m=1265502236&s=612x612&w=0&h=6tAimUt291HSqeL0h0qN1_I9FJ3-HueDZMb8GV7ZPLE=">
-                        </div>
-                        <div class="carousel-item">
-                            <img  src="https://media.istockphoto.com/photos/fried-dumplings-gyoza-with-soy-sauce-and-chopsticks-top-view-picture-id1286079738?k=20&m=1286079738&s=612x612&w=0&h=HQFZXNWA6i89OlKnllEfqFcc85Lm-hFjCWrd6nwDwuA=">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://media.istockphoto.com/photos/chinese-food-blank-background-picture-id545286388?k=20&m=545286388&s=612x612&w=0&h=1zAWEuV5W6SoYtErOkWasELFcAWMKgQEBUsNOoH5znc=">
-                        </div>
-                    </div>
-
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
-
+        <strong><h1 class="display-4">ABOUT US</h1></strong>
+        </section>
+        <main style="    display: flex;flex-direction: column;align-items: center; margin-bottom: 200px">
+            <h1 class="card-title"><%=restaurant.getName()%>
+            </h1>
+            <p>Located in <%=restaurant.getLocation()%>
+            </p>
+            <p>Contact us: <%=restaurant.getPhone()%>
+            </p>
+            <p>We are very good at cooking <%=restaurant.getType()%> food! </p>
+            <div class="mapouter">
+                <div class="gmap_canvas">
+                    <iframe width="600" height="500" id="gmap_canvas"
+                            src="https://maps.google.com/maps?q=UTS%20Building%2011%20(CB11%2081-113,%20Broadway,%20Ultimo%20NSW%202007&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                    <a href="https://123movies-to.org"></a><br>
+                    <style>.mapouter {
+                        position: relative;
+                        text-align: right;
+                        height: 500px;
+                        width: 600px;
+                    }</style>
+                    <a href="https://www.embedgooglemap.net">google map embed responsive</a>
+                    <style>.gmap_canvas {
+                        overflow: hidden;
+                        background: none !important;
+                        height: 500px;
+                        width: 600px;
+                    }</style>
                 </div>
             </div>
-        </section>
-
-            <%-- main --%>
-        <main role="main">
-            <section class="jumbotron text-center" style="display: flex; flex-direction: column; align-items: center;">
-
-                <h1 class="card-title"><%=restaurant.getName()%></h1>
-                <p>Located in <%=restaurant.getLocation()%> </p>
-                <p>Contact us: <%=restaurant.getPhone()%> </p>
-                <p>We are very good at cooking <%=restaurant.getType()%> food! </p>
-                <div id="map-canvas" style="height:300px; width:500px"></div>
-
-            </section>
-
         </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <%--    map--%>
-        <script>
-
-        let map;
-
-            function initialize() {
-                const mapOptions = {
-                    zoom: 8,
-                    center: new google.maps.LatLng(-34.397, 150.644)
-                };
-                map = new google.maps.Map(document.getElementById('map-canvas'),
-                    mapOptions);
-            }
-
-            google.maps.event.addDomListener(window, 'load', initialize);
-        </script>
-
-
-
-
-
         <%--    footer--%>
-    </main>
-    <footer class="text-muted">
-        <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-            <p>Restaurant Online Ordering System &copy;</p>
-        </div>
-    </footer>
-</div>
-<script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAKfdSxa_3So9L5sKXbovjUDyLwTRXRds&libraries=geometry&callback=initMap">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-        crossorigin="anonymous"></script>
+        <footer class="text-muted">
+            <div class="container">
+                <p class="float-right">
+                    <a href="#">Back to top</a>
+                </p>
+                <p>Restaurant Online Ordering System &copy;</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+            crossorigin="anonymous"></script>
 
 </body>
 </html>
