@@ -21,6 +21,7 @@ public class Restaurant implements Serializable {
         this.name = name;
         this.phone = phone;
         this.location = location;
+        //testing
         this.type = type;
     }
 
