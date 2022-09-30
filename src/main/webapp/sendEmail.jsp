@@ -111,7 +111,8 @@
 
     <h1>Hello, world!</h1>
 
-
+<%--order = oderdao.getorder(id);--%>
+<%--    String info = "ordernumber: " + order.getid() + "\n order axxxxxx" + --%>
 
 
     <%
@@ -119,7 +120,6 @@
         String result = "unsuccessful";
         if(email.sendEmail(100, "your order detail"))
             result = "Successful";
-
     %>
 
     <html>
