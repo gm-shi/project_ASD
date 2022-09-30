@@ -35,20 +35,7 @@ public class RestaurantDao {
         }
         return null;
     }
-    public boolean updaterest(String name, String phone, String location, String type) throws  SQLException {
-        try {
-            String query = "UPDATE Restaurant SET name = ?, phone = ?, location = ?, type = ? ";
-            PreparedStatement ps = conn().prepareStatement(query);
-            ps.setString(1, name);
-            ps.setString(2, phone);
-            ps.setString(3, location);
-            ps.setString(4, type);
-            ps.execute();
-            return true;
-        }catch (Exception e) {
-            return false;
-        }
-    }
+
 
 
     public Restaurant getRestaurantById(int id) throws SQLException {
@@ -69,6 +56,24 @@ public class RestaurantDao {
         return null;
 
     }
+
+    public boolean updaterest(String name, String phone, String location, String type) throws  SQLException {
+        try {
+            String query = "UPDATE Restaurant SET name = ?, phone = ?, location = ?, type = ? ";
+            PreparedStatement ps = conn().prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, phone);
+            ps.setString(3, location);
+            ps.setString(4, type);
+            ps.execute();
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
+    }
+
+
+
 
 
 
