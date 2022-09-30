@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Restaurant implements Serializable {
     private int id;
     private String name;
-    private int phone;
+    private String phone;
     private String location;
     private String type;
 
@@ -16,7 +16,7 @@ public class Restaurant implements Serializable {
     public Restaurant() {
     }
 
-    public Restaurant(int id, String name, int phone, String location, String type) {
+    public Restaurant(int id, String name, String phone, String location, String type) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -29,7 +29,7 @@ public class Restaurant implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,11 +41,11 @@ public class Restaurant implements Serializable {
         this.name = name;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

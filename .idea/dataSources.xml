@@ -8,5 +8,19 @@
       <jdbc-url>jdbc:mysql://database-asd-project.cjsubjzglg6d.ap-southeast-2.rds.amazonaws.com:3306/ASD_DB</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="ASD_DB@database-asd-project.cjsubjzglg6d.ap-southeast-2.rds.amazonaws.com [2]" uuid="6a10ea7a-7bb2-4eb6-a160-933e169fe587">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://database-asd-project.cjsubjzglg6d.ap-southeast-2.rds.amazonaws.com:3306/ASD_DB</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="ASD_DB@database-asd-project.cjsubjzglg6d.ap-southeast-2.rds.amazonaws.com [3]" uuid="fe34455b-6e20-4b01-8f25-13796415163c">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://database-asd-project.cjsubjzglg6d.ap-southeast-2.rds.amazonaws.com:3306/ASD_DB</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

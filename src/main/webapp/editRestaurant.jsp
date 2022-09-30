@@ -1,4 +1,8 @@
 <%@ page import="com.asd.project.model.User" %>
+<%@ page import="com.asd.project.utils.DB" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.asd.project.model.Restaurant" %>
+<%@ page import="com.asd.project.model.dao.RestaurantDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!doctype html>
@@ -28,6 +32,9 @@
                 name = user.getName();
             }
 
+            DB db = new DB();
+            RestaurantDao rDao = new RestaurantDao(db);
+            Restaurant restaurant = rDao.getRestaurant();
         %>
         <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: steelblue;
     box-shadow: 0px 0px 3px 0px black;">
@@ -104,66 +111,60 @@
 
     <%--    content goes here--%>
 
-    <h1>Hello, world!</h1>
 
 
 
+    <%--    edit view--%>
+    <section class="jumbotron text-center">
+        <strong><h1 class="display-4">Restaurant information edit</h1></strong>
+    </section>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 30%">
+            <form method="post" action="RestaurantServlet?action=edit">
 
 
-
-
-
-
-
-
-    <h1>Restaurant information edit</h1>
-    <div class="card-body">
-        <form>
-            <h6>User information</h6>
-            <div class="pl-lg-4">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="email">Email address</label>
-                            <input type="email" name="email" id="email" class="form-control form-control-alternative" value="${account.email}" readonly>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group focused">
-                            <label class="form-control-label" for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control form-control-alternative" value="${account.password}" readonly>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="inputName">Restaurant Name</label>  <%--    cant change name--%>
+                    <input type="text" name="name" class="form-control" id="inputName" value="<%=restaurant.getName()%>"readonly required>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group focused">
-                            <label class="form-control-label" for="fname">First name</label>
-                            <input type="text" name="fname" id="fname" class="form-control form-control-alternative" value="${account.fname}" readonly>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group focused">
-                            <label class="form-control-label" for="lname">Last name</label>
-                            <input type="text" name="lname" id="lname" class="form-control form-control-alternative" value="${account.lname}" readonly>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="inputPhone">Phone</label>
+                    <input type="text" name="phone" class="form-control" id="inputPhone" value="<%=restaurant.getPhone()%>" required>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group focused">
-                            <label class="form-control-label" for="gender">Gender</label>
-                            <input type="text" name="gender" id="gender" class="form-control form-control-alternative" value="${account.gender}" readonly>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group focused">
-                            <label class="form-control-label" for="dob">Date of Birth</label>
-                            <input type="date" name="dob" id="dob" class="form-control form-control-alternative" value="${account.dob}" readonly>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="inputLocation">Location</label>
+                    <input type="text"  name="location" class="form-control" id="inputLocation" value="<%=restaurant.getLocation()%>" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="inputType">Location</label>
+                    <input type="text"  name="type" class="form-control" id="inputType" value="<%=restaurant.getType()%>" required>
+                </div>
+
+
+                <div style=" text-align: center;">
+                    <button style="margin: 20px" type="submit" id="submitButton" class="btn btn-primary">Save
+                    </button>
+                    <a href="home.jsp" class="btn btn-danger">Cancel</a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
