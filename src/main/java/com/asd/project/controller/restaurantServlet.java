@@ -50,7 +50,7 @@ public class restaurantServlet extends HttpServlet {
         Restaurant restaurant;
         String id = request.getParameter("Id");
         try {
-            restaurant = RestaurantDao.getRestaurantById(Integer.parseInt(id));
+            restaurant = restaurantDao.getRestaurantById(Integer.parseInt(id));
             request.setAttribute("result", restaurant);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("editRestaurant.jsp");
             requestDispatcher.forward(request, response);
@@ -69,7 +69,7 @@ public class restaurantServlet extends HttpServlet {
         String location = req.getParameter("location");
         String type = req.getParameter("type");
         try {
-            if (RestaurantDao.updaterest(name, phone, location, type)) {
+            if (restaurantDao.updaterest(name, phone, location, type)) {
                 System.out.println("ok");
                 response.sendRedirect("home.jsp");
             } else {

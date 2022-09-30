@@ -120,8 +120,7 @@
     </section>
     <div style="display: flex; flex-direction: column; align-items: center;">
         <div style="width: 30%">
-            <form method="post" action="RestaurantServlet?action=edit">
-
+            <form method="post" action="restaurantServlet?action=edit">
 
                 <div class="form-group">
                     <label for="inputName">Restaurant Name</label>  <%--    cant change name--%>
@@ -136,7 +135,7 @@
                     <input type="text"  name="location" class="form-control" id="inputLocation" value="<%=restaurant.getLocation()%>" required>
                 </div>
                 <div class="form-group">
-                    <label for="inputType">Location</label>
+                    <label for="inputType">Type</label>
                     <input type="text"  name="type" class="form-control" id="inputType" value="<%=restaurant.getType()%>" required>
                 </div>
 
