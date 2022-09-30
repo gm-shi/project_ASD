@@ -68,7 +68,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/email jar/activation.jar!/" />
+          <root url="jar://$MODULE_DIR$/../email jar/activation.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -77,7 +77,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/email jar/mail (1).jar!/" />
+          <root url="jar://$MODULE_DIR$/../email jar/mail (1).jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
