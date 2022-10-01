@@ -103,53 +103,13 @@
             </div>
         </nav>
     </header>
-
-    <div class="list-group" style="    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 20%;
-    margin-right: 20%;
-    padding-bottom: 50px;
-    text-align: center;
-}">
-        <h1>Cart</h1>
-        <table>
-            <tr>
-                <td>Item Name</td>
-                <td>Price</td>
-                <td>Action</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><button>+</button><button>Delete</button></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>Here is going to be a table that showing as shopping carts</td>
-                <td><button>+</button><button>Delete</button></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><button>+</button><button>Delete</button></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><button>+</button><button>Delete</button></td>
-            </tr>
-        </table>
-        <br>
-        <a href="payment.jsp" class="btn btn-primary">Check Out</a>
-    </div>
-    <style>
-        td{
-            height: 20px;
-            border: 1px solid black;
-        }
-    </style>
-
+    <%
+        if (user == null) {
+    %>
+        <div class="Login-Please">
+            <p>Please Login!</p>
+        </div>
+    <%}%>
     <footer class="text-muted">
         <div class="container">
             <p class="float-right">
