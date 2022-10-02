@@ -107,8 +107,25 @@
         if (user == null) {
     %>
         <div class="Login-Please">
-            <p>Please Login!</p>
+            <h2>Please Login!</h2>
+            <p>If you are not logged in, guest users cannot use the shopping cart feature. If you do not have an account, please sign up.</p>
+            <a class="btn btn-primary" href="index.jsp">Login</a>
+            <a class="btn btn-primary" href="register.jsp">Sign Up</a>
         </div>
+    <%} else{%>
+        <%if (user != null && (user.getRole().equalsIgnoreCase("Customer"))){ %>
+            <div class="Shopping-Cart-Div">
+                <h1>Cart</h1>
+                <table>
+                    <tr>
+                        <td>Dish Name</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Action</td>
+                    </tr>
+                </table>
+            </div>
+        <%}%>
     <%}%>
     <footer class="text-muted">
         <div class="container">
