@@ -112,6 +112,20 @@
             <a class="btn btn-primary" href="index.jsp">Login</a>
             <a class="btn btn-primary" href="register.jsp">Sign Up</a>
         </div>
+    <%} else{%>
+        <%if (user != null && (user.getRole().equalsIgnoreCase("Customer"))){ %>
+            <div class="Shopping-Cart-Div">
+                <h1>Cart</h1>
+                <table>
+                    <tr>
+                        <td>Dish Name</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Action</td>
+                    </tr>
+                </table>
+            </div>
+        <%}%>
     <%}%>
     <footer class="text-muted">
         <div class="container">
