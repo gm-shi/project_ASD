@@ -1,14 +1,51 @@
 <%@ page import="com.asd.project.model.User" %>
-<%@ page import="com.asd.project.model.UserAccessLog" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.asd.project.utils.DB" %><%--
-  Created by IntelliJ IDEA.
-  User: sgm49
-  Date: 21/09/2022
-  Time: 10:05 am
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page import="java.io.*,java.util.*,javax.mail.*"%>
+<%@ page import="javax.mail.internet.*,javax.activation.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+
+<%
+    String result;
+    // 收件人的电子邮件
+    String to = "abcd@gmail.com";
+
+    // 发件人的电子邮件
+    String from = "mcmohd@gmail.com";
+
+    // 假设你是从本地主机发送电子邮件
+    String host = "localhost";
+
+    // 获取系统属性对象
+    Properties properties = System.getProperties();
+
+    // 设置邮件服务器
+    properties.setProperty("mail.smtp.host", host);
+
+    // 获取默认的Session对象。
+    Session mailSession = Session.getDefaultInstance(properties);
+
+    try{
+        // 创建一个默认的MimeMessage对象。
+        MimeMessage message = new MimeMessage(mailSession);
+        // 设置 From: 头部的header字段
+        message.setFrom(new InternetAddress(from));
+        // 设置 To: 头部的header字段
+        message.addRecipient(Message.RecipientType.TO,
+                new InternetAddress(to));
+        // 设置 Subject: header字段
+        message.setSubject("This is the Subject Line!");
+        // 现在设置的实际消息
+        message.setText("This is actual message");
+        // 发送消息
+        Transport.send(message);
+        result = "Sent message successfully....";
+    }catch (MessagingException mex) {
+        mex.printStackTrace();
+        result = "Error: unable to send message....";
+    }
+%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,28 +57,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Search User Access Log</title>
+    <title>Hello, world!</title>
 </head>
 <body>
 <div class="body">
-    <%
-        String name;
-        User user;
-        ArrayList<UserAccessLog> accessLogs;
 
-        if (session.getAttribute("user") == null) {
-            response.sendRedirect("home.jsp");
-        }
-        user = (User) session.getAttribute("user");
-        if (user.getRole().equalsIgnoreCase("Customer")) {
-            response.sendRedirect("home.jsp");
-        }
-        name = user.getName();
-        accessLogs = (ArrayList<UserAccessLog>) request.getAttribute("userAccessLogs");
 
-    %>
     <header>
-        <%--    navigation bar--%>
+        <%--    navigation bar start--%>
+        <%
+            String name = "Guest";
+            User user = null;
+            if (session.getAttribute("user") != null) {
+                user = (User) session.getAttribute("user");
+                name = user.getName();
+            }
+
+        %>
         <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: steelblue;
     box-shadow: 0px 0px 3px 0px black;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -76,7 +108,7 @@
                             <a class="dropdown-item" href="accesslog.jsp">Access Log</a>
                             <% if (user.getRole().equalsIgnoreCase("Customer")) {%>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#">Delete Account</a>
+                            <a class="dropdown-item text-danger" href="delete.jsp">Delete Account</a>
                             <%}%>
                         </div>
                     </li>
@@ -112,77 +144,46 @@
                 </div>
             </div>
         </nav>
-        <%--    navigation bar end--%>
     </header>
 
 
-    <section class="jumbotron text-center">
-        <strong><h1 class="display-4">VIEW USER ACCESS LOG</h1></strong>
-    </section>
-    <div style="display: flex;
-    flex-direction: column;
-    align-items: center;">
-        <div class="col-md-8">
-            <form method="post" action="userAccessLogServlet?action=email">
+    <%--    content goes here--%>
+
+    <h1>Hello, world!</h1>
 
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="email">User Email</label>
-                        <input type="text" class="form-control" id="email" name="email">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="date">Date</label>
-                        <input type="date" class="form-control" id="date" name="date" aria-label="DATE">
-                    </div>
-                    <div class="form-group col-md-2"
-                         style="display: flex;flex-direction: row;align-items: flex-end;width: 100%;">
-                        <button style="width: inherit" class="btn btn-outline-primary" type="submit" id="searchButton">
-                            Search
-                        </button>
-                    </div>
-
-                </div>
 
 
-            </form>
-            <div class="table-responsive">
-                <table class="table table-hover table-striped ">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Type</th>
-                        <th>Time</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <%
-                        if (accessLogs != null && !accessLogs.isEmpty()) {
-                            for (UserAccessLog log : accessLogs) {
-                    %>
-                    <tr>
-                        <td><%=log.getUserID()%>
-                        </td>
-                        <td style="text-transform: capitalize"><%=log.getUserAccessType()%>
-                        </td>
-                        <td><%=log.getUserAccessTime()%>
-                        </td>
-                    </tr>
-                    <%
-                        }
-                    } else
-                    %>
-                    </tbody>
-                </table>
-                <% if (accessLogs != null && accessLogs.isEmpty()) {
-                %>
-                <h3 style="text-align: center; margin-top: 100px">No Result</h3>
-                <%} else if (accessLogs == null) { %>
-                <h3 style="text-align: center; margin-top: 100px">Please Provide Email</h3>
-                <%} %>
-            </div>
-        </div>
-    </div>
+
+
+
+
+
+
+
+
+    <title>Send Email using JSP</title>
+    </head>
+    <body>
+    <center>
+        <h1>Send Email using JSP</h1>
+    </center>
+    <p align="center">
+        <%
+            out.println("Result: " + result + "\n");
+        %>
+    </p>
+
+
+
+
+
+
+
+
+
+
+
     <footer style="margin-top: 80px" class="text-muted">
         <div class="container">
             <p class="float-right">
