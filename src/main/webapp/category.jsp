@@ -1,15 +1,10 @@
 <%@ page import="com.asd.project.model.User" %>
-<%@ page import="com.asd.project.model.Category" %>
+<%@ page import="com.asd.project.utils.DB" %>
 <%@ page import="com.asd.project.model.dao.CategoryDao" %>
+<%@ page import="com.asd.project.model.Category" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.asd.project.utils.DB" %><%--
-  Created by IntelliJ IDEA.
-  User: Littlenewww
-  Date: 2022/9/6
-  Time: 21:19
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,6 +20,7 @@
 </head>
 <body>
 <div class="body">
+
 
     <header>
         <%--    navigation bar start--%>
@@ -110,17 +106,18 @@
     </header>
 
 
+    <%--    content goes here--%>
 
 
     <main role="main">
         <section class="jumbotron text-center">
-            <strong><h1 class="display-4">DISH MANAGEMENT</h1></strong>
+            <strong><h1 class="display-4">MODIFICATION</h1></strong>
         </section>
         <div style="display: flex; flex-direction: column; align-items: center;">
             <div style="width: 30%">
                 <form method="post" action="dishmanagement?action=add">
                     <div class="form-group">
-                        <label for="inputUserName">Dishes name</label>
+                        <label for="inputUserName">Category name</label>
                         <input type="text" name="name" class="form-control" id="inputUserName" required>
                     </div>
                     <div class="form-group">
@@ -157,11 +154,15 @@
 
             </div>
         </div>
-
+        <div class="form-outline mb-4">
+            <input type="search" class="form-control" id="datatable-search-input">
+            <label class="form-label" for="datatable-search-input">Search</label>
+        </div>
+        <div id="datatable">
+        </div>
     </main>
 
-
-    <footer class="text-muted">
+    <footer style="margin-top: 80px" class="text-muted">
         <div class="container">
             <p class="float-right">
                 <a href="#">Back to top</a>

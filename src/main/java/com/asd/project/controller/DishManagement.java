@@ -70,18 +70,7 @@ public class DishManagement extends HttpServlet {
 
 
     }
-//
-//    private void displayList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-//        try{
-//            ArrayList<Dish> list = menu.search(null);
-//            System.out.println(list);
-//            req.setAttribute("list", list);
-//            req.getRequestDispatcher(view).forward(req, res);
-//        }
-//        catch(SQLException e){
-//            e.printStackTrace();
-//        }
-//    }
+
     private boolean isEmpty(String str){
         if(str.isEmpty() || str == null){
             return false;
