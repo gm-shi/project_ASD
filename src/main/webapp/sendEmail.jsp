@@ -115,9 +115,8 @@
 
 
     <%
-        EmailService email = new EmailService();
         String result = "unsuccessful";
-        if(email.sendEmail(100, "your order detail"))
+        if(EmailService.sendEmail(100, "your order detail", "Lun.Ou@student.uts.edu.au"))
             result = "Successful";
     %>
 

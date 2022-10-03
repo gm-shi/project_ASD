@@ -7,12 +7,11 @@ import java.util.Properties;
 
 public class EmailService {
 
-    public boolean sendEmail(int orderId, String info) {
+    public static boolean sendEmail(int orderId, String message, String userEmail) {
 
 
         final String fromEmail = "asd.project.testing@outlook.com"; //requires valid gmail id
         final String password = "asdemail123"; // correct password for gmail id
-        final String toEmail = "gm.shi@outlook.com"; // can be any email id
 
         System.out.println("TLSEmail Start");
         Properties props = new Properties();
@@ -31,7 +30,7 @@ public class EmailService {
         };
         Session session = Session.getInstance(props, auth);
 
-       return EmailUtil.sendEmail(session, toEmail, "TLSEmail Testing Subject", "TLSEmail Testing Body");
+       return EmailUtil.sendEmail(session, userEmail, "Order Number: " + orderId, message);
 
     }
 
