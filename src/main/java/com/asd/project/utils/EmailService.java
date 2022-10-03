@@ -7,44 +7,32 @@ import java.util.Properties;
 
 public class EmailService {
 
-    final String username = "asd.project.tester.email@gmail.com";
-    final String password = "dbwhnmwkokloiego";
-
     public boolean sendEmail(int orderId, String info) {
 
-        Properties prop = new Properties();
-        prop.put("mail.smtp.host", "smtp.gmail.com");
-        prop.put("mail.smtp.port", "465");
-        prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.socketFactory.port", "465");
-        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
-        Session session = Session.getInstance(prop,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
+        final String fromEmail = "asd.project.testing@outlook.com"; //requires valid gmail id
+        final String password = "asdemail123"; // correct password for gmail id
+        final String toEmail = "gm.shi@outlook.com"; // can be any email id
 
-        try {
+        System.out.println("TLSEmail Start");
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.office365.com"); //SMTP Host
+        props.put("mail.smtp.port", "587"); //TLS Port
+        props.put("mail.smtp.auth", "true"); //enable authentication
+        props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-            message.setRecipients(
-                    Message.RecipientType.TO,
-                    InternetAddress.parse("Lun.Ou@student.uts.edu.au")
-            );
-            message.setSubject("Order No: " + orderId);
-            message.setText(info);
+        //create Authenticator object to pass in Session.getInstance argument
+        Authenticator auth = new Authenticator() {
+            //override the getPasswordAuthentication method
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        };
+        Session session = Session.getInstance(props, auth);
 
-            Transport.send(message);
+       return EmailUtil.sendEmail(session, toEmail, "TLSEmail Testing Subject", "TLSEmail Testing Body");
 
-            System.out.println("Done");
-            return true;
-        } catch (MessagingException e) {
-            e.printStackTrace();
-            return false;
-        }
     }
+
 }
 
