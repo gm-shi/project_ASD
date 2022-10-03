@@ -26,7 +26,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="GlassFish 5.1.0 - CDI: Contexts and Dependency Injection" level="application_server_libraries" />
+    <orderEntry type="library" scope="TEST" name="GlassFish 5.1.0 - CDI: Contexts and Dependency Injection" level="application_server_libraries" />
     <orderEntry type="library" name="mysql-connector-java-8.0.28" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.28" level="project" />

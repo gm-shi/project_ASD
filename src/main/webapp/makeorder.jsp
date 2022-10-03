@@ -17,6 +17,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <title>Make Order</title>
+    <script type="text/css">
+        .LoginPlease{
+            width:400px;
+            height:500px;
+            text-align: center;
+        }
+    </script>
 </head>
 <body>
 <div class="body">
@@ -106,7 +113,7 @@
     <%
         if (user == null) {
     %>
-        <div class="Login-Please">
+        <div class="LoginPlease">
             <h2>Please Login!</h2>
             <p>If you are not logged in, guest users cannot use the shopping cart feature. If you do not have an account, please sign up.</p>
             <a class="btn btn-primary" href="index.jsp">Login</a>
