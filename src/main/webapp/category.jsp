@@ -113,47 +113,7 @@
         <section class="jumbotron text-center">
             <strong><h1 class="display-4">MODIFICATION</h1></strong>
         </section>
-        <div style="display: flex; flex-direction: column; align-items: center;">
-            <div style="width: 30%">
-                <form method="post" action="dishmanagement?action=add">
-                    <div class="form-group">
-                        <label for="inputUserName">Category name</label>
-                        <input type="text" name="name" class="form-control" id="inputUserName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail4">Dishes description</label>
-                        <input type="text" name="description" class="form-control" id="inputEmail4" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword">Dishes price</label>
-                        <input type="number" name="price" class="form-control"
-                               id="inputPassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="category">Categories</label>
-                        <select class="custom-select" name="category" id="category" required>
-                            <% DB db = new DB();
-                                CategoryDao cateDao = new CategoryDao(db);
-                                ArrayList<Category> categories = cateDao.getAllCategories();
-                                for (Category category : categories) { %>
 
-                            <option value="<%=category.getId()%>"><%=category.getName()%>
-                            </option>
-                            <%}%>
-                        </select>
-                    </div>
-
-
-                    <div style=" text-align: center;">
-                        <button style="margin: 20px" type="submit" id="addButton" class="btn btn-primary">Add
-                        </button>
-                        <a href="home.jsp" class="btn btn-danger">Cancel</a>
-                    </div>
-
-                </form>
-
-            </div>
-        </div>
         <div class="form-outline mb-4">
             <input type="search" class="form-control" id="datatable-search-input">
             <label class="form-label" for="datatable-search-input">Search</label>
