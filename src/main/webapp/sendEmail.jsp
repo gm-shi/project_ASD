@@ -109,10 +109,9 @@
 
     <%--    content goes here--%>
 
-    <h1>Hello, world!</h1>
 
 <%--order = oderdao.getorder(id);--%>
-<%--    String info = "ordernumber: " + order.getid() + "\n order axxxxxx" + --%>
+<%--     String info = "ordernumber: " + order.getid() + "\n order axxxxxx" + --%>
 
 
     <%

@@ -18,6 +18,7 @@ import java.sql.SQLException;
 
 
 
+
 @WebServlet("/restaurantServlet")
 public class restaurantServlet extends HttpServlet {
     DB db;
