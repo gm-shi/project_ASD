@@ -44,14 +44,6 @@
                 user = (User) session.getAttribute("user");
                 name = user.getName();
             }
-            ArrayList<Order> orderdisplay;
-            if (request.getAttribute("DisplayAL") == null) {
-                DB db = new DB();
-                OrderDao OrderArraylist = new OrderDao(db);
-                orderdisplay = OrderArraylist.viewcart(user.getId());
-            } else {
-                orderdisplay = (ArrayList<Order>) request.getAttribute("DisplayAL");
-            }
         %>
         <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: steelblue;
     box-shadow: 0px 0px 3px 0px black;">
@@ -127,7 +119,7 @@
     <%
         if (user == null) {
     %>
-        <div class="LoginPlease">
+        <div class="LoginPlease" style="text-align: center">
             <h2>Please Login!</h2>
             <p>If you are not logged in, guest users cannot use the shopping cart feature. If you do not have an account, please sign up.</p>
             <a class="btn btn-primary" href="index.jsp">Login</a>
@@ -135,38 +127,48 @@
         </div>
     <%} else{%>
         <%if (user != null && (user.getRole().equalsIgnoreCase("Customer"))){ %>
-            <div class="Shopping-Cart-Div">
+            <div class="Shopping-Cart-Div" style="text-align: center">
                 <h1>Cart</h1>
                 <%
                     int userid = user.getId();
                     String username = user.getName();
+                    ArrayList<Order> orderdisplay;
+                    if (request.getAttribute("DisplayAL") == null) {
+                        DB db = new DB();
+                        OrderDao OrderArraylist = new OrderDao(db);
+                        orderdisplay = OrderArraylist.viewcart(user.getId());
+                    } else {
+                        orderdisplay = (ArrayList<Order>) request.getAttribute("DisplayAL");
+                    }
                 %>
-                <div class="MyCart">
-                    <p>Hi <% out.print(username);%> Here is your cart.</p>
-                    <table>
+                <div class="MyCart" style="text-align: center;width: 800px;margin: 0 auto;">
+                    <p style="text-align: center;font-size: 20px;">Hi <% out.print(username);%> Here is your cart.</p>
+                    <table style="border: solid black 1px;">
                         <tr>
-                            <td width="200px">Dish Name</td>
-                            <td width="200px">Price</td>
-                            <td width="200px">Quantity</td>
-                            <td width="200px">Action</td>
+                            <td width="200px" style="border: solid 1px black;text-align: center">Dish Name</td>
+                            <td width="200px" style="border: solid 1px black;text-align: center">Price</td>
+                            <td width="200px" style="border: solid 1px black;text-align: center">Quantity</td>
+                            <td width="200px" style="border: solid 1px black;text-align: center">Action</td>
                         </tr>
                         <%
+                            double totalprice = 0;
                             if(orderdisplay != null){
                             for(Order display : orderdisplay){
+                                totalprice = totalprice + display.getDishPrice() * display.getQuantity();
                         %>
                         <tr>
-                            <td><%=display.getDishName()%></td>
-                            <td><%=display.getDishPrice()%> $</td>
-                            <td><%=display.getQuantity()%></td>
-                            <td>
+                            <td style="border: solid 1px black;text-align: center"><%=display.getDishName()%></td>
+                            <td style="border: solid 1px black;text-align: center"><%=display.getDishPrice()%> $</td>
+                            <td style="border: solid 1px black;text-align: center"><%=display.getQuantity()%></td>
+                            <td style="border: solid 1px black">
                                 <form action="OrderServlet?action=Add&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
-                                    <button type="submit">+</button>
+                                    <button type="submit" style="width: 150px">ADD(+)</button>
                                 </form>
                                 <form action="OrderServlet?action=Minus&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
-                                    <button type="submit">-</button>
+                                    <button type="submit" style="width: 150px">Minus(-)</button>
                                 </form>
                                 <form action="OrderServlet?action=Delete&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
-                                    <button type="submit">Delete</button>
+                                    <button type="submit" style="width: 150px">Delete(X)</button>
                                 </form>
                             </td>
                         </tr>
@@ -174,6 +176,10 @@
                             <tr><td></td><td>Nothing in Cart</td></tr>
                         <%}%>
                     </table>
+                    <h2 style="text-align: center;">The Total Price of the Cart is: <%=totalprice%> $</h2>
+                    <form action="OrderServlet?action=Submit&totalprice=<%=totalprice%>&userid=<%=userid%>" method="post">
+                        <button type="submit" style="text-align: center;height: 50px;width: 200px;color: indianred">Order Now</button>
+                    </form>
                 </div>
             </div>
         <%}%>

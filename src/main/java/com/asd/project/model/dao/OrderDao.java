@@ -84,4 +84,8 @@ public class OrderDao {
         ps.setInt(2,dishid);
         ps.executeUpdate();
     }
+
+    public void submitorder(int userid,int totalprice) throws SQLException{
+
+    }
 }

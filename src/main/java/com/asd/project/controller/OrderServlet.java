@@ -34,7 +34,7 @@ public class OrderServlet extends HttpServlet{
         String[] actionpro = action.split("&");
         String actionfinal = actionpro[0];
 
-        String dishid = request.getQueryString().split("=")[2];//Dishname if cart this field will be none;
+        String dishid = request.getQueryString().split("=")[2];//Dishname if in submit function this field means total price
         String[] dishtemp = dishid.split("&");
         int dishidfinal = Integer.parseInt(dishtemp[0]);
 
@@ -78,7 +78,13 @@ public class OrderServlet extends HttpServlet{
                     throw new RuntimeException(e);
                 }
                 break;
-            case "Confirm":
+            case "Submit":
+                try {
+                    handleSubmit(request,response,id,dishidfinal);
+                }
+                catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             case "Edit":
                 break;
@@ -107,6 +113,11 @@ public class OrderServlet extends HttpServlet{
     private void handleDelete(HttpServletRequest req, HttpServletResponse res,int id,int dishid) throws IOException, SQLException {
         orderDao.deletedish(id,dishid);
         res.sendRedirect("makeorder.jsp");
+    }
+
+    private void handleSubmit(HttpServletRequest req, HttpServletResponse res,int id,int totalprice) throws IOException, SQLException {
+        orderDao.submitorder(id, totalprice); 
+        res.sendRedirect("home.jsp");
     }
 
 
