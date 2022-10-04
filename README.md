@@ -35,3 +35,8 @@ Responsibility:
     - Controller : OrderManagement, OrderServlet
     - View : makeorder.jsp, myorder.jsp, payment.jsp(Modified buttons) home.jsp(Modified buttons)
     - JunitTest : OrderTest
+  - Ao Qu (13323415):
+    - Model: Payment, PaymentDao
+    - Controller: AddPaymentServlet
+    - View: addPayment.jsp, confirmPayment.jsp, personInfo.jsp
+    - Utils: DB, Helper, Validator
