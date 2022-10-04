@@ -2,13 +2,10 @@ package com.asd.project.model.dao;
 
 import com.asd.project.model.Order;
 import com.asd.project.utils.DB;
-import com.mysql.cj.util.StringUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Objects;
+
 
 public class OrderDao {
     private final DB db;
@@ -94,13 +91,13 @@ public class OrderDao {
         ResultSet resultSet = ps.executeQuery();
         String str = "";
         while(resultSet.next()){
-            str = str + "[";
+            str = str + "[ Dishname:";
             str = str + resultSet.getString("name");
-            str = str + "|";
+            str = str + " | Price:";
             str = str + resultSet.getDouble("price");
-            str = str + "|";
+            str = str + "$ | Quantity:";
             str = str + resultSet.getInt("quantity");
-            str = str + "]";
+            str = str + " ]";
         }
         String ST = "NotPayed";
         String SQLDelete = "INSERT INTO `Order`(OrderInfo,UserID,Status) VALUES (?,?,?)";
@@ -114,13 +111,5 @@ public class OrderDao {
         PreparedStatement psdel = conn().prepareStatement(SQLDeleteCart);
         psdel.setInt(1,userid);
         psdel.executeUpdate();
-    }
-
-    public void searchorder(int userid)  throws SQLException{
-
-    }
-
-    public void cancelorder(int userid) throws SQLException{
-
     }
 }
