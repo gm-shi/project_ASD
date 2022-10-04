@@ -30,3 +30,8 @@ Responsibility:
     - View: editRestaurant.jsp email.jsp, Restaurant.jsp, sendEmail.jsp
     - Utils: EmailUtil, EmailService
     - JunitTest: RestaurantTest
+- Ao Qu (13323415):
+    - Model: Payment, PaymentDao
+    - Controller: AddPaymentServlet
+    - View: addPayment.jsp, confirmPayment.jsp, personInfo.jsp
+    - Utils: DB, Helper, Validator
