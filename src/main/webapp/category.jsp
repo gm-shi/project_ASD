@@ -115,13 +115,11 @@
             <strong><h1 class="display-4">MODIFICATION</h1></strong>
         </section>
 
-        <div class="form-outline mb-4">
-            <input type="search" class="form-control" id="datatable-search-input">
-            <label class="form-label" for="datatable-search-input">Search</label>
+        <div class="input-group">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon"/>
+            <button type="button" class="btn btn-outline-primary">search</button>
         </div>
-        <div id="datatable">
-        </div>
-        <table class="table table-hover">
+        <table class="table table-hover" style="margin-left: auto;margin-right: auto;width: 800px;text-align: center;font-size: 15px;" >
             <thead>
             <tr>
                 <th scope="col">Category ID</th>
