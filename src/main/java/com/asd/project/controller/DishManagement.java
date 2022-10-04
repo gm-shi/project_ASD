@@ -41,7 +41,7 @@ public class DishManagement extends HttpServlet {
         }
     }
     private void add(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        //id name description price
+
         String item_name = req.getParameter("name");
         String item_description = req.getParameter("description");
         double item_price = Double.valueOf(req.getParameter("price"));
@@ -66,7 +66,7 @@ public class DishManagement extends HttpServlet {
     }
 
     private void search(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        String dish = req.getParameter("dishes");
+
 
 
     }
