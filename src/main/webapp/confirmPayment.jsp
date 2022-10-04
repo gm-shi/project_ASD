@@ -1,51 +1,11 @@
-<%@ page import="com.asd.project.model.User" %>
+<%@ page import="com.asd.project.model.User" %><%--
+  Created by IntelliJ IDEA.
+  User: huawei
+  Date: 2022/9/6
+  Time: 17:25
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%@ page import="java.io.*,java.util.*,javax.mail.*"%>
-<%@ page import="javax.mail.internet.*,javax.activation.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-
-<%
-    String result;
-    // 收件人的电子邮件
-    String to = "abcd@gmail.com";
-
-    // 发件人的电子邮件
-    String from = "mcmohd@gmail.com";
-
-    // 假设你是从本地主机发送电子邮件
-    String host = "localhost";
-
-    // 获取系统属性对象
-    Properties properties = System.getProperties();
-
-    // 设置邮件服务器
-    properties.setProperty("mail.smtp.host", host);
-
-    // 获取默认的Session对象。
-    Session mailSession = Session.getDefaultInstance(properties);
-
-    try{
-        // 创建一个默认的MimeMessage对象。
-        MimeMessage message = new MimeMessage(mailSession);
-        // 设置 From: 头部的header字段
-        message.setFrom(new InternetAddress(from));
-        // 设置 To: 头部的header字段
-        message.addRecipient(Message.RecipientType.TO,
-                new InternetAddress(to));
-        // 设置 Subject: header字段
-        message.setSubject("This is the Subject Line!");
-        // 现在设置的实际消息
-        message.setText("This is actual message");
-        // 发送消息
-        Transport.send(message);
-        result = "Sent message successfully....";
-    }catch (MessagingException mex) {
-        mex.printStackTrace();
-        result = "Error: unable to send message....";
-    }
-%>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -54,14 +14,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Payment</title>
 </head>
 <body>
 <div class="body">
-
 
     <header>
         <%--    navigation bar start--%>
@@ -98,17 +56,26 @@
                     </li>
                     <% if (user != null) { %>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="delete.jsp" role="button" data-toggle="dropdown"
                            aria-expanded="false">
                             My Account
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">My Order</a>
+
                             <a class="dropdown-item" href="editinfo.jsp">Profile</a>
                             <a class="dropdown-item" href="accesslog.jsp">Access Log</a>
                             <% if (user.getRole().equalsIgnoreCase("Customer")) {%>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="delete.jsp">Delete Account</a>
+                            <a class="dropdown-item" href="myorder.jsp">My Order</a>
+                            <a class="dropdown-item text-danger" href="#">Delete Account</a>
+                            <%}%>
+                            <% if (user.getRole().equalsIgnoreCase("admin")) {%>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="myorder.jsp">Order Management</a>
+                            <%}%>
+                            <% if (user.getRole().equalsIgnoreCase("staff")) {%>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="myorder.jsp">Order Management</a>
                             <%}%>
                         </div>
                     </li>
@@ -129,7 +96,7 @@
                             <%=name%>
                         </button>
                         <div class="dropdown-menu-right dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="makeorder.jsp">Cart</a>
+                            <a class="dropdown-item" href="#">Cart</a>
                             <%
                                 if (user != null) {
                             %>
@@ -147,58 +114,18 @@
     </header>
 
 
-    <%--    content goes here--%>
+    <div class='center'>
 
-    <h1>Hello, world!</h1>
+        <h3>You have paid for your order!</h3>
 
-
-
-
-
-
-
-
-
-
-
-
-    <title>Send Email using JSP</title>
-    </head>
-    <body>
-    <center>
-        <h1>Send Email using JSP</h1>
-    </center>
-    <p align="center">
-        <%
-            out.println("Result: " + result + "\n");
-        %>
-    </p>
-
-
-
-
-
-
-
-
-
-
-
-    <footer style="margin-top: 80px" class="text-muted">
-        <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-            <p>Online Ordering System &copy;</p>
+        <div>
+            <p><a class="btn btn-outline-primary" style="" href="home.jsp">Back</a></p>
         </div>
-    </footer>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-        crossorigin="anonymous"></script>
+        <script type="text/javascript" src="./dist/jquery-3.6.0-dist/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
 
+        </script>
+    </div>>
+</div>
 </body>
 </html>
