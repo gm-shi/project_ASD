@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.asd.project.model.Payment"%>
 
 <!doctype html>
 <html lang="en">
@@ -107,41 +108,43 @@
 
 
     <h1>Payment</h1>
-
-
-    <div class="body-text">
-        <b><label for name="paymentMethod">Payment Method</label></b>
-        <input type="text"  name="Payment_method" placeholder="Payment Method" required/>
-
-
-        <p><b><label for name="datePaid">Date</label></b>
-            <input type="date" name="Payment_date" placeholder="Date Paid" required/>
-
-        <div class="row d-flex justify-content-center pd-120">
-            <h3>Payment Information</h3></div>
-        <input type="text"  name="cardNumber" placeholder="Card Number" required/>
-        <input type="text"  name="expiryDate" placeholder="MM/YY" required/>
-        <input type="password" name="securityCode" placeholder="securityCode" required/>
-        <input type="text"  name="nameOnCard" placeholder="Name on Card" required/>
-
-        <button type="submit" class="btn btn-outline-primary">Pay</button>
-    </div>
-    <p><a class="btn btn-outline-primary" style="" href="home.jsp">Cancel</a></p>
+    <form action="${pageContext.request.contextPath}/AddPaymentServlet" method="post">
 
 
 
+        <div class="body-text">
+            <b><label for name="paymentMethod">Payment Method</label></b>
+            <input type="text"  name="Payment_method" placeholder="Payment Method" required/>
 
-    <footer class="text-muted">
-        <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-            <p>Online Ordering System &copy;</p>
+
+            <p><b><label for name="datePaid">Date</label></b>
+                <input type="date" name="Payment_date" placeholder="Date Paid" required/>
+
+            <div class="row d-flex justify-content-center pd-120">
+                <h3>Payment Information</h3></div>
+            <input type="text"  name="cardNumber" placeholder="Card Number" required/>
+            <input type="text"  name="expiryDate" placeholder="MM/YY" required/>
+            <input type="password" name="securityCode" placeholder="securityCode" required/>
+            <input type="text"  name="nameOnCard" placeholder="Name on Card" required/>
+
+            <p><a class="btn btn-outline-primary" style="" href="confirmPayment.jsp">Pay</a></p>
         </div>
-    </footer>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+        <p><a class="btn btn-outline-primary" style="" href="home.jsp">Cancel</a></p>
 
+
+
+
+        <footer class="text-muted">
+            <div class="container">
+                <p class="float-right">
+                    <a href="#">Back to top</a>
+                </p>
+                <p>Online Ordering System &copy;</p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    </form>>
+</div>
 </body>
 </html>
