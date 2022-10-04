@@ -18,3 +18,9 @@ Responsibility:
     - View: index.jsp delete.jsp, accesslog.jsp, editUserInfo.jsp, home.jsp, register.jsp, searchAccessLog.jsp, usermanagement.jsp, welcome.jsp
     - Utils: DB, Helper, Validator
     - JunitTest: UserTest
+    
+ - LUN OU (14065890):
+    - Model: Restaurant, RestaurantDao
+    - Controller: EmailServlet, RestaurantServlet
+    - View: editRestaurant.jsp email.jsp, Restaurant.jsp, sendEmail.jsp
+    - Utils: EmailUtil, EmailService
