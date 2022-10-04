@@ -30,3 +30,8 @@ Responsibility:
     - View: editRestaurant.jsp email.jsp, Restaurant.jsp, sendEmail.jsp
     - Utils: EmailUtil, EmailService
     - JunitTest: RestaurantTest
+  - Changyu Wang (13715507)
+    - Model : Order, OrderProcess, OrderDao, OrderProcessDao
+    - Controller : OrderManagement, OrderServlet
+    - View : makeorder.jsp, myorder.jsp, payment.jsp(Modified buttons) home.jsp(Modified buttons)
+    - JunitTest : OrderTest
