@@ -1,15 +1,13 @@
-<%@ page import="com.asd.project.model.User" %>
-<%@ page import="com.asd.project.model.Category" %>
-<%@ page import="com.asd.project.model.dao.CategoryDao" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.asd.project.utils.DB" %><%--
+<%@ page import="com.asd.project.model.User" %><%--
   Created by IntelliJ IDEA.
-  User: Littlenewww
+  User: huawei
   Date: 2022/9/6
-  Time: 21:19
+  Time: 17:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.asd.project.model.Payment"%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,10 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Payment</title>
 </head>
 <body>
 <div class="body">
@@ -61,7 +58,7 @@
                     </li>
                     <% if (user != null) { %>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="delete.jsp" role="button" data-toggle="dropdown"
                            aria-expanded="false">
                             My Account
                         </a>
@@ -71,7 +68,7 @@
                             <a class="dropdown-item" href="accesslog.jsp">Access Log</a>
                             <% if (user.getRole().equalsIgnoreCase("Customer")) {%>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="delete.jsp">Delete Account</a>
+                            <a class="dropdown-item text-danger" href="#">Delete Account</a>
                             <%}%>
                         </div>
                     </li>
@@ -92,7 +89,7 @@
                             <%=name%>
                         </button>
                         <div class="dropdown-menu-right dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="makeorder.jsp">Cart</a>
+                            <a class="dropdown-item" href="#">Cart</a>
                             <%
                                 if (user != null) {
                             %>
@@ -108,74 +105,50 @@
             </div>
         </nav>
     </header>
+    <section class="jumbotron text-center">
+        <strong><h1 class="display-4">PAYMENT</h1></strong>
+    </section>
+    <div style="    display: flex;
+    flex-direction: column;
+    align-items: center;">
+
+<%--    <form action="${pageContext.request.contextPath}/AddPaymentServlet" method="post">--%>
 
 
 
-
-    <main role="main">
-        <section class="jumbotron text-center">
-            <strong><h1 class="display-4">DISH MANAGEMENT</h1></strong>
-        </section>
-        <div style="display: flex; flex-direction: column; align-items: center;">
-            <div style="width: 30%">
-                <form method="post" action="dishmanagement?action=add">
-                    <div class="form-group">
-                        <label for="inputUserName">Dishes name</label>
-                        <input type="text" name="name" class="form-control" id="inputUserName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail4">Dishes description</label>
-                        <input type="text" name="description" class="form-control" id="inputEmail4" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword">Dishes price</label>
-                        <input type="number" name="price" class="form-control"
-                               id="inputPassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="category">Categories</label>
-                        <select class="custom-select" name="category" id="category" required>
-                            <% DB db = new DB();
-                                CategoryDao cateDao = new CategoryDao(db);
-                                ArrayList<Category> categories = cateDao.getAllCategories();
-                                for (Category category : categories) { %>
-
-                            <option value="<%=category.getId()%>"><%=category.getName()%>
-                            </option>
-                            <%}%>
-                        </select>
-                    </div>
+        <div class="body-text">
+            <b><label for name="paymentMethod">Payment Method</label></b>
+            <input type="text"  name="Payment_method" placeholder="Payment Method" required/>
 
 
-                    <div style=" text-align: center;">
-                        <button style="margin: 20px" type="submit" id="addButton" class="btn btn-primary">Add
-                        </button>
-                        <a href="home.jsp" class="btn btn-danger">Cancel</a>
-                    </div>
+            <p><b><label for name="datePaid">Date</label></b>
+                <input type="date" name="Payment_date" placeholder="Date Paid" required/>
 
-                </form>
+            <div class="row d-flex justify-content-center pd-120">
+                <h3>Payment Information</h3></div>
+            <input type="text"  name="cardNumber" placeholder="Card Number" required/>
+            <input type="text"  name="expiryDate" placeholder="MM/YY" required/>
+            <input type="password" name="securityCode" placeholder="securityCode" required/>
+            <input type="text"  name="nameOnCard" placeholder="Name on Card" required/>
 
+        </div>
+        <p>            <p><a class="btn btn-outline-primary" style="" href="confirmPayment.jsp">Pay</a></p>
+        <a class="btn btn-outline-primary" style="" href="home.jsp">Cancel</a></p>
+        </div>
+
+
+
+        <footer class="text-muted">
+            <div class="container">
+                <p class="float-right">
+                    <a href="#">Back to top</a>
+                </p>
+                <p>Online Ordering System &copy;</p>
             </div>
-        </div>
-
-    </main>
-
-
-    <footer class="text-muted">
-        <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-            <p>Online Ordering System &copy;</p>
-        </div>
-    </footer>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    </form>>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-        crossorigin="anonymous"></script>
-
 </body>
 </html>
