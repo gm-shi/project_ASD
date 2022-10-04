@@ -18,3 +18,9 @@ Responsibility:
     - View: index.jsp delete.jsp, accesslog.jsp, editUserInfo.jsp, home.jsp, register.jsp, searchAccessLog.jsp, usermanagement.jsp, welcome.jsp
     - Utils: DB, Helper, Validator
     - JunitTest: UserTest
+  - Jianyin Xu (13641283):
+    - Model: CartDao, CategoryDao, DishDao, Category, Dish
+    - Controller: DishManagement, DishSelectManagement
+    - View: category.jsp, dishes.jsp, menu.jsp
+    - Utils: DB, Helper, Validator
+    - JunitTest: DishManagementTest
