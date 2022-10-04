@@ -3,6 +3,7 @@
 <%@ page import="com.asd.project.model.dao.CategoryDao" %>
 <%@ page import="com.asd.project.model.Category" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.asd.project.model.Dish" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!doctype html>
@@ -114,12 +115,42 @@
             <strong><h1 class="display-4">MODIFICATION</h1></strong>
         </section>
 
-        <div class="form-outline mb-4">
-            <input type="search" class="form-control" id="datatable-search-input">
-            <label class="form-label" for="datatable-search-input">Search</label>
+        <div class="input-group">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon"/>
+            <button type="button" class="btn btn-outline-primary">search</button>
         </div>
-        <div id="datatable">
-        </div>
+        <table class="table table-hover" style="margin-left: auto;margin-right: auto;width: 800px;text-align: center;font-size: 15px;" >
+            <thead>
+            <tr>
+                <th scope="col">Category ID</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Dish ID</th>
+                <th scope="col">Dish Name</th>
+                <th scope="col">Dish Description</th>
+                <th scope="col">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <% DB db = new DB();
+                    CategoryDao cateDao = new CategoryDao(db);
+                    ArrayList<Category> categories = cateDao.getAllCategories();
+                    for (Category category : categories) { %>
+                <% ArrayList<Dish> dishes = cateDao.getDishes(category.getId());
+                    for (Dish dish : dishes) {
+                %>
+
+                <th scope="row"><%=category.getId()%></th>
+                <td><%=category.getName()%></td>
+                <td><%=dish.getId()%></td>
+                <td><%=dish.getName()%></td>
+                <td><%=dish.getDescription()%></td>
+                <td><%=dish.getPrice()%></td>
+            </tr>
+            <%}%>
+            <%}%>
+            </tbody>
+        </table>
     </main>
 
     <footer style="margin-top: 80px" class="text-muted">
@@ -139,4 +170,5 @@
         crossorigin="anonymous"></script>
 
 </body>
+
 </html>
