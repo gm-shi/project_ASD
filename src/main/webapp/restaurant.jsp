@@ -1,5 +1,11 @@
 <%@ page import="com.asd.project.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.asd.project.utils.DB" %>
+<%@ page import="com.asd.project.model.Restaurant" %>
+<%@ page import="com.asd.project.model.dao.RestaurantDao" %>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,22 +16,24 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-
     <title>Restaurant</title>
 </head>
 <body>
 <div class="body">
+        <%
+        String name = "Guest";
+        User user = null;
+        if (session.getAttribute("user") != null) {
+            user = (User) session.getAttribute("user");
+            name = user.getName();
+        }
+        DB db = new DB();
+        RestaurantDao rDao = new RestaurantDao(db);
+        Restaurant restaurant = rDao.getRestaurant();
+    %>
+
     <header>
         <%--    navigation bar start--%>
-        <%
-            String name = "Guest";
-            User user = null;
-            if (session.getAttribute("user") != null) {
-                user = (User) session.getAttribute("user");
-                name = user.getName();
-            }
-
-        %>
         <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: steelblue;
     box-shadow: 0px 0px 3px 0px black;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -36,7 +44,7 @@
             <div class="collapse navbar-collapse" style="justify-content: space-around;" id="navbarNavDropdown">
                 <ul class="navbar-nav"
                     style="font-size: 20px;flex-basis: 90%;display: flex;justify-content: space-evenly; font-weight: 600;">
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link" href="home.jsp">Home</a>
                     </li>
                     <li class="nav-item">
@@ -45,7 +53,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="makeorder.jsp">My Cart</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="restaurant.jsp">About us</a>
                     </li>
                     <% if (user != null) { %>
@@ -99,95 +107,60 @@
     </header>
 
 
-    <main role="main">
+    <%--    picture and as link--%>
+    <%-- main --%>
+    <div>
         <section class="jumbotron text-center">
-            <div class="container">
-                <div id="demo" class="carousel slide" data-ride="carousel">
 
-                    <ul class="carousel-indicators">
-                        <li data-target="#demo" data-slide-to="0" class="active"></li>
-                        <li data-target="#demo" data-slide-to="1"></li>
-                        <li data-target="#demo" data-slide-to="2"></li>
-                    </ul>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://media.istockphoto.com/photos/stir-fry-noodles-with-vegetables-and-beef-in-black-bowl-slate-top-picture-id1265502236?k=20&m=1265502236&s=612x612&w=0&h=6tAimUt291HSqeL0h0qN1_I9FJ3-HueDZMb8GV7ZPLE=">
-                        </div>
-                        <div class="carousel-item">
-                            <img  src="https://media.istockphoto.com/photos/fried-dumplings-gyoza-with-soy-sauce-and-chopsticks-top-view-picture-id1286079738?k=20&m=1286079738&s=612x612&w=0&h=HQFZXNWA6i89OlKnllEfqFcc85Lm-hFjCWrd6nwDwuA=">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://media.istockphoto.com/photos/chinese-food-blank-background-picture-id545286388?k=20&m=545286388&s=612x612&w=0&h=1zAWEuV5W6SoYtErOkWasELFcAWMKgQEBUsNOoH5znc=">
-                        </div>
-                    </div>
-
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
-
+        <strong><h1 class="display-4">ABOUT US</h1></strong>
+        </section>
+        <main style="    display: flex;flex-direction: column;align-items: center; margin-bottom: 200px">
+            <h1 class="card-title"><%=restaurant.getName()%>
+            </h1>
+            <p>Located in <%=restaurant.getLocation()%>
+            </p>
+            <p>Contact us: <%=restaurant.getPhone()%>
+            </p>
+            <p>We are very good at cooking <%=restaurant.getType()%> food! </p>
+            <div class="mapouter">
+                <div class="gmap_canvas">
+                    <iframe width="600" height="500" id="gmap_canvas"
+                            src="https://maps.google.com/maps?q=UTS%20Building%2011%20(CB11%2081-113,%20Broadway,%20Ultimo%20NSW%202007&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                    <a href="https://123movies-to.org"></a><br>
+                    <style>.mapouter {
+                        position: relative;
+                        text-align: right;
+                        height: 500px;
+                        width: 600px;
+                    }</style>
+                    <a href="https://www.embedgooglemap.net">google map embed responsive</a>
+                    <style>.gmap_canvas {
+                        overflow: hidden;
+                        background: none !important;
+                        height: 500px;
+                        width: 600px;
+                    }</style>
                 </div>
             </div>
-        </section>
-
-
-        <main role="main">
-            <section class="jumbotron text-center" style="display: flex; flex-direction: column; align-items: center;">
-
-                <h1>Restaurant101</h1>
-                <p>Located in Bridge mengpo, guichai District, yanwang City, difu Province </p>
-                <p>Contact us: 11223344 </p>
-            </section>
         </main>
+        <%--    footer--%>
+        <footer class="text-muted">
+            <div class="container">
+                <p class="float-right">
+                    <a href="#">Back to top</a>
+                </p>
+                <p>Restaurant Online Ordering System &copy;</p>
+            </div>
+        </footer>
+    </div>
 
-
-        <html>
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-            <title>Insert title here</title>
-            <script
-                    src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-            <script>
-                var map;
-                function initialize() {
-                    var mapOptions = {
-                        zoom: 8,
-                        center: new google.maps.LatLng(-34.397, 150.644)
-                    };
-                    map = new google.maps.Map(document.getElementById('map-canvas'),
-                        mapOptions);
-                }
-
-                google.maps.event.addDomListener(window, 'load', initialize);
-            </script>
-        </head>
-        <body>
-        <div id="map-canvas" style="height:300px; width:500px"></div>
-        </body>
-        </html>
-
-
-
-
-
-    </main>
-    <footer class="text-muted">
-        <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-            <p>Restaurant Online Ordering System &copy;</p>
-        </div>
-    </footer>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+            crossorigin="anonymous"></script>
 
 </body>
 </html>

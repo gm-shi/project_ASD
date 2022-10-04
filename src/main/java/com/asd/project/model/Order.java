@@ -3,32 +3,16 @@ package com.asd.project.model;
 import java.util.Date;
 
 public class Order {
-    private int OrderID;
-    private int Quantity;
     private String DishName;
-    private Date OrderDate;
+    private double DishPrice;
+    private int Quantity;
+    private int Dishid;
 
-    public Order(int orderID, int quantity, String dishName, Date orderDate) {
-        OrderID = orderID;
-        Quantity = quantity;
+    public Order(String dishName, double dishPrice, int quantity, int dishid) {
         DishName = dishName;
-        OrderDate = orderDate;
-    }
-
-    public int getOrderID() {
-        return OrderID;
-    }
-
-    public void setOrderID(int orderID) {
-        OrderID = orderID;
-    }
-
-    public int getQuantity() {
-        return Quantity;
-    }
-
-    public void setQuantity(int quantity) {
+        DishPrice = dishPrice;
         Quantity = quantity;
+        Dishid = dishid;
     }
 
     public String getDishName() {
@@ -39,11 +23,27 @@ public class Order {
         DishName = dishName;
     }
 
-    public Date getOrderDate() {
-        return OrderDate;
+    public double getDishPrice() {
+        return DishPrice;
     }
 
-    public void setOrderDate(Date orderDate) {
-        OrderDate = orderDate;
+    public void setDishPrice(double dishPrice) {
+        DishPrice = dishPrice;
+    }
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
+    }
+
+    public int getDishid() {
+        return Dishid;
+    }
+
+    public void setDishid(int dishid) {
+        Dishid = dishid;
     }
 }
