@@ -41,7 +41,7 @@ public class DishManagement extends HttpServlet {
         }
     }
     private void add(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-       //id name description price
+        //id name description price
         String item_name = req.getParameter("name");
         String item_description = req.getParameter("description");
         double item_price = Double.valueOf(req.getParameter("price"));
@@ -70,18 +70,7 @@ public class DishManagement extends HttpServlet {
 
 
     }
-//
-//    private void displayList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-//        try{
-//            ArrayList<Dish> list = menu.search(null);
-//            System.out.println(list);
-//            req.setAttribute("list", list);
-//            req.getRequestDispatcher(view).forward(req, res);
-//        }
-//        catch(SQLException e){
-//            e.printStackTrace();
-//        }
-//    }
+
     private boolean isEmpty(String str){
         if(str.isEmpty() || str == null){
             return false;
