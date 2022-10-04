@@ -200,6 +200,24 @@
                 <div class="col mb-4">
                     <div class="card">
                         <div class="card-body">
+                            <h5 class="card-title">Send Email</h5>
+                            <p class="card-text">Send email about your order</p>
+                            <a class="btn btn-primary" href="sendEmail.jsp">Button</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Edit Restaurant</h5>
+                            <p class="card-text">change restaurant information</p>
+                            <a class="btn btn-primary" href="editRestaurant.jsp">Button</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body">
                             <h5 class="card-title">View Access Log</h5>
                             <p class="card-text">View user Access log</p>
                             <a class="btn btn-primary" href="searchAccessLog.jsp">Button</a>

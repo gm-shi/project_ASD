@@ -1,50 +1,10 @@
 <%@ page import="com.asd.project.model.User" %>
+<%@ page import="java.util.Properties" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%@ page import="java.io.*,java.util.*,javax.mail.*"%>
 <%@ page import="javax.mail.internet.*,javax.activation.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-
-<%
-    String result;
-    // 收件人的电子邮件
-    String to = "abcd@gmail.com";
-
-    // 发件人的电子邮件
-    String from = "mcmohd@gmail.com";
-
-    // 假设你是从本地主机发送电子邮件
-    String host = "localhost";
-
-    // 获取系统属性对象
-    Properties properties = System.getProperties();
-
-    // 设置邮件服务器
-    properties.setProperty("mail.smtp.host", host);
-
-    // 获取默认的Session对象。
-    Session mailSession = Session.getDefaultInstance(properties);
-
-    try{
-        // 创建一个默认的MimeMessage对象。
-        MimeMessage message = new MimeMessage(mailSession);
-        // 设置 From: 头部的header字段
-        message.setFrom(new InternetAddress(from));
-        // 设置 To: 头部的header字段
-        message.addRecipient(Message.RecipientType.TO,
-                new InternetAddress(to));
-        // 设置 Subject: header字段
-        message.setSubject("This is the Subject Line!");
-        // 现在设置的实际消息
-        message.setText("This is actual message");
-        // 发送消息
-        Transport.send(message);
-        result = "Sent message successfully....";
-    }catch (MessagingException mex) {
-        mex.printStackTrace();
-        result = "Error: unable to send message....";
-    }
-%>
+<%@ page import="com.asd.project.utils.EmailService" %>
 
 <!doctype html>
 <html lang="en">
@@ -149,36 +109,44 @@
 
     <%--    content goes here--%>
 
-    <h1>Hello, world!</h1>
+
+    <%--order = oderdao.getorder(id);--%>
+    <%--     String info = "ordernumber: " + order.getid() + "\n order axxxxxx" + --%>
 
 
+    <%
+        String result = "unsuccessful";
+        if(EmailService.sendEmail(100010,
+                "detail: [sweet n sour pork|10.0|3][Stri-fried Noodle|99.0|2]  Time: 2022-10-04 15:10:13",
+                "Lun.Ou@student.uts.edu.au"))
+            result = "Successful";
+    %>
 
-
-
-
-
-
-
-
-
-
-    <title>Send Email using JSP</title>
+    <html>
+    <head>
+        <title>Send Email using JSP</title>
     </head>
+
     <body>
     <center>
-        <h1>Send Email using JSP</h1>
+        <h1>Email situation</h1>
     </center>
-    <p align="center">
-        <%
-            out.println("Result: " + result + "\n");
-        %>
+
+    <p style="text-align: center">
+        <%=result%>
+
+
     </p>
+    </body>
+    </html>
 
 
 
 
-
-
+    <div style=" text-align: center;">
+        <a href="https://www.google.com/gmail/"  class="btn btn-success">Track Gmail</a>
+        <a href="https://outlook.office.com/mail/inbox/id/AAQkADBhYTQ1NTVhLWQyYWUtNGJmOS1iZWJiLWQ4OGE4YjI0MjY1OAAQAL3NhMijUYlBus6fJ4DQ0Rc%3D?actSwt=true"  class="btn btn-success">Track Outlook</a>
+    </div>
 
 
 
