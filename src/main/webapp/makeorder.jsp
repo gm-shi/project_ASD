@@ -1,4 +1,11 @@
-<%@ page import="com.asd.project.model.User" %><%--
+<%@ page import="com.asd.project.model.User" %>
+<%@ page import="com.asd.project.model.Dish" %>
+<%@ page import="com.asd.project.model.dao.OrderDao" %>
+<%@ page import="com.asd.project.controller.OrderServlet" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.asd.project.model.Order" %>
+<%@ page import="com.asd.project.utils.DB" %>
+<%--
   Created by IntelliJ IDEA.
   User: John Wang
   Date: 9/6/2022
@@ -17,6 +24,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <title>Make Order</title>
+    <script type="text/css">
+        .LoginPlease{
+            width:400px;
+            height:500px;
+            text-align: center;
+        }
+    </script>
 </head>
 <body>
 <div class="body">
@@ -30,7 +44,6 @@
                 user = (User) session.getAttribute("user");
                 name = user.getName();
             }
-
         %>
         <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: steelblue;
     box-shadow: 0px 0px 3px 0px black;">
@@ -103,53 +116,74 @@
             </div>
         </nav>
     </header>
-
-    <div class="list-group" style="    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 20%;
-    margin-right: 20%;
-    padding-bottom: 50px;
-    text-align: center;
-}">
-        <h1>Cart</h1>
-        <table>
-            <tr>
-                <td>Item Name</td>
-                <td>Price</td>
-                <td>Action</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><button>+</button><button>Delete</button></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>Here is going to be a table that showing as shopping carts</td>
-                <td><button>+</button><button>Delete</button></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><button>+</button><button>Delete</button></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><button>+</button><button>Delete</button></td>
-            </tr>
-        </table>
-        <br>
-        <a href="payment.jsp" class="btn btn-primary">Check Out</a>
-    </div>
-    <style>
-        td{
-            height: 20px;
-            border: 1px solid black;
-        }
-    </style>
-
+    <%
+        if (user == null) {
+    %>
+        <div class="LoginPlease" style="text-align: center">
+            <h2>Please Login!</h2>
+            <p>If you are not logged in, guest users cannot use the shopping cart feature. If you do not have an account, please sign up.</p>
+            <a class="btn btn-primary" href="index.jsp">Login</a>
+            <a class="btn btn-primary" href="register.jsp">Sign Up</a>
+        </div>
+    <%} else{%>
+        <%if (user != null && (user.getRole().equalsIgnoreCase("Customer"))){ %>
+            <div class="Shopping-Cart-Div" style="text-align: center">
+                <h1>Cart</h1>
+                <%
+                    int userid = user.getId();
+                    String username = user.getName();
+                    ArrayList<Order> orderdisplay;
+                    if (request.getAttribute("DisplayAL") == null) {
+                        DB db = new DB();
+                        OrderDao OrderArraylist = new OrderDao(db);
+                        orderdisplay = OrderArraylist.viewcart(user.getId());
+                    } else {
+                        orderdisplay = (ArrayList<Order>) request.getAttribute("DisplayAL");
+                    }
+                %>
+                <div class="MyCart" style="text-align: center;width: 800px;margin: 0 auto;">
+                    <p style="text-align: center;font-size: 20px;">Hi <% out.print(username);%> Here is your cart.</p>
+                    <table style="border: solid black 1px;">
+                        <tr>
+                            <td width="200px" style="border: solid 1px black;text-align: center">Dish Name</td>
+                            <td width="200px" style="border: solid 1px black;text-align: center">Price</td>
+                            <td width="200px" style="border: solid 1px black;text-align: center">Quantity</td>
+                            <td width="200px" style="border: solid 1px black;text-align: center">Action</td>
+                        </tr>
+                        <%
+                            double totalprice = 0;
+                            if(orderdisplay != null){
+                            for(Order display : orderdisplay){
+                                totalprice = totalprice + display.getDishPrice() * display.getQuantity();
+                        %>
+                        <tr>
+                            <td style="border: solid 1px black;text-align: center"><%=display.getDishName()%></td>
+                            <td style="border: solid 1px black;text-align: center"><%=display.getDishPrice()%> $</td>
+                            <td style="border: solid 1px black;text-align: center"><%=display.getQuantity()%></td>
+                            <td style="border: solid 1px black">
+                                <form action="OrderServlet?action=Add&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
+                                    <button type="submit" style="width: 150px">ADD(+)</button>
+                                </form>
+                                <form action="OrderServlet?action=Minus&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
+                                    <button type="submit" style="width: 150px">Minus(-)</button>
+                                </form>
+                                <form action="OrderServlet?action=Delete&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
+                                    <button type="submit" style="width: 150px">Delete(X)</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <%}}else{%>
+                            <tr><td></td><td>Nothing in Cart</td></tr>
+                        <%}%>
+                    </table>
+                    <h2 style="text-align: center;">The Total Price of the Cart is: <%=totalprice%> $</h2>
+                    <form action="OrderServlet?action=Submit&totalprice=<%=totalprice%>&userid=<%=userid%>" method="post">
+                        <button type="submit" style="text-align: center;height: 50px;width: 200px;color: indianred">Order Now</button>
+                    </form>
+                </div>
+            </div>
+        <%}%>
+    <%}%>
     <footer class="text-muted">
         <div class="container">
             <p class="float-right">

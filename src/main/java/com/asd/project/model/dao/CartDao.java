@@ -8,21 +8,21 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class CartDao {
-        private final DB db;
-        public CartDao(DB db) {
-            this.db = db;
-        }
-        private Connection conn() throws SQLException {
-            return db.connection();
-        }
+    private final DB db;
+    public CartDao(DB db) {
+        this.db = db;
+    }
+    private Connection conn() throws SQLException {
+        return db.connection();
+    }
 
-        public void add(int userId, int dishId) throws SQLException {
-            String query = "INSERT INTO Cart(user_id, dish_id) VALUES (?,?)";
-            PreparedStatement ps = conn().prepareStatement(query);
-            ps.setInt(1, userId);
-            ps.setInt(2, dishId);
-            ps.executeUpdate();
-        }
+    public void add(int userId, int dishId) throws SQLException {
+        String query = "INSERT INTO Cart(user_id, dish_id) VALUES (?,?)";
+        PreparedStatement ps = conn().prepareStatement(query);
+        ps.setInt(1, userId);
+        ps.setInt(2, dishId);
+        ps.executeUpdate();
+    }
 
 
     public ArrayList<Integer> getDishIds(int userId) throws SQLException {
