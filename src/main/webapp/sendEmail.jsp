@@ -110,13 +110,15 @@
     <%--    content goes here--%>
 
 
-<%--order = oderdao.getorder(id);--%>
-<%--     String info = "ordernumber: " + order.getid() + "\n order axxxxxx" + --%>
+    <%--order = oderdao.getorder(id);--%>
+    <%--     String info = "ordernumber: " + order.getid() + "\n order axxxxxx" + --%>
 
 
     <%
         String result = "unsuccessful";
-        if(EmailService.sendEmail(100, "your order detail", "Lun.Ou@student.uts.edu.au"))
+        if(EmailService.sendEmail(100010,
+                "detail: [sweet n sour pork|10.0|3][Stri-fried Noodle|99.0|2]  Time: 2022-10-04 15:10:13",
+                "Lun.Ou@student.uts.edu.au"))
             result = "Successful";
     %>
 
@@ -127,16 +129,24 @@
 
     <body>
     <center>
-        <h1>Send Email using JSP</h1>
+        <h1>Email situation</h1>
     </center>
 
     <p style="text-align: center">
         <%=result%>
+
+
     </p>
     </body>
     </html>
 
 
+
+
+    <div style=" text-align: center;">
+        <a href="https://www.google.com/gmail/"  class="btn btn-success">Track Gmail</a>
+        <a href="https://outlook.office.com/mail/inbox/id/AAQkADBhYTQ1NTVhLWQyYWUtNGJmOS1iZWJiLWQ4OGE4YjI0MjY1OAAQAL3NhMijUYlBus6fJ4DQ0Rc%3D?actSwt=true"  class="btn btn-success">Track Outlook</a>
+    </div>
 
 
 
