@@ -86,6 +86,6 @@ public class OrderDao {
     }
 
     public void submitorder(int userid,int totalprice) throws SQLException{
-
+        String GetSQL = "Select * ";
     }
 }
