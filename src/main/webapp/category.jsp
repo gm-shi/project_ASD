@@ -3,6 +3,7 @@
 <%@ page import="com.asd.project.model.dao.CategoryDao" %>
 <%@ page import="com.asd.project.model.Category" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.asd.project.model.Dish" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!doctype html>
@@ -123,30 +124,33 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Category ID</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Dish ID</th>
+                <th scope="col">Dish Name</th>
+                <th scope="col">Dish Description</th>
+                <th scope="col">Price</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <% DB db = new DB();
+                    CategoryDao cateDao = new CategoryDao(db);
+                    ArrayList<Category> categories = cateDao.getAllCategories();
+                    for (Category category : categories) { %>
+                <% ArrayList<Dish> dishes = cateDao.getDishes(category.getId());
+                    for (Dish dish : dishes) {
+                %>
+
+                <th scope="row"><%=category.getId()%></th>
+                <td><%=category.getName()%></td>
+                <td><%=dish.getId()%></td>
+                <td><%=dish.getName()%></td>
+                <td><%=dish.getDescription()%></td>
+                <td><%=dish.getPrice()%></td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
+            <%}%>
+            <%}%>
             </tbody>
         </table>
     </main>
@@ -168,4 +172,5 @@
         crossorigin="anonymous"></script>
 
 </body>
+
 </html>
