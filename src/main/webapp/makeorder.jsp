@@ -1,4 +1,11 @@
-<%@ page import="com.asd.project.model.User" %><%--
+<%@ page import="com.asd.project.model.User" %>
+<%@ page import="com.asd.project.model.Dish" %>
+<%@ page import="com.asd.project.model.dao.OrderDao" %>
+<%@ page import="com.asd.project.controller.OrderServlet" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.asd.project.model.Order" %>
+<%@ page import="com.asd.project.utils.DB" %>
+<%--
   Created by IntelliJ IDEA.
   User: John Wang
   Date: 9/6/2022
@@ -17,6 +24,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <title>Make Order</title>
+    <script type="text/css">
+        .LoginPlease{
+            width:400px;
+            height:500px;
+            text-align: center;
+        }
+    </script>
 </head>
 <body>
 <div class="body">
@@ -30,7 +44,14 @@
                 user = (User) session.getAttribute("user");
                 name = user.getName();
             }
-
+            ArrayList<Order> orderdisplay;
+            if (request.getAttribute("DisplayAL") == null) {
+                DB db = new DB();
+                OrderDao OrderArraylist = new OrderDao(db);
+                orderdisplay = OrderArraylist.viewcart(user.getId());
+            } else {
+                orderdisplay = (ArrayList<Order>) request.getAttribute("DisplayAL");
+            }
         %>
         <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: steelblue;
     box-shadow: 0px 0px 3px 0px black;">
@@ -106,7 +127,7 @@
     <%
         if (user == null) {
     %>
-        <div class="Login-Please">
+        <div class="LoginPlease">
             <h2>Please Login!</h2>
             <p>If you are not logged in, guest users cannot use the shopping cart feature. If you do not have an account, please sign up.</p>
             <a class="btn btn-primary" href="index.jsp">Login</a>
@@ -116,14 +137,40 @@
         <%if (user != null && (user.getRole().equalsIgnoreCase("Customer"))){ %>
             <div class="Shopping-Cart-Div">
                 <h1>Cart</h1>
-                <table>
-                    <tr>
-                        <td>Dish Name</td>
-                        <td>Price</td>
-                        <td>Quantity</td>
-                        <td>Action</td>
-                    </tr>
-                </table>
+                <%
+                    int userid = user.getId();
+                    String username = user.getName();
+                %>
+                <div class="MyCart">
+                    <p>Hi <% out.print(username);%> Here is your cart.</p>
+                    <table>
+                        <tr>
+                            <td width="200px">Dish Name</td>
+                            <td width="200px">Price</td>
+                            <td width="200px">Quantity</td>
+                            <td width="200px">Action</td>
+                        </tr>
+                        <%
+                            if(orderdisplay != null){
+                            for(Order display : orderdisplay){
+                        %>
+                        <tr>
+                            <td><%=display.getDishName()%></td>
+                            <td><%=display.getDishPrice()%> $</td>
+                            <td><%=display.getQuantity()%></td>
+                            <td>
+                                <%---<button onclick="orderServlet?action=Add&userid=<% out.print(userid)%>&Dishname=<%out.print(dishname)%>">+</button>---%>
+                                <%---<button onclick="orderServlet?action=Minus&userid=<% out.print(userid)%>&Dishname=<%out.print(dishname)%>">-</button>---%>
+                                <form action="OrderServlet?action=Delete&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <%}}else{%>
+                            <tr><td></td><td>Nothing in Cart</td></tr>
+                        <%}%>
+                    </table>
+                </div>
             </div>
         <%}%>
     <%}%>
