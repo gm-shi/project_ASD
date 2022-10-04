@@ -36,7 +36,7 @@ public class OrderServlet extends HttpServlet{
 
         String dishid = request.getQueryString().split("=")[2];//Dishname if in submit function this field means total price
         String[] dishtemp = dishid.split("&");
-        int dishidfinal = Integer.parseInt(dishtemp[0]);
+        double dishidfinal = Double.parseDouble(dishtemp[0]);
 
         String numtemp = request.getQueryString().split("=")[3]; //UserID
         int id = Integer.parseInt(numtemp);
@@ -80,7 +80,7 @@ public class OrderServlet extends HttpServlet{
                 break;
             case "Submit":
                 try {
-                    handleSubmit(request,response,id,dishidfinal);
+                    handleSubmit(request,response,id);
                 }
                 catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -101,23 +101,23 @@ public class OrderServlet extends HttpServlet{
         requestDispatcher.forward(req, res);
     }
 
-    private void handleAdd(HttpServletRequest req, HttpServletResponse res,int id,int dishid) throws IOException, SQLException {
+    private void handleAdd(HttpServletRequest req, HttpServletResponse res,int id,double dishid) throws IOException, SQLException {
         orderDao.addquantity(id,dishid);
         res.sendRedirect("makeorder.jsp");
     }
-    private void handleMinus(HttpServletRequest req, HttpServletResponse res,int id,int dishid) throws IOException, SQLException {
+    private void handleMinus(HttpServletRequest req, HttpServletResponse res,int id,double dishid) throws IOException, SQLException {
         orderDao.minusquantity(id,dishid);
         res.sendRedirect("makeorder.jsp");
     }
 
-    private void handleDelete(HttpServletRequest req, HttpServletResponse res,int id,int dishid) throws IOException, SQLException {
+    private void handleDelete(HttpServletRequest req, HttpServletResponse res,int id,double dishid) throws IOException, SQLException {
         orderDao.deletedish(id,dishid);
         res.sendRedirect("makeorder.jsp");
     }
 
-    private void handleSubmit(HttpServletRequest req, HttpServletResponse res,int id,int totalprice) throws IOException, SQLException {
-        orderDao.submitorder(id, totalprice); 
-        res.sendRedirect("home.jsp");
+    private void handleSubmit(HttpServletRequest req, HttpServletResponse res,int id) throws IOException, SQLException {
+        orderDao.submitorder(id);
+        res.sendRedirect("payment.jsp");
     }
 
 
