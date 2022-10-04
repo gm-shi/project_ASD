@@ -74,7 +74,7 @@
                             My Account
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">My Order</a>
+                            <a class="dropdown-item" href="myorder.jsp">My Order</a>
                             <a class="dropdown-item" href="editinfo.jsp">Profile</a>
                             <a class="dropdown-item" href="accesslog.jsp">Access Log</a>
                             <% if (user.getRole().equalsIgnoreCase("Customer")) {%>
@@ -152,7 +152,7 @@
                         </tr>
                         <%
                             double totalprice = 0;
-                            if(orderdisplay != null){
+                            if(orderdisplay.size() > 0){
                             for(Order display : orderdisplay){
                                 totalprice = totalprice + display.getDishPrice() * display.getQuantity();
                         %>
@@ -172,14 +172,15 @@
                                 </form>
                             </td>
                         </tr>
-                        <%}}else{%>
+                        <%}%>
+                            <h2 style="text-align: center;">The Total Price of the Cart is: <%=totalprice%> $</h2>
+                            <form action="OrderServlet?action=Submit&totalprice=<%=totalprice%>&userid=<%=userid%>" method="post"><button type="submit" style="text-align: center;height: 50px;width: 200px;color: indianred;margin-bottom: 10px;">Order Now</button></form>
+                            <br>
+                            <%}else{%>
                             <tr><td></td><td>Nothing in Cart</td></tr>
                         <%}%>
                     </table>
-                    <h2 style="text-align: center;">The Total Price of the Cart is: <%=totalprice%> $</h2>
-                    <form action="OrderServlet?action=Submit&totalprice=<%=totalprice%>&userid=<%=userid%>" method="post">
-                        <button type="submit" style="text-align: center;height: 50px;width: 200px;color: indianred">Order Now</button>
-                    </form>
+
                 </div>
             </div>
         <%}%>

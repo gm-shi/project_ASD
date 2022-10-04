@@ -86,8 +86,6 @@ public class OrderServlet extends HttpServlet{
                     throw new RuntimeException(e);
                 }
                 break;
-            case "Edit":
-                break;
             default:
                 System.out.println(actionfinal);
                 System.out.println("Nothing");
