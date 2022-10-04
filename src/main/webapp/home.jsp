@@ -191,8 +191,35 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Manage Dishes</h5>
-                            <p class="card-text">mange dishes for staff</p>
-                            <a class="btn btn-primary" href="dishes.jsp">Button</a>
+                            <p class="card-text">manage dishes for staff</p>
+                            <a class="btn btn-primary" href="dishes.jsp">Manage</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Modification</h5>
+                            <p class="card-text">modification for staff</p>
+                            <a class="btn btn-primary" href="category.jsp">Modify</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Send Email</h5>
+                            <p class="card-text">Send email about your order</p>
+                            <a class="btn btn-primary" href="sendEmail.jsp">Button</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Edit Restaurant</h5>
+                            <p class="card-text">change restaurant information</p>
+                            <a class="btn btn-primary" href="editRestaurant.jsp">Button</a>
                         </div>
                     </div>
                 </div>

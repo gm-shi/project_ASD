@@ -115,7 +115,7 @@ public class OrderServlet extends HttpServlet{
 
     private void handleSubmit(HttpServletRequest req, HttpServletResponse res,int id) throws IOException, SQLException {
         orderDao.submitorder(id);
-        res.sendRedirect("payment.jsp");
+        res.sendRedirect("addPayment.jsp");
     }
 
 

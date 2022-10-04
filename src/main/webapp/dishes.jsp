@@ -133,7 +133,7 @@
                                id="inputPassword" required>
                     </div>
                     <div class="form-group">
-                        <label for="category">Position</label>
+                        <label for="category">Categories</label>
                         <select class="custom-select" name="category" id="category" required>
                             <% DB db = new DB();
                                 CategoryDao cateDao = new CategoryDao(db);

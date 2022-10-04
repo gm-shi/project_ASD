@@ -1,9 +1,10 @@
 <%@ page import="com.asd.project.model.User" %>
-<%@ page import="com.asd.project.utils.DB" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.asd.project.model.Restaurant" %>
-<%@ page import="com.asd.project.model.dao.RestaurantDao" %>
+<%@ page import="java.util.Properties" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.io.*,java.util.*,javax.mail.*"%>
+<%@ page import="javax.mail.internet.*,javax.activation.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ page import="com.asd.project.utils.EmailService" %>
 
 <!doctype html>
 <html lang="en">
@@ -32,9 +33,6 @@
                 name = user.getName();
             }
 
-            DB db = new DB();
-            RestaurantDao rDao = new RestaurantDao(db);
-            Restaurant restaurant = rDao.getRestaurant();
         %>
         <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: steelblue;
     box-shadow: 0px 0px 3px 0px black;">
@@ -112,86 +110,63 @@
     <%--    content goes here--%>
 
 
+    <%--order = oderdao.getorder(id);--%>
+    <%--     String info = "ordernumber: " + order.getid() + "\n order axxxxxx" + --%>
 
 
-    <%--    edit view--%>
-    <section class="jumbotron text-center">
-        <strong><h1 class="display-4">Restaurant information edit</h1></strong>
-    </section>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <div style="width: 30%">
-            <form method="post" action="restaurantServlet?action=edit">
+    <%
+        String result = "unsuccessful";
+        if(EmailService.sendEmail(100010,
+                "detail: [sweet n sour pork|10.0|3][Stri-fried Noodle|99.0|2]  Time: 2022-10-04 15:10:13",
+                "Lun.Ou@student.uts.edu.au"))
+            result = "Successful";
+    %>
 
-                <div class="form-group">
-                    <label for="inputName">Restaurant Name</label>  <%--    cant change name--%>
-                    <input type="text" name="name" class="form-control" id="inputName" value="<%=restaurant.getName()%>"readonly required>
-                </div>
-                <div class="form-group">
-                    <label for="inputPhone">Phone</label>
-                    <input type="text" name="phone" class="form-control" id="inputPhone" value="<%=restaurant.getPhone()%>" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputLocation">Location</label>
-                    <input type="text"  name="location" class="form-control" id="inputLocation" value="<%=restaurant.getLocation()%>" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputType">Type</label>
-                    <input type="text"  name="type" class="form-control" id="inputType" value="<%=restaurant.getType()%>" required>
-                </div>
+    <html>
+    <head>
+        <title>Send Email using JSP</title>
+    </head>
+
+    <body>
+    <center>
+        <h1>Email situation</h1>
+    </center>
+
+    <p style="text-align: center">
+        <%=result%>
 
 
-                <div style=" text-align: center;">
-                    <button style="margin: 20px" type="submit" id="submitButton" class="btn btn-primary">Save
-                    </button>
-                    <a href="home.jsp" class="btn btn-danger">Cancel</a>
-                </div>
+    </p>
+    </body>
+    </html>
 
-            </form>
 
+
+
+    <div style=" text-align: center;">
+        <a href="https://www.google.com/gmail/"  class="btn btn-success">Track Gmail</a>
+        <a href="https://outlook.office.com/mail/inbox/id/AAQkADBhYTQ1NTVhLWQyYWUtNGJmOS1iZWJiLWQ4OGE4YjI0MjY1OAAQAL3NhMijUYlBus6fJ4DQ0Rc%3D?actSwt=true"  class="btn btn-success">Track Outlook</a>
+    </div>
+
+
+
+
+
+    <footer style="margin-top: 80px" class="text-muted">
+        <div class="container">
+            <p class="float-right">
+                <a href="#">Back to top</a>
+            </p>
+            <p>Online Ordering System &copy;</p>
         </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <footer style="margin-top: 80px" class="text-muted">
-                <div class="container">
-                    <p class="float-right">
-                        <a href="#">Back to top</a>
-                    </p>
-                    <p>Online Ordering System &copy;</p>
-                </div>
-            </footer>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-            crossorigin="anonymous"></script>
+    </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
