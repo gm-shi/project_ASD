@@ -29,3 +29,4 @@ Responsibility:
     - Controller: EmailServlet, RestaurantServlet
     - View: editRestaurant.jsp email.jsp, Restaurant.jsp, sendEmail.jsp
     - Utils: EmailUtil, EmailService
+    - JunitTest: RestaurantTest
