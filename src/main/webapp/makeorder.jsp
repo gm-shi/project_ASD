@@ -159,8 +159,12 @@
                             <td><%=display.getDishPrice()%> $</td>
                             <td><%=display.getQuantity()%></td>
                             <td>
-                                <%---<button onclick="orderServlet?action=Add&userid=<% out.print(userid)%>&Dishname=<%out.print(dishname)%>">+</button>---%>
-                                <%---<button onclick="orderServlet?action=Minus&userid=<% out.print(userid)%>&Dishname=<%out.print(dishname)%>">-</button>---%>
+                                <form action="OrderServlet?action=Add&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
+                                    <button type="submit">+</button>
+                                </form>
+                                <form action="OrderServlet?action=Minus&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
+                                    <button type="submit">-</button>
+                                </form>
                                 <form action="OrderServlet?action=Delete&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
                                     <button type="submit">Delete</button>
                                 </form>

@@ -19,6 +19,7 @@ public class OrderServlet extends HttpServlet{
     DB db;
     OrderDao orderDao;
     UserDao userDao;
+    private HttpServletResponse response;
 
     public OrderServlet() throws SQLException {
         super();
@@ -71,7 +72,7 @@ public class OrderServlet extends HttpServlet{
                 break;
             case "Delete":
                 try {
-                    handleDelte(request,response,id,dishidfinal);
+                    handleDelete(request,response,id,dishidfinal);
                 }
                 catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -95,17 +96,17 @@ public class OrderServlet extends HttpServlet{
     }
 
     private void handleAdd(HttpServletRequest req, HttpServletResponse res,int id,int dishid) throws IOException, SQLException {
-        //Num in this case is dish;
         orderDao.addquantity(id,dishid);
+        res.sendRedirect("makeorder.jsp");
     }
     private void handleMinus(HttpServletRequest req, HttpServletResponse res,int id,int dishid) throws IOException, SQLException {
-        //Num in this case is dish;
         orderDao.minusquantity(id,dishid);
+        res.sendRedirect("makeorder.jsp");
     }
 
-    private void handleDelte(HttpServletRequest req, HttpServletResponse res,int id,int dishid) throws IOException, SQLException {
-        //Num in this case is dish;
+    private void handleDelete(HttpServletRequest req, HttpServletResponse res,int id,int dishid) throws IOException, SQLException {
         orderDao.deletedish(id,dishid);
+        res.sendRedirect("makeorder.jsp");
     }
 
 
