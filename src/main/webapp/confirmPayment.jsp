@@ -61,12 +61,21 @@
                             My Account
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">My Order</a>
+
                             <a class="dropdown-item" href="editinfo.jsp">Profile</a>
                             <a class="dropdown-item" href="accesslog.jsp">Access Log</a>
                             <% if (user.getRole().equalsIgnoreCase("Customer")) {%>
                             <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="myorder.jsp">My Order</a>
                             <a class="dropdown-item text-danger" href="#">Delete Account</a>
+                            <%}%>
+                            <% if (user.getRole().equalsIgnoreCase("admin")) {%>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="myorder.jsp">Order Management</a>
+                            <%}%>
+                            <% if (user.getRole().equalsIgnoreCase("staff")) {%>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="myorder.jsp">Order Management</a>
                             <%}%>
                         </div>
                     </li>
