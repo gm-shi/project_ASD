@@ -38,11 +38,11 @@ public class OrderDao {
         String SQLCheck = "SELECT quantity FROM Cart INNER JOIN Dish on Cart.dish_id = Dish.id Where user_id = ? and dish_id = ?";
         PreparedStatement ps = conn().prepareStatement(SQLCheck);
         ps.setInt(1, userid);
-        ps.setInt(2,dishid);
+        ps.setInt(2, dishid);
         ResultSet resultSet = ps.executeQuery();
         int temp = 0;
         while(resultSet.next()){
-            temp = Integer.parseInt(resultSet.getString(1));
+            temp = resultSet.getInt(1);
         }
         int QuanAdd1 = temp + 1;
         String SQLAdd = "UPDATE Cart INNER JOIN Dish on Cart.dish_id = Dish.id set quantity = ? WHERE user_id = ? AND dish_id = ? ";

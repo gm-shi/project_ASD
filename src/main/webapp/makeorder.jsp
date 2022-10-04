@@ -161,7 +161,7 @@
                             <td style="border: solid 1px black;text-align: center"><%=display.getDishPrice()%> $</td>
                             <td style="border: solid 1px black;text-align: center"><%=display.getQuantity()%></td>
                             <td style="border: solid 1px black">
-                                <form action="OrderServlet?action=Add&dishid=<%=display.getDishid()%>;%>&userid=<%=user.getId()%>" method="post">
+                                <form action="OrderServlet?action=Add&dishid=<%=display.getDishid()%>&userid=<%=user.getId()%>" method="post">
                                     <button type="submit" style="width: 150px">ADD(+)</button>
                                 </form>
                                 <form action="OrderServlet?action=Minus&dishid=<%=display.getDishid()%>&userid=<%=user.getId()%>" method="post">
