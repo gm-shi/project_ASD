@@ -59,6 +59,7 @@ public class UserTest {
         assertEquals(tester.getAddress(), this.address);
         assertEquals(tester.getPhoneNumber(), this.phone);
     }
+
     @Test
     public void getUserByIdTest() throws SQLException {
         tester = userDao.getUserById(id);
@@ -71,9 +72,4 @@ public class UserTest {
         assertEquals(tester.getPhoneNumber(), this.phone);
     }
 
-    public void updateUserTest() throws SQLException {
-        userDao.update("tester2", "pass", "test","05555555","testing@testing.com");
-        tester = userDao.getUserByEmail("testing@testing.com");
-        assertEquals(tester.getName(), "tester2");
-    }
 }
