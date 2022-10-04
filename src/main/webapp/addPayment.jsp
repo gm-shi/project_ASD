@@ -105,10 +105,14 @@
             </div>
         </nav>
     </header>
+    <section class="jumbotron text-center">
+        <strong><h1 class="display-4">PAYMENT</h1></strong>
+    </section>
+    <div style="    display: flex;
+    flex-direction: column;
+    align-items: center;">
 
-
-    <h1>Payment</h1>
-    <form action="${pageContext.request.contextPath}/AddPaymentServlet" method="post">
+<%--    <form action="${pageContext.request.contextPath}/AddPaymentServlet" method="post">--%>
 
 
 
@@ -127,10 +131,10 @@
             <input type="password" name="securityCode" placeholder="securityCode" required/>
             <input type="text"  name="nameOnCard" placeholder="Name on Card" required/>
 
-            <p><a class="btn btn-outline-primary" style="" href="confirmPayment.jsp">Pay</a></p>
         </div>
-        <p><a class="btn btn-outline-primary" style="" href="home.jsp">Cancel</a></p>
-
+        <p>            <p><a class="btn btn-outline-primary" style="" href="confirmPayment.jsp">Pay</a></p>
+        <a class="btn btn-outline-primary" style="" href="home.jsp">Cancel</a></p>
+        </div>
 
 
 
