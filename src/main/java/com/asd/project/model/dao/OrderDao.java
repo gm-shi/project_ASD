@@ -35,39 +35,45 @@ public class OrderDao {
     }
 
     public void addquantity(int userid,int dishid) throws SQLException{
-        String SQLMinCheck = "SELECT quantity FROM Cart FULL OUTER JOIN DISH on Cart.dish_id = Dish.id Where user_id = ? and name = ?";
-        PreparedStatement ps = conn().prepareStatement(SQLMinCheck);
+        String SQLCheck = "SELECT quantity FROM Cart INNER JOIN Dish on Cart.dish_id = Dish.id Where user_id = ? and dish_id = ?";
+        PreparedStatement ps = conn().prepareStatement(SQLCheck);
         ps.setInt(1, userid);
         ps.setInt(2,dishid);
         ResultSet resultSet = ps.executeQuery();
-        int Quantity = resultSet.getInt("quantity");
-        int QuanAdd1 = Quantity + 1;
-        String SQLAdd = "UPDATE quantity = ? Cart FULL OUTER JOIN Dish ON Cart.dish_id = Dish.id SET Cart.dish_id = Dish.id WHERE user_id = ? and dishid = ?";
+        int temp = 0;
+        while(resultSet.next()){
+            temp = Integer.parseInt(resultSet.getString(1));
+        }
+        int QuanAdd1 = temp + 1;
+        String SQLAdd = "UPDATE Cart INNER JOIN Dish on Cart.dish_id = Dish.id set quantity = ? WHERE user_id = ? AND dish_id = ? ";
         PreparedStatement psmin = conn().prepareStatement(SQLAdd);
         psmin.setInt(1,QuanAdd1);
         psmin.setInt(2,userid);
         psmin.setInt(3,dishid);
-        psmin.executeQuery();
+        psmin.executeUpdate();
     }
 
     public void minusquantity(int userid,int dishid) throws SQLException{
-        String SQLMinCheck = "SELECT quantity FROM Cart FULL OUTER JOIN DISH on Cart.dish_id = Dish.id Where user_id = ? and name = ?";
-        PreparedStatement ps = conn().prepareStatement(SQLMinCheck);
+        String SQLCheck = "SELECT quantity FROM Cart INNER JOIN Dish on Cart.dish_id = Dish.id Where user_id = ? and dish_id = ?";
+        PreparedStatement ps = conn().prepareStatement(SQLCheck);
         ps.setInt(1, userid);
-        ps.setInt(2, dishid);
+        ps.setInt(2,dishid);
         ResultSet resultSet = ps.executeQuery();
-        int Quantity = resultSet.getInt("quantity");
-        if(Quantity == 1){
+        int temp = 0;
+        while(resultSet.next()){
+            temp = Integer.parseInt(resultSet.getString(1));
+        }
+        if(temp == 1){
             deletedish(userid, dishid);
         }
         else{
-            int QuanMin1 = Quantity - 1;
-            String SQLMin1 = "UPDATE quantity = ? Cart FULL OUTER JOIN Dish ON Cart.dish_id = Dish.id SET Cart.dish_id = Dish.id WHERE user_id = ? and dishname = ?";
-            PreparedStatement psmin = conn().prepareStatement(SQLMin1);
+            int QuanMin1 = temp - 1;
+            String SQLMin = "UPDATE Cart INNER JOIN Dish on Cart.dish_id = Dish.id set quantity = ? WHERE user_id = ? AND dish_id = ? ";
+            PreparedStatement psmin = conn().prepareStatement(SQLMin);
             psmin.setInt(1,QuanMin1);
             psmin.setInt(2,userid);
             psmin.setInt(3,dishid);
-            psmin.executeQuery();
+            psmin.executeUpdate();
         }
     }
 
