@@ -56,12 +56,20 @@
                             My Account
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">My Order</a>
                             <a class="dropdown-item" href="editinfo.jsp">Profile</a>
                             <a class="dropdown-item" href="accesslog.jsp">Access Log</a>
                             <% if (user.getRole().equalsIgnoreCase("Customer")) {%>
                             <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="myorder.jsp">My Order</a>
                             <a class="dropdown-item text-danger" href="delete.jsp">Delete Account</a>
+                            <%}%>
+                            <% if (user.getRole().equalsIgnoreCase("admin")) {%>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="myorder.jsp">Order Management</a>
+                            <%}%>
+                            <% if (user.getRole().equalsIgnoreCase("staff")) {%>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="myorder.jsp">Order Management</a>
                             <%}%>
                         </div>
                     </li>
@@ -194,6 +202,24 @@
                             <h5 class="card-title">Modification</h5>
                             <p class="card-text">modification for staff</p>
                             <a class="btn btn-primary" href="category.jsp">Modify</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Send Email</h5>
+                            <p class="card-text">Send email about your order</p>
+                            <a class="btn btn-primary" href="sendEmail.jsp">Button</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Edit Restaurant</h5>
+                            <p class="card-text">change restaurant information</p>
+                            <a class="btn btn-primary" href="editRestaurant.jsp">Button</a>
                         </div>
                     </div>
                 </div>
