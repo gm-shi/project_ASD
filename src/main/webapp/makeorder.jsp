@@ -126,7 +126,7 @@
             <a class="btn btn-primary" href="register.jsp">Sign Up</a>
         </div>
     <%} else{%>
-        <%if (user != null && (user.getRole().equalsIgnoreCase("Customer"))){ %>
+        <%if (user != null){ %>
             <div class="Shopping-Cart-Div" style="text-align: center">
                 <h1>Cart</h1>
                 <%
@@ -142,7 +142,7 @@
                     }
                 %>
                 <div class="MyCart" style="text-align: center;width: 800px;margin: 0 auto;">
-                    <p style="text-align: center;font-size: 20px;">Hi <% out.print(username);%> Here is your cart.</p>
+                    <p style="text-align: center;font-size: 20px;">Hi <%=username%> Here is your cart.</p>
                     <table style="border: solid black 1px;">
                         <tr>
                             <td width="200px" style="border: solid 1px black;text-align: center">Dish Name</td>
@@ -161,13 +161,13 @@
                             <td style="border: solid 1px black;text-align: center"><%=display.getDishPrice()%> $</td>
                             <td style="border: solid 1px black;text-align: center"><%=display.getQuantity()%></td>
                             <td style="border: solid 1px black">
-                                <form action="OrderServlet?action=Add&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
+                                <form action="OrderServlet?action=Add&dishid=<%=display.getDishid()%>;%>&userid=<%=user.getId()%>" method="post">
                                     <button type="submit" style="width: 150px">ADD(+)</button>
                                 </form>
-                                <form action="OrderServlet?action=Minus&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
+                                <form action="OrderServlet?action=Minus&dishid=<%=display.getDishid()%>&userid=<%=user.getId()%>" method="post">
                                     <button type="submit" style="width: 150px">Minus(-)</button>
                                 </form>
-                                <form action="OrderServlet?action=Delete&dishid=<%out.print(display.getDishid());%>&userid=<% out.print(userid);%>" method="post">
+                                <form action="OrderServlet?action=Delete&dishid=<%=display.getDishid()%>&userid=<%=user.getId()%>" method="post">
                                     <button type="submit" style="width: 150px">Delete(X)</button>
                                 </form>
                             </td>

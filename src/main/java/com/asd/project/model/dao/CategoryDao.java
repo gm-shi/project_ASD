@@ -2,10 +2,8 @@ package com.asd.project.model.dao;
 
 import com.asd.project.model.Category;
 import com.asd.project.model.Dish;
-import com.asd.project.model.UserAccessLog;
 import com.asd.project.utils.DB;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 
