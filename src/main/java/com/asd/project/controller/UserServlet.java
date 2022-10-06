@@ -97,7 +97,6 @@ public class UserServlet extends HttpServlet {
         String id = request.getParameter("userId");
         try{
             userDao.delete(Integer.parseInt(id));
-
         } catch (SQLException e) {
             Helper.alert(response.getWriter(), "Fail to delete");
         }

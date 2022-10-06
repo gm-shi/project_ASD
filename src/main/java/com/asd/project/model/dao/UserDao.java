@@ -92,13 +92,10 @@ public class UserDao {
     }
 
     public boolean delete(int id) throws SQLException {
+        System.out.println(id);
         try {
-            String query = "DELETE FROM User_access_log WHERE id = ?";
+            String query = "DELETE FROM User WHERE id = ?";
             PreparedStatement ps = conn().prepareStatement(query);
-            ps.setInt(1, id);
-            ps.execute();
-
-            query = "DELETE FROM User WHERE id = ?";
             ps = conn().prepareStatement(query);
             ps.setInt(1, id);
             ps.execute();
