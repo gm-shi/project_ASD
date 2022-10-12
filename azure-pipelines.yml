@@ -7,7 +7,11 @@ trigger:
   branches:
     include:
     - dev
-    - master
+    - GongmingShi
+    - Changyu
+    - LUN_OU_RE2
+    - Jacky
+    - Ao-Qu
 
 pool:
   vmImage: ubuntu-latest
@@ -23,7 +27,7 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'deploy'
+    goals: 'package'
   env:
     DB_URL: $(DB_URL)
     DB_NAME: $(DB_NAME)
