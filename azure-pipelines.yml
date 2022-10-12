@@ -7,7 +7,6 @@ trigger:
   branches:
     include:
     - dev
-    - master
     - GongmingShi
     - Changyu
     - LUN_OU_RE2
