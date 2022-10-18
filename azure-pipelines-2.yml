@@ -43,8 +43,18 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(Pipeline.Workspace)'
-        artifact: 'app'
+        artifact: 'app.war'
         publishLocation: 'pipeline'
+
+#     - task: CopyFiles@2
+#       displayName: 'Copy Files to artifact staging directory'
+#       inputs:
+#         SourceFolder: '$(System.DefaultWorkingDirectory)'
+#         Contents: '**/target/*.?(war|jar)'
+#         TargetFolder: $(Build.ArtifactStagingDirectory)
+
+#     - upload: $(Build.ArtifactStagingDirectory)
+#       artifact: drop
 
 
 # - stage: Deploy
