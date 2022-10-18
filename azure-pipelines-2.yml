@@ -71,7 +71,7 @@ stages:
               azureSubscription: $(azureSubscription)
               scriptType: pscore
               scriptLocation: inlineScript
-              inlineScript: az webapp deploy --name $(webAppName) --type static --src-path $(Pipeline.Workspace)/drop/**/target/*.?(war|jar) --target-path /home/site/wwwroot/app.war --resource-group ASD
+              inlineScript: az webapp deploy --name $(webAppName) --type static --src-path $(Pipeline.Workspace)/drop/target/project_ASD-1.0.war --target-path /home/site/wwwroot/app.war --resource-group ASD
           - task: AzureAppServiceManage@0
             inputs:
               azureSubscription: $(azureSubscription)
