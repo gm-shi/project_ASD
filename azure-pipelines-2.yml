@@ -72,5 +72,5 @@ stages:
               appType: webAppLinux
               appName: $(webAppName)
               resourceGroupName: 'ASD'
-              package: '$(Build.ArtifactStagingDirectory)/drop/**/target/*.?(war|jar)'
+              package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
 
