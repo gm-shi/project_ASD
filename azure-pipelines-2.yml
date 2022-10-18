@@ -40,21 +40,16 @@ stages:
         DB_NAME: $(DB_NAME)
         DB_USER: $(DB_USER)
         DB_PASSWORD: $(DB_PASSWORD)
-    - task: PublishPipelineArtifact@1
+
+    - task: CopyFiles@2
+      displayName: 'Copy Files to artifact staging directory'
       inputs:
-        targetPath: '$(Pipeline.Workspace)'
-        artifact: 'app.war'
-        publishLocation: 'pipeline'
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/target/*.?(war|jar)'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
 
-#     - task: CopyFiles@2
-#       displayName: 'Copy Files to artifact staging directory'
-#       inputs:
-#         SourceFolder: '$(System.DefaultWorkingDirectory)'
-#         Contents: '**/target/*.?(war|jar)'
-#         TargetFolder: $(Build.ArtifactStagingDirectory)
-
-#     - upload: $(Build.ArtifactStagingDirectory)
-#       artifact: drop
+    - publish: $(Build.ArtifactStagingDirectory)
+      artifact: drop
 
 
 # - stage: Deploy
