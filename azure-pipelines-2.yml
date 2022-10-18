@@ -65,15 +65,18 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: AzureRmWebAppDeployment@4
-            displayName: 'Azure Web App Deploy: asdgroupproject'
+          - task: AzureCLI@2
+            displayName: Azure CLI Deploy
             inputs:
-              ConnectionType: 'AzureRM'
-              azureSubscription: 'Azure subscription 1(4)(9b9307c4-f307-4842-9530-a160ce839329)'
-              appType: 'webAppLinux'
-              WebAppName: 'asdgroupproject'
-              packageForLinux: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
-              RuntimeStack: 'TOMCAT|9.0-jre8'
+              azureSubscription: $(azureSubscription)
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: az webapp deploy --name $(webAppName) --type static --src-path $(Pipeline.Workspace)/drop/**/target/*.?(war|jar) --target-path /home/site/wwwroot/app.war --resource-group ASD
+          - task: AzureAppServiceManage@0
+            inputs:
+              azureSubscription: $(azureSubscription)
+              action:  Restart Azure App Service
+              WebAppName: $(webAppName)
           # - task: AzureWebApp@1
           #   displayName: 'Azure Web App Deploy: asdgroupproject'
           #   inputs:
@@ -81,6 +84,5 @@ stages:
           #     appType: webAppLinux
           #     appName: $(webAppName)
           #     resourceGroupName: 'ASD'
-          #     package: '
-
+          #     package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
 
