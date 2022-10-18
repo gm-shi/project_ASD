@@ -41,15 +41,14 @@ stages:
         DB_USER: $(DB_USER)
         DB_PASSWORD: $(DB_PASSWORD)
 
-    - task: CopyFiles@2
-      displayName: 'Copy Files to artifact staging directory'
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/target/*.?(war|jar)'
-        TargetFolder: $(Build.ArtifactStagingDirectory)
-
-    - publish: $(Build.ArtifactStagingDirectory)
-      artifact: drop
+    # - task: CopyFiles@2
+    #   displayName: 'Copy Files to artifact staging directory'
+    #   inputs:
+    #     SourceFolder: '$(System.DefaultWorkingDirectory)'
+    #     Contents: '**/target/*.?(war|jar)'
+    #     TargetFolder: $(Build.ArtifactStagingDirectory)
+    # - publish: $(Build.ArtifactStagingDirectory)
+    #   artifact: drop
 
 
 # - stage: Deploy
@@ -72,5 +71,6 @@ stages:
 #               azureSubscription: $(azureSubscription)
 #               appType: webAppLinux
 #               appName: $(webAppName)
+                # resourceGroupName: 'ASD'
 #               package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
 
