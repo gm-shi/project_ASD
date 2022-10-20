@@ -27,9 +27,9 @@ public class RestaurantDao {
         if (rs.next()) {
             restaurant.setId(rs.getInt(1));
             restaurant.setName(rs.getString(2));
-            restaurant.setType(rs.getString(3));
-            restaurant.setPhone(rs.getString(4));
-            restaurant.setLocation(rs.getString(5));
+            restaurant.setType(rs.getString(5));
+            restaurant.setPhone(rs.getString(3));
+            restaurant.setLocation(rs.getString(4));
 
             return restaurant;
         }
