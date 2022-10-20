@@ -42,11 +42,9 @@ public class OrderManagement extends HttpServlet {
 
         String orderid = request.getQueryString().split("=")[2];//Dishname if in submit function this field means total price
         String[] orderidtemp = orderid.split("&");
-        String ValOrder = orderidtemp[0];
         double orderidfinal = Double.parseDouble(orderidtemp[0]);
 
         String numtemp = request.getQueryString().split("=")[3]; //UserID
-        String ValUserID = numtemp;
         int id = Integer.parseInt(numtemp);
 
         System.out.println(actionfinal);
@@ -97,9 +95,9 @@ public class OrderManagement extends HttpServlet {
     }
 
     private void handleSearchCustomer(HttpServletRequest request, HttpServletResponse response, int id) throws IOException, ServletException, SQLException {
-        int target = Integer.parseInt(request.getParameter("orderidform"));
         String ID_VAL = String.valueOf(id);
         if(ValidatorOrder(ID_VAL,request.getParameter("orderidform")).equals("NoProblem")) {
+            int target = Integer.parseInt(request.getParameter("orderidform"));
             String help = orderProcessDao.SearchOrderCustomer(id, target);
             if (help.equals("Error")) {
                 Helper.alert(response.getWriter(), "OrderID Error, Please Double check that");
@@ -117,11 +115,11 @@ public class OrderManagement extends HttpServlet {
     }
 
     private void handleSearchStaff(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
-        int targetuserid = Integer.parseInt(request.getParameter("useridformstaff"));
-        int targetorder = Integer.parseInt(request.getParameter("orderidformstaff"));
         String UserID_VAL = request.getParameter("useridformstaff");
         String OrderID_VAL = request.getParameter("orderidformstaff");
         if(ValidatorOrder(UserID_VAL,OrderID_VAL).equals("NoProblem")) {
+            int targetuserid = Integer.parseInt(request.getParameter("useridformstaff"));
+            int targetorder = Integer.parseInt(request.getParameter("orderidformstaff"));
             String help = orderProcessDao.SearchOrderCustomer(targetuserid, targetorder);
             if (help.equals("Error")) {
                 Helper.alert(response.getWriter(), "OrderID or UserID Error, Please Double check that");
