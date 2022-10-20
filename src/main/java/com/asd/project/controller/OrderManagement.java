@@ -42,9 +42,11 @@ public class OrderManagement extends HttpServlet {
 
         String orderid = request.getQueryString().split("=")[2];//Dishname if in submit function this field means total price
         String[] orderidtemp = orderid.split("&");
+        String ValOrder = orderidtemp[0];
         double orderidfinal = Double.parseDouble(orderidtemp[0]);
 
         String numtemp = request.getQueryString().split("=")[3]; //UserID
+        String ValUserID = numtemp;
         int id = Integer.parseInt(numtemp);
 
         System.out.println(actionfinal);
@@ -68,12 +70,12 @@ public class OrderManagement extends HttpServlet {
                     throw new RuntimeException(e);
                 }
             case "Cancel":
-                    try {
-                        handleCancel(request,response,orderidfinal,id);
-                    }
-                    catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+                try {
+                    handleCancel(request,response,orderidfinal,id);
+                }
+                catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             case "searchstaff":
                 try {
                     handleSearchStaff(request,response);
@@ -96,26 +98,41 @@ public class OrderManagement extends HttpServlet {
 
     private void handleSearchCustomer(HttpServletRequest request, HttpServletResponse response, int id) throws IOException, ServletException, SQLException {
         int target = Integer.parseInt(request.getParameter("orderidform"));
-        String help = orderProcessDao.SearchOrderCustomer(id,target);
-        if(help.equals("Error")){
-            Helper.alert(response.getWriter(),"OrderID Error, Please Double check that");
+        String ID_VAL = String.valueOf(id);
+        if(ValidatorOrder(ID_VAL,request.getParameter("orderidform")).equals("NoProblem")) {
+            String help = orderProcessDao.SearchOrderCustomer(id, target);
+            if (help.equals("Error")) {
+                Helper.alert(response.getWriter(), "OrderID Error, Please Double check that");
+            } else {
+                Helper.alert(response.getWriter(), help);
+            }
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("myorder.jsp");
+            requestDispatcher.forward(request, response);
         }
         else{
-            Helper.alert(response.getWriter(),help);
+            Helper.alert(response.getWriter(), "Syntex Error, Please Double check that");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("myorder.jsp");
+            requestDispatcher.forward(request, response);
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("myorder.jsp");
-        requestDispatcher.forward(request, response);
     }
 
     private void handleSearchStaff(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
         int targetuserid = Integer.parseInt(request.getParameter("useridformstaff"));
         int targetorder = Integer.parseInt(request.getParameter("orderidformstaff"));
-        String help = orderProcessDao.SearchOrderCustomer(targetuserid,targetorder);
-        if(help.equals("Error")){
-            Helper.alert(response.getWriter(),"OrderID or UserID Error, Please Double check that");
+        String UserID_VAL = request.getParameter("useridformstaff");
+        String OrderID_VAL = request.getParameter("orderidformstaff");
+        if(ValidatorOrder(UserID_VAL,OrderID_VAL).equals("NoProblem")) {
+            String help = orderProcessDao.SearchOrderCustomer(targetuserid, targetorder);
+            if (help.equals("Error")) {
+                Helper.alert(response.getWriter(), "OrderID or UserID Error, Please Double check that");
+            } else {
+                Helper.alert(response.getWriter(), help);
+            }
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("myorder.jsp");
+            requestDispatcher.forward(request, response);
         }
         else{
-            Helper.alert(response.getWriter(),help);
+            Helper.alert(response.getWriter(), "Syntex Error, Please Double check that");
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("myorder.jsp");
         requestDispatcher.forward(request, response);
@@ -135,4 +152,14 @@ public class OrderManagement extends HttpServlet {
         requestDispatcher.forward(req, res);
     }
 
+    public String ValidatorOrder(String First_Input, String Second_Input){
+        String TestA = First_Input;
+        String TestB = Second_Input;
+        if(TestA.matches("[0-9]+]") && TestB.matches("[0-9]+")){
+            return "NoProblem";
+        }
+        else{
+            return "Stop";
+        }
+    }
 }
