@@ -115,7 +115,7 @@
 
 
     <%
-        String result = "unsuccessful";
+        String result = "Successful";
         if(EmailService.sendEmail(100010,
                 "detail: [sweet n sour pork|10.0|3][Stri-fried Noodle|99.0|2]  Time: 2022-10-04 15:10:13",
                 "Lun.Ou@student.uts.edu.au"))
